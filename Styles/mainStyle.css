@@ -1,81 +1,89 @@
-:root{
+:root {
   --bbd-primary-color: #C80B0E;
   --bbd-secondary-color: #F5474A;
   --general-box-shadow: 0 8px 32px 0 rgba(10, 12, 38, 0.37);
   --font-color: rgba(255, 244, 244, 0.916);
   --active: #fff1f1;
-  --back-drop: blur( 4px );
+  --back-drop: blur(4px);
+  --main-border-radius: 17px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
 
-body{
+body {
   padding: 0;
   margin: 0;
 }
 
-main{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+main {
+  height: 100vh;
+  width: 100vw;
   margin: none;
   padding: none;
   background-image: url("../Assets/formBackground.jpg");
   background-size: cover;
   background-position-x: right;
   background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
   font-family: "Martel Sans", sans-serif;
   font-weight: 300;
   font-style: normal;
 }
 
-form{
-  display: inherit;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column;
-  background: rgba(255, 255, 255, 0.132);
-  box-shadow: var(--general-box-shadow);
-  backdrop-filter: var(--back-drop);
-  -webkit-backdrop-filter: var(--back-drop);
-  border-radius: 17px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+form {
   height: 60vh;
   width: 80vw;
   max-width: 400px;
+  flex-flow: column;
+  background: rgba(255, 255, 255, 0.132);
+  border-radius: var(--main-border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: var(--font-color);
 }
 
-form:hover{
+main,
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form:hover {
   transition: 500ms;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
   border: 1px solid rgba(255, 255, 255, 0.381);
 }
 
-section, #submitLogIn{
+section,
+#submitLogIn {
+  width: 80%;
   display: inherit;
   flex-flow: column;
-  width: 80%;
   margin: 1vh auto;
   background: rgba(255, 255, 255, 0.219);
-  box-shadow: var(--general-box-shadow);
-  backdrop-filter: var(--back-drop);
-  -webkit-backdrop-filter: var(--back-drop);
-  border-radius: 17px;
+  border-radius: var(--main-border-radius);
   padding: 10px;
 }
 
-#submitLogIn{
+section,
+#submitLogIn,
+form {
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+}
+
+#submitLogIn {
   margin-top: 5cqh;
   border: 2px solid white;
   color: var(--font-color);
   font: inherit;
 }
 
-#submitLogIn:hover{
+#submitLogIn:hover {
   border-color: rgba(255, 255, 255, 0.219);
   background-color: var(--active);
   box-shadow: none;
@@ -83,26 +91,27 @@ section, #submitLogIn{
   color: black;
 }
 
-input{
+input {
+  height: 3cqh;
   margin: 1vh auto;
   background-color: rgba(240, 248, 255, 0.134);
   border: none;
-  height: 3cqh;
   border-radius: 15px;
   padding-left: 3%;
   color: var(--font-color);
   font: inherit;
 }
 
-input:focus{
+input:focus {
   border: 1px solid var(--active);
   outline: none;
 }
 
-label, input {
+label,
+input {
   width: 90%;
 }
 
-h1{
+h1 {
   margin-top: 0;
 }
