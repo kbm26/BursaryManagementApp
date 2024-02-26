@@ -74,7 +74,7 @@ function oauth2SignIn() {
 async function verifyrole(){
 
     try{
-    const response = await fetch("https://localhost:7162/api/Login/byEmail?userEmail="+email)
+    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/Login/byEmail?userEmail="+email)
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
