@@ -1,11 +1,12 @@
 :root {
   --bbd-primary-color: #C80B0E;
   --bbd-secondary-color: #F5474A;
-  --general-box-shadow: 0 8px 32px 0 rgba(10, 12, 38, 0.37);
+  --general-box-shadow: 0 8px 32px 0 rgba(10, 12, 38, 0.173);
   --font-color: rgba(255, 244, 244, 0.916);
   --active: #fff1f1;
   --back-drop: blur(4px);
   --main-border-radius: 17px;
+  --bbd-tertiary-color: #d0d5dd;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
@@ -15,7 +16,7 @@ body {
   margin: 0;
 }
 
-main {
+.mainLogIn {
   height: 100vh;
   width: 100vw;
   margin: none;
@@ -29,7 +30,7 @@ main {
   font-style: normal;
 }
 
-form {
+#logInForm {
   height: 60vh;
   width: 80vw;
   max-width: 400px;
@@ -40,21 +41,22 @@ form {
   color: var(--font-color);
 }
 
-main,
-form {
+.mainLogIn,
+#logInForm {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
-form:hover {
+#logInForm:hover {
   transition: 500ms;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
   border: 1px solid rgba(255, 255, 255, 0.381);
 }
 
-section,
+.formInput,
 #submitLogIn {
   width: 80%;
   display: inherit;
@@ -65,9 +67,10 @@ section,
   padding: 10px;
 }
 
-section,
+.formInput,
 #submitLogIn,
-form {
+#logInForm {
+  border: 1px solid rgba(0, 0, 0, 0.349);
   box-shadow: var(--general-box-shadow);
   backdrop-filter: var(--back-drop);
   -webkit-backdrop-filter: var(--back-drop);
@@ -79,13 +82,22 @@ form {
 #submitLogIn {
   margin-top: 5cqh;
   border: 2px solid white;
-  color: var(--font-color);
+  color: black;
   font: inherit;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  border-color: rgba(255, 255, 255, 0.219);
+  background-color: var(--active);
+}
+
+#googleLogo {
+  margin-right: 3cqw;
 }
 
 #submitLogIn:hover {
-  border-color: rgba(255, 255, 255, 0.219);
-  background-color: var(--active);
+  scale: 1.01;
   box-shadow: none;
   border-width: 3px;
   color: black;
@@ -114,4 +126,9 @@ input {
 
 h1 {
   margin-top: 0;
+}
+
+h1 a {
+  text-decoration: none;
+  color: white;
 }

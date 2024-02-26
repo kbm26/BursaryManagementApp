@@ -1,4 +1,3 @@
-//Can't create, edit, or upload … Not enough storage. Get 100 GB of storage for R 34.99 R 8.99/month for 3 months.
 const universities = [
   {
     applicationID: 1,
@@ -239,5 +238,4 @@ const redirectToStudentInfo = (e) => {
 };
 
 for (const b of viewUniversityButtons)
-    b.addEventListener("click", redirectToStudentInfo);
-
+  b.addEventListener("click", redirectToStudentInfo);

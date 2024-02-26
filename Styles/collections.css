@@ -1,0 +1,248 @@
+body {
+  display: flex;
+  flex-flow: column;
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  overflow-x: hidden;
+  background-image: url("../Assets/bbdBackground.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  backdrop-filter: blur(3px);
+}
+
+button {
+  border-radius: 6px;
+  background-color: #e7eaee;
+  color: #64748B;
+  border: none;
+  padding: 1em 0;
+  text-align: center;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+}
+
+nav {
+  display: inherit;
+  text-align: center;
+  position: sticky;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  background-color: var(--bbd-primary-color);
+  width: 100vw;
+  color: var(--font-color);
+}
+
+nav>h1 {
+  margin: 1.5vh;
+}
+
+.navigationCenter {
+  display: inherit;
+  flex-wrap: wrap-reverse;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 2.5cqh 0 1cqh;
+}
+
+.informationCenter {
+  display: inherit;
+  flex-flow: column;
+  padding-left: 3vw;
+  max-width: 50vw;
+}
+
+.actionCenter {
+  width: 100vw;
+  height: max-content;
+  padding: 1.5vh 0;
+  display: inherit;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 500px;
+}
+
+.add {
+  box-sizing: border-box;
+  max-width: 130px;
+  width: 30%;
+  border: 3px solid var(--bbd-secondary-color);
+  color: var(--bbd-secondary-color);
+  background-color: transparent;
+}
+
+.add:hover {
+  background-color: var(--bbd-secondary-color);
+  border-color: white;
+  color: white;
+}
+
+.addIcon {
+  margin-right: 1cqw;
+}
+
+.assignReviewer {
+  border: 2px solid var(--bbd-tertiary-color);
+  background-color: transparent;
+  min-width: 62%;
+}
+
+.assignReviewer:hover {
+  background-color: var(--bbd-tertiary-color);
+  color: black;
+  border-color: black;
+}
+
+.assignReviewer,
+.add {
+  display: inherit;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.gridOfUsers {
+  display: grid;
+  height: max-content;
+  padding: 3%;
+}
+
+table {
+  border-collapse: collapse;
+  padding-left: 3vw;
+}
+
+tr {
+  height: 6.5cqh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.248);
+}
+
+thead {
+  height: 4cqh;
+  color: rgb(0, 0, 0);
+}
+
+.status {
+  width: 18cqw;
+  max-width: 100px;
+  max-height: 3cqh;
+  padding: 8px;
+  text-align: center;
+  box-sizing: content-box;
+  border: none;
+}
+
+.viewUniversity,
+fundAllocation {
+  width: 12cqw;
+  max-width: 80px;
+  max-height: 3cqh;
+  padding: 8px;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.viewUniversity:enabled:hover {
+  background-color: rgba(0, 0, 0, 0.273);
+  border-color: #eeeae7;
+  color: white;
+}
+
+td>button {
+  padding: 1cqw 1cqh;
+  border: 2px solid #9facbd;
+}
+
+td>button:disabled {
+  background-color: rgba(53, 52, 49, 0.067);
+  border: none;
+}
+
+.info {
+  box-sizing: border-box;
+  text-align: center;
+  margin: auto;
+  height: 0vw;
+  width: 50cqw;
+  transition: 900ms;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  opacity: 0;
+  color: rgb(0, 0, 0);
+  backdrop-filter: blur(13px);
+}
+
+select {
+  height: 25px;
+}
+
+.userData::placeholder,
+select {
+  margin: 3px;
+  color: rgb(29, 29, 29);
+  text-align: center;
+}
+
+.formInput,
+select {
+  max-width: 380px;
+  width: 40cqw;
+}
+
+.dataModButtons {
+  margin-top: 6cqh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80cqw;
+}
+
+.dataModButtons button {
+  width: 25cqw;
+}
+
+.updateData {
+  background-color: #23c68b;
+}
+
+.deleteData {
+  background-color: #ea3a4b;
+}
+
+.updateData,
+.deleteData {
+  color: white;
+}
+
+#createTempLink {
+  transition: 900ms;
+  opacity: 0;
+  display: none;
+  position: fixed;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  background-color: var(--bbd-primary-color);
+  height: 40vh;
+  width: 50vw;
+  border: 4px solid rgb(255, 255, 255);
+  margin: 30vh 25vw;
+  border-radius: 17px;
+}
+
+#createTempLink input {
+  max-width: 200px;
+  height: 40px;
+}
+
+#createTempLink label {
+  text-align: center;
+}
+
+#submitTempLink {
+  padding: 1cqh 3cqw;
+}
