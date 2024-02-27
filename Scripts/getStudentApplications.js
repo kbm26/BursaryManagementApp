@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(url)
             .then(response => {
                 if (response.ok) {
+                    console.log(response.json);
                     return response.json();
+                    
                 } else {
                     throw new Error('Network response was not ok');
                 }
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 // Process the response data and display it in the table
                 displayStudentAllocations(data);
+               
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -54,6 +57,10 @@ function displayStudentAllocations(data) {
             <td>${allocation.amount}</td>
             <td>${allocation.allocationYear}</td>
             <td>${allocation.studentIDNum}</td>
+            <td>${allocation.studentMarks}</td>
+            <td>${allocation.courseYear}</td>
+            <td>${allocation.applicationStatusID}</td>
+            <td>${allocation.uniName}</td>
         `;
         studentAllocationsTableBody.appendChild(row);
     });
