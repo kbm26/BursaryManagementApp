@@ -115,9 +115,9 @@ body {
 }
 
 input {
-  height: 3cqh;
+  height: 6cqh;
   margin: 1vh auto;
-  background-color: rgba(240, 248, 255, 0.134);
+  background-color: rgba(240, 248, 255, 0.308);
   border: none;
   border-radius: 15px;
   padding-left: 3%;

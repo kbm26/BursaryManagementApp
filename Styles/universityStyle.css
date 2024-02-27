@@ -29,6 +29,10 @@ body {
     box-shadow:  0  0  10px rgba(0,  0,  0,  0.1);
     max-width: 400px;
     max-height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
 }
 
 main {
@@ -40,6 +44,10 @@ main {
     font-weight: 300;
     font-style: normal;
   }
+
+.main-container a {
+    text-decoration: none;
+}
 
 .main-container {
     width:  100vw;
@@ -71,7 +79,7 @@ main {
 .section-title {
     color: #333;
     text-align: center;
-    margin-top: 5%;
+    
 }
 
 section:hover{
