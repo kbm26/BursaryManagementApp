@@ -33,7 +33,7 @@ function trySampleRequest() {
     xhr.onreadystatechange = function (e) {
       if (xhr.readyState === 4 && xhr.status === 200) {
         email = JSON.parse(xhr.response)["email"];
-        verifyrole();
+        verifyRole();
       } else if (xhr.readyState === 4 && xhr.status === 401) {
         oauth2SignIn();
       }
@@ -45,15 +45,11 @@ function trySampleRequest() {
 }
 
 function oauth2SignIn() {
-  // Google's OAuth 2.0 endpoint for requesting an access token
   let oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 
-  // Create element to open OAuth 2.0 endpoint in new window.
-  let form = document.createElement("form");
-  form.setAttribute("method", "GET"); // Send as a GET request.
-  form.setAttribute("action", oauth2Endpoint);
+  document.getElementById("logInForm").setAttribute("method", "GET");
+  document.getElementById("logInForm").setAttribute("action", oauth2Endpoint);
 
-  // Parameters to pass to OAuth 2.0 endpoint.
   let params = {
     client_id: YOUR_CLIENT_ID,
     redirect_uri: YOUR_REDIRECT_URI,
@@ -63,21 +59,18 @@ function oauth2SignIn() {
     response_type: "token",
   };
 
-  // Add form parameters as hidden input values.
   for (let p in params) {
     let input = document.createElement("input");
     input.setAttribute("type", "hidden");
     input.setAttribute("name", p);
     input.setAttribute("value", params[p]);
-    form.appendChild(input);
+    document.getElementById("logInForm").appendChild(input);
   }
 
-  // Add form to page and submit it to open the OAuth 2.0 endpoint.
-  document.body.appendChild(form);
-  form.submit();
+  document.getElementById("logInForm").submit();
 }
 
-async function verifyrole() {
+async function verifyRole() {
   try {
     const response = await fetch(
       "https://bursarywebapp.azurewebsites.net/api/Login/byEmail?userEmail=" +
@@ -90,20 +83,14 @@ async function verifyrole() {
     const data = await response.json();
     roleFinder(data["roleID"]);
   } catch (error) {
-    // Handle errors
     console.error("There was a problem with your fetch operation:", error);
   }
 
-  /**
-   *
-   * @param {int} role
-   * @returns {string} roleInfo
-   */
   function roleFinder(role) {
     return role === 1
-      ? (window.location.href = "./BBD.html")
+      ? (window.location.href = "./BBD/UniversityCollection.html")
       : role === 2
-      ? (window.location.href = "./HOD.html")
+      ? (window.location.href = "./HOD/StudentCollection.html")
       : "None";
   }
 }
