@@ -1,3 +1,8 @@
+/*
+ Get All the student Allocations for a university ID 
+ userId needs to be in URL e.g https://ukukhulabursary.netlify.app/hod/studentcollection?userId=10
+ */
+
 document.addEventListener('DOMContentLoaded', function () {
     // Extract userID from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -6,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Check if userID exists
     if (userId) {
-        // Construct the URL with the userID
+        // Url for API Endpoint, passes UserId 
         const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
 
-        // Make an AJAX GET request to the API endpoint
+        // AJAX (Asynchronous JavaScript and XML) GET request to the API endpoint
         fetch(url)
             .then(response => {
                 if (response.ok) {
@@ -32,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         // Display error message if userID is not provided in the URL
         const errorMessage = document.createElement('p');
-        errorMessage.textContent = 'User ID not found in the URL.';
+        errorMessage.textContent = 'HOD User ID not found in the URL.';
         document.body.appendChild(errorMessage);
     }
 });
@@ -49,7 +54,6 @@ function displayStudentAllocations(data) {
             <td>${allocation.amount}</td>
             <td>${allocation.allocationYear}</td>
             <td>${allocation.studentIDNum}</td>
-            <!-- Add more table cells as needed -->
         `;
         studentAllocationsTableBody.appendChild(row);
     });

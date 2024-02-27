@@ -1,3 +1,4 @@
+// Create a New University Application for funding from BBD 
 document.getElementById('postForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -36,3 +37,5 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
             console.error('Error:', error);
         });
 });
+
+

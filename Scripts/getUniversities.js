@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('getUniversitiesForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
 
-        // Construct the URL for the GET request
+        // API Endpoint URL
         var url = 'https://bursarywebapp.azurewebsites.net/api/Universities';
 
-        // AJAX GET request to the API endpoint
         fetch(url)
             .then(response => {
                 if (!response.ok) {
