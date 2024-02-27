@@ -1,10 +1,12 @@
+
+// Generate a Temporary Link for a student (Need to provide StudentIDNum)
 document.getElementById('generateTokenForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
 
     // Get studentIDNum input value
     const studentIDNum = document.getElementById('studentIDNum').value;
 
-    // Construct the URL with the studentIDNum parameter
+    // Endpoint URL with the studentIDNum parameter
     const url = `https://bursarywebapp.azurewebsites.net/api/Token/generateToken?studentIDNum=${studentIDNum}`;
 
     // Define request options
