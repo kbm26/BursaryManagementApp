@@ -91,9 +91,9 @@ async function verifyRole() {
 
   function roleFinder(role) {
     return role === 1
-      ? (window.location.href = "./BBD/UniversityCollection.html?"+userID)
+      ? (window.location.href = "./BBD/UniversityCollection?"+userID)
       : role === 2
-      ? (window.location.href = "./HOD/StudentCollection.html?"+userID)
+      ? (window.location.href = "./HOD/StudentCollection?"+userID)
       : "None";
   }
 }
