@@ -1,44 +1,36 @@
-// Validate The Temporary Link for a student 
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the full URL of the current page
+    // Extract the current URL from the browser
     const currentUrl = window.location.href;
     
-    // Check if URL exists
-    if (currentUrl) {
-        // Construct the URL for the API endpoint, passing the URL parameter
-        const apiUrl = `https://bursarywebapp.azurewebsites.net/api/Token/validateToken?url=${encodeURIComponent(currentUrl)}`;
+    // Define the URL for the API endpoint
+    const apiUrl = 'https://bursarywebapp.azurewebsites.net/api/Token/validateToken';
 
-        // Make a GET request to the API endpoint
-        fetch(apiUrl)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .then(data => {
-                // Display the response data
-                displayResponse(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Display error message to the user
-                const errorMessage = document.createElement('p');
-                errorMessage.textContent = 'An error occurred while fetching data.';
-                document.body.appendChild(errorMessage);
-            });
-    } else {
-        // Display error message if URL is not provided
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = 'URL not found.';
-        document.body.appendChild(errorMessage);
-    }
+    // Construct the full URL including the query parameter
+    const fullUrl = `${apiUrl}?url=${encodeURIComponent(currentUrl)}`;
+
+    // Define request options
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'accept': '*/*'
+        }
+    };
+
+    // Make the GET request
+    fetch(fullUrl, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .then(data => {
+            // Handle the response data
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+        });
 });
-
-function displayResponse(data) {
-    // Display the response data
-    const responseContainer = document.getElementById('responseContainer');
-    responseContainer.textContent = JSON.stringify(data, null, 2);
-}
