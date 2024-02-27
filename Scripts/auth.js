@@ -8,6 +8,7 @@ let email = "";
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g,
   m;
+let userID
 
 while ((m = regex.exec(fragmentString))) {
   params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
@@ -81,16 +82,18 @@ async function verifyRole() {
     }
 
     const data = await response.json();
+    userID = data["userID"]
     roleFinder(data["roleID"]);
+
   } catch (error) {
     console.error("There was a problem with your fetch operation:", error);
   }
 
   function roleFinder(role) {
     return role === 1
-      ? (window.location.href = "./BBD/UniversityCollection.html")
+      ? (window.location.href = "./BBD/UniversityCollection.html?"+userID)
       : role === 2
-      ? (window.location.href = "./HOD/StudentCollection.html")
+      ? (window.location.href = "./HOD/StudentCollection.html?"+userID)
       : "None";
   }
 }
