@@ -9,7 +9,13 @@
   --bbd-tertiary-color: #d0d5dd;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+@font-face {
+  font-family: 'NordiquePro';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+    url('../Assets/FontsFree-Net-Nordique-Pro-Bold.ttf') format('woff2');
+}
 
 body {
   padding: 0;
@@ -25,8 +31,9 @@ body {
   background-size: cover;
   background-position-x: right;
   background-repeat: no-repeat;
-  font-family: "Martel Sans", sans-serif;
+  font-family: NordiquePro, sans-serif;
   font-weight: 300;
+  font-size: 0.7rem;
   font-style: normal;
 }
 
@@ -103,6 +110,10 @@ body {
   color: black;
 }
 
+#submitLogIn>p {
+  font-family: "Calibri", sans-serif;
+}
+
 input {
   height: 3cqh;
   margin: 1vh auto;
@@ -130,5 +141,13 @@ h1 {
 
 h1 a {
   text-decoration: none;
+  color: white;
+}
+
+
+.errorPage {
+  font-size: 2rem;
+  font-family: NordiquePro, sans-serif;
+  font-weight: 700;
   color: white;
 }
