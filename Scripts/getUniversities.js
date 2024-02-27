@@ -1,5 +1,7 @@
+
+// For BBD Login - Just Gets All the Universities 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('getTokenForm').addEventListener('submit', function (event) {
+    document.getElementById('getUniversitiesForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
 
         // Construct the URL for the GET request
@@ -22,3 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+
+/*
+HOD Logs in, Get Details from Email, Get All Student Applications for That University HOD 
+*/
+
+// For HOD Login
