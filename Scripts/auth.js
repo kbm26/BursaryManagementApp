@@ -2,7 +2,7 @@ const btn = document.getElementById("submitLogIn");
 
 const YOUR_CLIENT_ID =
   "701328728829-c507ja8sc0q410m1bg250l7spinh0g5m.apps.googleusercontent.com";
-const YOUR_REDIRECT_URI = "http://localhost:5500";
+const YOUR_REDIRECT_URI = "https://ukukhulabursary.netlify.app";
 let fragmentString = location.hash.substring(1);
 let email = "";
 let params = {};
