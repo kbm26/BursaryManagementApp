@@ -1,7 +1,14 @@
+@font-face {
+  font-family: Calibri;
+  src: url("../Assets/calibri.ttf") format('woff');
+  font-weight: 700;
+  font-style: normal
+}
+
 body {
   display: flex;
   flex-flow: column;
-  font-family: "Martel Sans", sans-serif;
+  font-family: "Calibri", sans-serif;
   font-weight: 300;
   font-style: normal;
   overflow-x: hidden;
@@ -21,6 +28,7 @@ button {
   text-align: center;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
+  font-family: "Calibri", sans-serif;
 }
 
 nav {
@@ -29,10 +37,11 @@ nav {
   position: sticky;
   justify-content: center;
   align-items: center;
-  height: max-content;
   background-color: var(--bbd-primary-color);
   width: 100vw;
   color: var(--font-color);
+  font-family: NordiquePro, sans-serif;
+  height: min-content;
 }
 
 nav>h1 {
