@@ -2,12 +2,13 @@ const btn = document.getElementById("submitLogIn");
 
 const YOUR_CLIENT_ID =
   "701328728829-c507ja8sc0q410m1bg250l7spinh0g5m.apps.googleusercontent.com";
-const YOUR_REDIRECT_URI = "http://localhost:5500";
+const YOUR_REDIRECT_URI = "https://ukukhulabursary.netlify.app";
 let fragmentString = location.hash.substring(1);
 let email = "";
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g,
   m;
+let userID
 
 while ((m = regex.exec(fragmentString))) {
   params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
@@ -81,16 +82,18 @@ async function verifyRole() {
     }
 
     const data = await response.json();
+    userID = data["userID"]
     roleFinder(data["roleID"]);
+
   } catch (error) {
     console.error("There was a problem with your fetch operation:", error);
   }
 
   function roleFinder(role) {
     return role === 1
-      ? (window.location.href = "./BBD/UniversityCollection.html")
+      ? (window.location.href = "./BBD/UniversityCollection?"+userID)
       : role === 2
-      ? (window.location.href = "./HOD/StudentCollection.html")
+      ? (window.location.href = "./HOD/StudentCollection?"+userID)
       : "None";
   }
 }
