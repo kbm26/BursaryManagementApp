@@ -1,13 +1,19 @@
 const table = document.getElementById("dataTable");
 const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
 
-let unis
+let unis;
 
-function tableMaker(list){
+function tableMaker(list) {
   list.forEach((uni, i) => {
-    rowAdder(table, i, {name: uni.universityName, status: uni.applicationStatusID === 1 ?
-       "pending" : uni.applicationStatusID === 2?
-      "approved" : "rejected" });
+    rowAdder(table, i, {
+      name: uni.universityName,
+      status:
+        uni.applicationStatusID === 1
+          ? "pending"
+          : uni.applicationStatusID === 2
+          ? "approved"
+          : "rejected",
+    });
   });
 }
 
@@ -16,15 +22,15 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select disabled name="Status" id="status">
+       <select disabled name="Status" id="status">
         <option ${
-          data.status == "pending" && "selected"
+          data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
         <option ${
-          data.status == "approved" && "selected"
+          data.applicationStatusID == "2" && "selected"
         } value="2">Approved</option>
         <option ${
-          data.status == "rejected" && "selected"
+          data.applicationStatusID == "3" && "selected"
         } value="3">Rejected</option>
       </select>
       </section>
@@ -40,7 +46,6 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
     </form>`;
 };
-
 
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
@@ -78,40 +83,26 @@ const redirectToUniInfo = (e) => {
   }
 };
 
-
-async function getAllApplications(){
-
-  fetch("https://bursarywebapp.azurewebsites.net/api/UniversityApplication/getAllUniversityApplicationsWithName")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(jsonData => {
-      unis = jsonData
+async function getAllApplications() {
+  fetch(
+    "https://bursarywebapp.azurewebsites.net/api/UniversityApplication/getAllUniversityApplicationsWithName"
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((jsonData) => {
+      unis = jsonData;
       tableMaker(jsonData);
       statusColorCoder();
       for (const b of viewUniversityButtons)
-      b.addEventListener("click", redirectToUniInfo);
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
+        b.addEventListener("click", redirectToUniInfo);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
 }
 
-getAllApplications()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+getAllApplications();

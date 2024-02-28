@@ -125,9 +125,9 @@ nav h1 a {
 .gridOfUsers {
   display: grid;
   padding: 3%;
-  height: 70vh;
   overflow-y: scroll;
   height: max-content;
+  max-height: 70vh;
 }
 
 table {

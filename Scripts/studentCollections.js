@@ -19,20 +19,19 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  console.log(data);
   element.innerHTML = ` <form action="">
-      <h1>${name}(${data.applicationYear})</h1>
+      <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
         <select disabled name="Status" id="status">
         <option ${
-          data.status == "pending" && "selected"
+          data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
         <option ${
-          data.status == "approved" && "selected"
+          data.applicationStatusID == "2" && "selected"
         } value="2">Approved</option>
         <option ${
-          data.status == "rejected" && "selected"
+          data.applicationStatusID == "3" && "selected"
         } value="3">Rejected</option>
       </select>
       </section>
