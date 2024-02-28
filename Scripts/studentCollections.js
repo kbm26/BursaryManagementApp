@@ -42,11 +42,41 @@ const userDataInserter = ({ name, element, data }) => {
         }  type="number" name="name">
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" type="submit">Delete</button>
+      <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
       <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
+
+    // Event listener to the delete button
+    const deleteButton = element.querySelector(".deleteData");
+    deleteButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent page from reloading when delete is clicked
+      const allocationID = deleteButton.getAttribute("allocationID");
+      deleteStudentAllocation(allocationID);
+    });
+
 };
+
+
+// Delete the Allocation with AllocationID attached to button
+function deleteStudentAllocation(allocationID) {
+  fetch(`https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`, {
+    method: "DELETE",
+    headers: {
+      "accept": "*/*"
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log("Student Allocation successfully deleted.");
+    } else {
+      console.error("Failed to delete student allocation");
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+}
 
 const redirectToStudentInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
@@ -118,5 +148,8 @@ async function getAllApplications() {
     document.body.appendChild(errorMessage);
   }
 }
+
+
+
 
 getAllApplications();
