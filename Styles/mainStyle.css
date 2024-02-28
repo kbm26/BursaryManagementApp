@@ -144,10 +144,34 @@ h1 a {
   color: white;
 }
 
-
 .errorPage {
   font-size: 2rem;
   font-family: NordiquePro, sans-serif;
   font-weight: 700;
+  color: white;
+}
+
+#burger {
+  position: absolute;
+  right: 3.5vw;
+  top: 4cqh;
+}
+
+.navigation {
+  opacity: 0;
+  transition: 900ms;
+  display: none;
+  flex-flow: column;
+  align-items: center;
+  width: 100vw;
+  height: 0vh;
+  background-color: var(--bbd-primary-color);
+  background-image: url("../Assets/bbdBackground.png");
+
+  background-blend-mode: color-burn;
+}
+
+.navigation a {
+  text-decoration: none;
   color: white;
 }
