@@ -16,14 +16,19 @@
   <main class="mainLogIn">
     <form id="logInForm">
       <h1>Upload Documents</h1>
-      <input type="text" id="textavatar" name="avatar" placeholder="Student ID Number" />
-      <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
-      <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+      <input type="text" id="studentIDNumber" name="avatar" placeholder="Student ID Number" />
+      <input type="file" id="academicTranscriptFile" name="avatar" type="file" />
+      <input type="file" id="idFile" name="avatar" type="file" />
       <button id="submitLogIn" type="submit">Submit</button>
+      <!-- Display for successful / unsuccessful upload -->
+      <span id="successMessage"></span>
+</form>
         
     </form>
   </main>
 </body>
+
 <script src="/Scripts/validateTempLink.js"></script>
+<script src="/Scripts/uploadDocuments.js"></script>
 
 </html>
