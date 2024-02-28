@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../Styles/mainStyle.css" />
   <link rel="stylesheet" href="../Styles/collections.css" />
-  <title>Funding</title>
+  <title>Our Students</title>
 </head>
 
 <body>
@@ -33,28 +33,41 @@
   </nav>
   <section class="navigationCenter">
     <section class="informationCenter">
-      <h2>Funding</h2>
+      <h2>Students</h2>
     </section>
     <section class="actionCenter">
-      <button class="assignReviewer">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/pastel-glyph/64/loop.png" alt="loop" />
-        Allocate Evenly
+      <button class="add">
+        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/ios/50/add--v1.png" alt="add--v1" />
+        Add Student
+      </button>
+      <button id="assignReviewer" class="assignReviewer">
+        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/ios/50/link--v1.png" alt="link--v1" />
+        Create Temporary Link
       </button>
     </section>
   </section>
   <main class="gridOfUsers">
     <table id="dataTable">
       <thead>
-        <td>University Name</td>
-        <td>Amount</td>
+        <td>Student Name</td>
+        <td>Status</td>
         <td></td>
       </thead>
     </table>
   </main>
+  <!-- TODO add post method -->
+  <!-- Add onclick onto the submit button using its id, in the onclick what you will do is post, wait for the response then add that response to the id element of "tempLink" -->
+  <form id="createTempLink" action="" method="post">
+    <label for="">Enter student ID</label>
+    <input type="string">
+    <button id="submitTempLink" type="submit">Create Temporary Link</button>
+    <p id="tempLink"></p>
+  </form>
 </body>
 <script src="../Scripts/statusColorCoder.js"></script>
-<script src="../Scripts/fundRowAdder.js"></script>
-<script src="../Scripts/fundAllocation.js"></script>
+<script src="../Scripts/createTempLink.js"></script>
+<script src="../Scripts/rowAdder.js"></script>
+<script src="../Scripts/studentCollections.js"></script>
 <script src="../Scripts/navController.js"></script>
 
 </html>
