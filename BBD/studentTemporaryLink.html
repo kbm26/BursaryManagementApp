@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../Styles/mainStyle.css" />
-  <link rel="stylesheet" href="../Styles/collections.css" />
-  <title>Our Students</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <link rel="stylesheet" href="../Styles/mainStyle.css">
+  <link rel="stylesheet" href="../Styles/collections.css">
+  <title>Log In</title>
 </head>
 
 <body>
@@ -30,43 +33,16 @@
       <a href="/bbd/studenttemporarylink">Create Temporary Link</a>
     </section>
   </nav>
-  <section class="navigationCenter">
-    <section class="informationCenter">
-      <h2>Students</h2>
-    </section>
-    <section class="actionCenter">
-      <button class="add">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/ios/50/add--v1.png" alt="add--v1" />
-        Add Student
+  <main class="tempLink">
+    <form id="tempLinkForm">
+      <h1>Please enter student ID</h1>
+      <input type="text">
+      <button id="tempLinkSubmit" type="submit">
+        Submit
       </button>
-      <button id="assignReviewer" class="assignReviewer">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/ios/50/link--v1.png" alt="link--v1" />
-        Create Temporary Link
-      </button>
-    </section>
-  </section>
-  <main class="gridOfUsers">
-    <table id="dataTable">
-      <thead>
-        <td>Student Name</td>
-        <td>Status</td>
-        <td></td>
-      </thead>
-    </table>
+    </form>
   </main>
-  <!-- TODO add post method -->
-  <!-- Add onclick onto the submit button using its id, in the onclick what you will do is post, wait for the response then add that response to the id element of "tempLink" -->
-  <form id="createTempLink" action="" method="post">
-    <label for="">Enter student ID</label>
-    <input type="string">
-    <button id="submitTempLink" type="submit">Create Temporary Link</button>
-    <p id="tempLink"></p>
-  </form>
 </body>
-<script src="../Scripts/statusColorCoder.js"></script>
-<script src="../Scripts/createTempLink.js"></script>
-<script src="../Scripts/rowAdder.js"></script>
-<script src="../Scripts/studentCollections.js"></script>
 <script src="../Scripts/navController.js"></script>
 
 </html>

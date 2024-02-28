@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
   <link rel="stylesheet" href="../Styles/mainStyle.css">
-  <link rel="stylesheet" href="../Styles/studentApplicationStyle.css">
   <link rel="stylesheet" href="../Styles/collections.css">
-  <title>Document</title>
+  <title>Log In</title>
 </head>
 
 <body>
@@ -31,36 +33,13 @@
       <a href="/hod/studenttemporarylink">Create Temporary Link For Student</a>
     </section>
   </nav>
-  <main>
-    <form action="">
-      <h1>Student Application</h1>
-      <section>
-        <label for="name"> ID Number:</label>
-        <input type="number" name="ID">
-      </section>
-      <section>
-        <label for="name">Date of Birth:</label>
-        <input type="date" name="dob">
-      </section>
-      <section>
-        <label for="name">Gender:</label>
-        <input type="text" name="gender">
-      </section>
-      <section>
-        <label for="name">Ethnicity:</label>
-        <input type="text" name="ethnicity">
-      </section>
-      <section>
-        <label for="name">Department:</label>
-        <input type="text" name="department">
-      </section>
-      <section>
-        <label for="name">University:</label>
-        <input type="text" name="university">
-      </section>
-
-      <section>
-        <button id="submitLogIn" type="submit">Submit</button>
+  <main class="tempLink">
+    <form id="tempLinkForm">
+      <h1>Please enter student ID</h1>
+      <input type="text">
+      <button id="tempLinkSubmit" type="submit">
+        Submit
+      </button>
     </form>
   </main>
 </body>
