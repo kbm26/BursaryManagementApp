@@ -7,7 +7,7 @@ const tableMaker = (data) => {
   data.forEach((student, i) => {
     console.log(student);
     rowAdder(table, i, {
-      name: `${student.studentFirstName} ${student.studentLastName}`,
+      name: `${student.studentFirstName} ${student.studentLastName} (ID: ${student.studentIDNum})`,
       status:
         student.applicationStatusID === 1
           ? "pending"
