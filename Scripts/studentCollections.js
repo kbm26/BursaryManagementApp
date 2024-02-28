@@ -163,14 +163,40 @@ const students = [
 
 const table = document.getElementById("dataTable");
 
-students.forEach((uni, i) => {
-  rowAdder(table, i, uni);
-});
+document.addEventListener("DOMContentLoaded", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get("userId");
 
-statusColorCoder();
+  if (userId) {
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
 
-const userDataInserter = ({ name, element, data }) => {
-  element.innerHTML = ` <form action="">
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        data.forEach((uni, i) => {
+          console.log(uni);
+          rowAdder(table, i, {
+            name: "uni",
+            status:
+              uni.applicationStatusID === 1
+                ? "pending"
+                : uni.applicationStatusID === 2
+                ? "approved"
+                : "rejected",
+          });
+        });
+
+        statusColorCoder();
+
+        const userDataInserter = ({ name, element, data }) => {
+          element.innerHTML = ` <form action="">
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
@@ -197,45 +223,61 @@ const userDataInserter = ({ name, element, data }) => {
       <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
-};
+        };
 
-const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
+        const viewUniversityButtons =
+          document.getElementsByClassName("viewUniversity");
 
-const redirectToStudentInfo = (e) => {
-  const tableRow = e.target.parentNode.parentNode;
-  const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 2;
+        const redirectToStudentInfo = (e) => {
+          const tableRow = e.target.parentNode.parentNode;
+          const uniName = tableRow.childNodes[0].textContent;
+          const rowPos = parseInt(tableRow.id) + 2;
 
-  if (e.target.textContent == "View") {
-    for (const b of viewUniversityButtons) b.setAttribute("disabled", "");
-    e.target.textContent = "Close";
-    const infoCell = table.insertRow(rowPos).insertCell(0);
-    infoCell.classList.add("info");
-    infoCell.setAttribute("colspan", 3);
-    infoCell.parentNode.id = `info-${rowPos}`;
-    userDataInserter({
-      name: uniName,
-      element: infoCell,
-      data: students[tableRow.id],
-    });
-    setTimeout(() => {
-      infoCell.style.height = "max-content";
-      infoCell.style.padding = "10vh 5vw";
-      infoCell.style.opacity = "1";
-    }, 100);
-    e.target.removeAttribute("disabled");
-  } else if (e.target.textContent == "Close") {
-    for (const b of viewUniversityButtons) b.removeAttribute("disabled");
-    const infoStyle = document.getElementsByClassName("info")[0].style;
-    infoStyle.height = "0vh";
-    infoStyle.padding = "0px";
-    infoStyle.opacity = "0";
-    setTimeout(() => {
-      document.getElementById(`info-${rowPos}`).remove();
-      e.target.textContent = "View";
-    }, 860);
+          if (e.target.textContent == "View") {
+            for (const b of viewUniversityButtons)
+              b.setAttribute("disabled", "");
+            e.target.textContent = "Close";
+            const infoCell = table.insertRow(rowPos).insertCell(0);
+            infoCell.classList.add("info");
+            infoCell.setAttribute("colspan", 3);
+            infoCell.parentNode.id = `info-${rowPos}`;
+            userDataInserter({
+              name: uniName,
+              element: infoCell,
+              data: students[tableRow.id],
+            });
+            setTimeout(() => {
+              infoCell.style.height = "max-content";
+              infoCell.style.padding = "10vh 5vw";
+              infoCell.style.opacity = "1";
+            }, 100);
+            e.target.removeAttribute("disabled");
+          } else if (e.target.textContent == "Close") {
+            for (const b of viewUniversityButtons)
+              b.removeAttribute("disabled");
+            const infoStyle = document.getElementsByClassName("info")[0].style;
+            infoStyle.height = "0vh";
+            infoStyle.padding = "0px";
+            infoStyle.opacity = "0";
+            setTimeout(() => {
+              document.getElementById(`info-${rowPos}`).remove();
+              e.target.textContent = "View";
+            }, 860);
+          }
+        };
+
+        for (const b of viewUniversityButtons)
+          b.addEventListener("click", redirectToStudentInfo);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = "An error occurred while fetching data.";
+        document.body.appendChild(errorMessage);
+      });
+  } else {
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "HOD User ID not found in the URL.";
+    document.body.appendChild(errorMessage);
   }
-};
-
-for (const b of viewUniversityButtons)
-  b.addEventListener("click", redirectToStudentInfo);
+});
