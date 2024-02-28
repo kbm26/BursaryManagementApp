@@ -11,6 +11,37 @@ function tableMaker(list){
   });
 }
 
+const userDataInserter = ({ name, element, data }) => {
+  element.innerHTML = ` <form action="">
+      <h1>${name}(${data.applicationYear})</h1>
+      <section class="formInput">
+        <label for="status">Application Status:</label>
+        <select disabled name="Status" id="status">
+        <option ${
+          data.status == "pending" && "selected"
+        } value="1">Pending</option>
+        <option ${
+          data.status == "approved" && "selected"
+        } value="2">Approved</option>
+        <option ${
+          data.status == "rejected" && "selected"
+        } value="3">Rejected</option>
+      </select>
+      </section>
+      <section class="formInput">
+        <label for="name">Amount Requested:</label>
+        <input class="userData" disabled placeholder=${
+          data.amountRequested
+        }  type="number" name="name">
+      </section>
+      <section class="dataModButtons">
+      <button class="deleteData" type="submit">Delete</button>
+      <button class="updateData" type="submit">Update</button>
+      </section>
+    </form>`;
+};
+
+
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
@@ -47,35 +78,6 @@ const redirectToUniInfo = (e) => {
   }
 };
 
-const userDataInserter = ({ name, element, data }) => {
-  element.innerHTML = ` <form action="">
-      <h1>${name}(${data.applicationYear})</h1>
-      <section class="formInput">
-        <label for="status">Application Status:</label>
-        <select disabled name="Status" id="status">
-        <option ${
-          data.status == "pending" && "selected"
-        } value="1">Pending</option>
-        <option ${
-          data.status == "approved" && "selected"
-        } value="2">Approved</option>
-        <option ${
-          data.status == "rejected" && "selected"
-        } value="3">Rejected</option>
-      </select>
-      </section>
-      <section class="formInput">
-        <label for="name">Amount Requested:</label>
-        <input class="userData" disabled placeholder=${
-          data.amountRequested
-        }  type="number" name="name">
-      </section>
-      <section class="dataModButtons">
-      <button class="deleteData" type="submit">Delete</button>
-      <button class="updateData" type="submit">Update</button>
-      </section>
-    </form>`;
-};
 
 async function getAllApplications(){
 
