@@ -35,28 +35,57 @@
     <form action="">
       <h1>Student Application</h1>
       <section>
-        <label for="name"> ID Number:</label>
-        <input type="number" name="ID">
+        <label for="phoneNumber"> Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber">
       </section>
       <section>
-        <label for="name">Date of Birth:</label>
-        <input type="date" name="dob">
+        <label for="email">Email:</label>
+        <input type="text" id="emailAddress" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
       </section>
       <section>
-        <label for="name">Gender:</label>
-        <input type="text" name="gender">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
       </section>
       <section>
-        <label for="name">Ethnicity:</label>
-        <input type="text" name="ethnicity">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
       </section>
       <section>
-        <label for="name">Department:</label>
-        <input type="text" name="department">
+        <label for="studentID">ID Number:</label>
+        <input type="text" id="studentID" name="studentID">
       </section>
       <section>
-        <label for="name">University:</label>
-        <input type="text" name="university">
+        <label for="birthDate">Date of Birth:</label>
+        <input type="text" id="birthDate" name="birthDate" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01" max="9999-12-31" required>
+      </section>
+      <section>
+        <select id="genderID" name="genderID">
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+      </section>
+      <section>
+      <select id="ethnicityID" name="ethnicityID">
+        <option value="1">African</option>
+        <option value="2">Indian</option>
+        <option value="3">Coloured</option>
+      </select>
+      </section>
+      <section>
+        <select id="departmentID" name="departmentID">
+          <option value="1">CompSci</option>
+          <option value="2">BEng</option>
+          <option value="3">GameDev</option>
+        </select>
+      </section>
+      <section>
+        <select id="universityID" name="universityID">
+          <option value="1">Stellenbosch University</option>
+          <option value="2">University of Cape Town</option>
+        </select>
+      </section>
+      <section>
+      
       </section>
 
       <section>
