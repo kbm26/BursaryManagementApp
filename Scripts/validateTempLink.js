@@ -28,11 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             // Handle the response data
             console.log(data);
+            if (!data.isValid) {
+                // If validation fails, redirect the user to an error page
+                window.location.href = 'https://ukukhulabursary.netlify.app/InvalidLink.html';
+            }
         })
         .catch(error => {
             // Handle errors
             console.error('Error:', error);
-            // If validation fails, redirect the user
-            window.location.href = "https://ukukhulabursary.netlify.app/InvalidLink.html";
+            // If validation fails due to network error, redirect the user to an error page
+            window.location.href = 'https://ukukhulabursary.netlify.app/InvalidLink.html';
         });
 });
