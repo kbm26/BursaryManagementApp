@@ -32,5 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             // Handle errors
             console.error('Error:', error);
+            // If validation fails, redirect the user
+            window.location.href = "https://ukukhulabursary.netlify.app/InvalidLink.html";
         });
 });
