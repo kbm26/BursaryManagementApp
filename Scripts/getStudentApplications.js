@@ -42,6 +42,10 @@ function displayStudentAllocations(data) {
             <td>${allocation.amount}</td>
             <td>${allocation.allocationYear}</td>
             <td>${allocation.studentIDNum}</td>
+            <td>${allocation.studentMarks}</td>
+            <td>${allocation.courseYear}</td>
+            <td>${allocation.applicationStatusID}</td>
+            <td>${allocation.uniName}</td>
         `;
     studentAllocationsTableBody.appendChild(row);
   });
