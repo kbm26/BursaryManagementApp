@@ -156,7 +156,9 @@ thead {
 }
 
 .viewUniversity,
+#tempLinkSubmit,
 fundAllocation {
+  transition: 400ms;
   width: 12cqw;
   max-width: 80px;
   max-height: 3cqh;
@@ -165,7 +167,8 @@ fundAllocation {
   box-sizing: content-box;
 }
 
-.viewUniversity:enabled:hover {
+.viewUniversity:enabled:hover,
+#tempLinkSubmit:hover {
   background-color: rgba(0, 0, 0, 0.273);
   border-color: #eeeae7;
   color: white;
