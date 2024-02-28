@@ -124,10 +124,10 @@ nav h1 a {
 
 .gridOfUsers {
   display: grid;
-  height: max-content;
   padding: 3%;
   height: 70vh;
   overflow-y: scroll;
+  height: max-content;
 }
 
 table {
