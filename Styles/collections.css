@@ -17,6 +17,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   backdrop-filter: blur(3px);
+  overflow-y: hidden;
 }
 
 button {
@@ -36,16 +37,23 @@ nav {
   text-align: center;
   position: sticky;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   background-color: var(--bbd-primary-color);
   width: 100vw;
   color: var(--font-color);
   font-family: NordiquePro, sans-serif;
   height: min-content;
+  flex-flow: column;
 }
 
-nav>h1 {
+nav h1 {
+  width: 100vw;
+}
+
+nav h1 a {
+  text-align: center;
   margin: 1.5vh;
+  width: 100vw;
 }
 
 .navigationCenter {
@@ -118,6 +126,8 @@ nav>h1 {
   display: grid;
   height: max-content;
   padding: 3%;
+  height: 70vh;
+  overflow-y: scroll;
 }
 
 table {
