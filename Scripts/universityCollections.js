@@ -13,7 +13,6 @@ function tableMaker(list){
 
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
-  console.log(tableRow)
   const uniName = tableRow.childNodes[0].textContent;
   const rowPos = parseInt(tableRow.id) + 2;
 
