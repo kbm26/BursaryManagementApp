@@ -175,3 +175,10 @@ h1 a {
   text-decoration: none;
   color: white;
 }
+
+.addApplication{
+  width: 100vw;
+  padding: 3vh 20vw;
+  overflow-y: scroll;
+  height: 88vh;
+}
