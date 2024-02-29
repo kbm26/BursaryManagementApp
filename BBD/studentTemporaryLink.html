@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../Styles/mainStyle.css" />
-  <link rel="stylesheet" href="../Styles/collections.css" />
-  <title>Funding</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <link rel="stylesheet" href="../Styles/mainStyle.css">
+  <link rel="stylesheet" href="../Styles/collections.css">
+  <title>Temporary Link</title>
 </head>
 
 <body>
@@ -25,35 +28,23 @@
       </g>
     </svg>
     <section class="navigation">
-      <a href="#">Students</a>
-      <a href="#">Universities</a>
-      <a href="#">Create Temporary Link</a>
+      <a href="/bbd/studentcollection">All Our Students</a>
+      <a href="/bbd/universitycollection">View All Universities</a>
+      <a href="/bbd/studenttemporarylink">Create Temporary Link</a>
     </section>
   </nav>
-  <section class="navigationCenter">
-    <section class="informationCenter">
-      <h2>Funding</h2>
-    </section>
-    <section class="actionCenter">
-      <button class="assignReviewer">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/pastel-glyph/64/loop.png" alt="loop" />
-        Allocate Evenly
+  <main class="tempLink">
+    <form id="tempLinkForm">
+      <h1>Please enter student ID</h1>
+      <input type="text" id="studentIDNum" name="studentIDNum">
+      <button id="tempLinkSubmit" type="submit">
+        Submit
       </button>
-    </section>
-  </section>
-  <main class="gridOfUsers">
-    <table id="dataTable">
-      <thead>
-        <td>University Name</td>
-        <td>Amount</td>
-        <td></td>
-      </thead>
-    </table>
+      <span id="tokenUrl"></span>
+    </form>
   </main>
 </body>
-<script src="../Scripts/statusColorCoder.js"></script>
-<script src="../Scripts/fundRowAdder.js"></script>
-<script src="../Scripts/fundAllocation.js"></script>
 <script src="../Scripts/navController.js"></script>
+<script src="../Scripts/generateLinks.js"></script>
 
 </html>

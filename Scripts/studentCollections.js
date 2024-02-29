@@ -1,205 +1,82 @@
-const students = [
-  {
-    applicationID: 1,
-    status: "pending",
-    amountRequested: 360000,
-    name: "John Hendrick",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 2,
-    status: "approved",
-    amountRequested: 288000,
-    name: "Naoimi Wes",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 3,
-    status: "rejected",
-    amountRequested: 240000,
-    name: "Jenny Jakes",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 4,
-    status: "pending",
-    amountRequested: 192000,
-    name: "Riri Wreck",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 5,
-    status: "pending",
-    amountRequested: 192000,
-    name: "Riri Wreck",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 6,
-    status: "pending",
-    amountRequested: 240000,
-    name: "Naoimi Wes",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 7,
-    status: "pending",
-    amountRequested: 168000,
-    name: "Jenny Jakes",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 8,
-    status: "pending",
-    amountRequested: 360000,
-    name: "Riri Wreck",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 9,
-    status: "pending",
-    amountRequested: 192000,
-    name: "Riri Wreck",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 10,
-    status: "pending",
-    amountRequested: 168000,
-    name: "Naoimi Wes",
-    applicationYear: 2022,
-    isLocked: true,
-  },
-  {
-    applicationID: 11,
-    status: "pending",
-    amountRequested: 180000,
-    name: "John Hendrick",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 12,
-    status: "pending",
-    amountRequested: 144000,
-    name: "Naoimi Wes",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 13,
-    status: "pending",
-    amountRequested: 120000,
-    name: "Jenny Jakes",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 14,
-    status: "pending",
-    amountRequested: 96000,
-    name: "Riri Wreck",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 15,
-    status: "pending",
-    amountRequested: 96000,
-    name: "Riri Wreck",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 16,
-    status: "pending",
-    amountRequested: 120000,
-    name: "Naoimi Wes",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 17,
-    status: "pending",
-    amountRequested: 84000,
-    name: "Jenny Jakes",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 18,
-    status: "pending",
-    amountRequested: 180000,
-    name: "Riri Wreck",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 19,
-    status: "pending",
-    amountRequested: 96000,
-    name: "Riri Wreck",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-  {
-    applicationID: 20,
-    status: "pending",
-    amountRequested: 84000,
-    name: "Naoimi Wes",
-    applicationYear: 2023,
-    isLocked: true,
-  },
-];
-
 const table = document.getElementById("dataTable");
+const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
 
-students.forEach((uni, i) => {
-  rowAdder(table, i, uni);
-});
+let students;
 
-statusColorCoder();
+const tableMaker = (data) => {
+  data.forEach((student, i) => {
+    console.log(student);
+    rowAdder(table, i, {
+      name: `${student.studentFirstName} ${student.studentLastName} (ID: ${student.studentIDNum})`,
+      status:
+        student.applicationStatusID === 1
+          ? "pending"
+          : student.applicationStatusID === 2
+          ? "approved"
+          : "rejected",
+    });
+  });
+};
 
 const userDataInserter = ({ name, element, data }) => {
   element.innerHTML = ` <form action="">
-      <h1>${name}(${data.applicationYear})</h1>
+      <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
         <select disabled name="Status" id="status">
         <option ${
-          data.status == "pending" && "selected"
+          data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
         <option ${
-          data.status == "approved" && "selected"
+          data.applicationStatusID == "2" && "selected"
         } value="2">Approved</option>
         <option ${
-          data.status == "rejected" && "selected"
+          data.applicationStatusID == "3" && "selected"
         } value="3">Rejected</option>
       </select>
       </section>
       <section class="formInput">
         <label for="name">Amount Requested:</label>
         <input class="userData" disabled placeholder=${
-          data.amountRequested
+          data.amount
         }  type="number" name="name">
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" type="submit">Delete</button>
+      <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
       <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
+
+    // Event listener to the delete button
+    const deleteButton = element.querySelector(".deleteData");
+    deleteButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent page from reloading when delete is clicked
+      const allocationID = deleteButton.getAttribute("allocationID");
+      deleteStudentAllocation(allocationID);
+    });
+
 };
 
-const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
+
+// Delete the Allocation with AllocationID attached to button
+function deleteStudentAllocation(allocationID) {
+  fetch(`https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`, {
+    method: "DELETE",
+    headers: {
+      "accept": "*/*"
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log("Student Allocation successfully deleted.");
+    } else {
+      console.error("Failed to delete student allocation");
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+}
 
 const redirectToStudentInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
@@ -237,5 +114,42 @@ const redirectToStudentInfo = (e) => {
   }
 };
 
-for (const b of viewUniversityButtons)
-  b.addEventListener("click", redirectToStudentInfo);
+async function getAllApplications() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get("userId");
+
+  if (userId) {
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
+
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        students = data;
+        tableMaker(data);
+        statusColorCoder();
+        for (const b of viewUniversityButtons)
+          b.addEventListener("click", redirectToStudentInfo);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = "An error occurred while fetching data.";
+        document.body.appendChild(errorMessage);
+      });
+  } else {
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "HOD User ID not found in the URL.";
+    document.body.appendChild(errorMessage);
+  }
+}
+
+
+
+
+getAllApplications();

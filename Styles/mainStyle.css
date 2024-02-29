@@ -22,7 +22,8 @@ body {
   margin: 0;
 }
 
-.mainLogIn {
+.mainLogIn,
+.tempLink {
   height: 100vh;
   width: 100vw;
   margin: none;
@@ -37,7 +38,8 @@ body {
   font-style: normal;
 }
 
-#logInForm {
+#logInForm,
+#tempLinkForm {
   height: 60vh;
   width: 80vw;
   max-width: 400px;
@@ -49,14 +51,17 @@ body {
 }
 
 .mainLogIn,
-#logInForm {
+#logInForm,
+#tempLinkForm,
+.tempLink {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-#logInForm:hover {
+#logInForm:hover,
+#tempLinkForm:hover {
   transition: 500ms;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
@@ -76,7 +81,8 @@ body {
 
 .formInput,
 #submitLogIn,
-#logInForm {
+#logInForm,
+#tempLinkForm {
   border: 1px solid rgba(0, 0, 0, 0.349);
   box-shadow: var(--general-box-shadow);
   backdrop-filter: var(--back-drop);
