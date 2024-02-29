@@ -43,6 +43,7 @@ const userDataInserter = ({ name, element, data }) => {
       <section class="dataModButtons">
       <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
       <button class="updateData" type="submit" 
+      allocationID="${data.allocationID}
       oldAmount="${data.amount}"
       applicationYear="${data.allocationYear}"
       studentIdNumber="${data.studentIdNumber}"
@@ -71,7 +72,7 @@ const userDataInserter = ({ name, element, data }) => {
         const studentIdNumber = updateButton.getAttribute("studentIdNumber");
         const marks = updateButton.getAttribute("marks");
         const courseYear = updateButton.getAttribute("courseYear");
-        const allocationID = deleteButton.getAttribute("allocationID");
+        const allocationID = updateButton.getAttribute("allocationID");
   
         UpdateStudentAllocation(amount,applicationYear,studentIdNumber,marks,courseYear,status,allocationID)
         
