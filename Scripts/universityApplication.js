@@ -9,12 +9,12 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         postData[key] = value;
     });
 
-    // Convert isLocked value to boolean
-    postData.isLocked = document.getElementById('isLocked').checked;
 
     // Default values
     postData.applicationID = 0;
     postData.applicationStatusID = 1; // Default pending
+    postData.applicationYear = new Date().getFullYear();
+    postData.isLocked = true;
 
     // Define request options
     const requestOptions = {

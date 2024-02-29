@@ -35,16 +35,21 @@
         <h2>Funding Application</h2>
 
         <label for="amountRequested">Amount Requested:</label>
-        <input type="text" id="amountRequested" name="amountRequested"><br><br>
+        <input type="text" id="amountRequested" name="amountRequested" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
 
-        <label for="universityID">University ID:</label>
-        <input type="text" id="universityID" name="universityID"><br><br>
-
-        <label for="applicationYear">Application Year:</label>
-        <input type="text" id="applicationYear" name="applicationYear"><br><br>
-
-        <label for="isLocked">Is Locked:</label>
-        <input type="checkbox" id="isLocked" name="isLocked"><br><br>
+        <label for="universityID">University:</label>
+        <select id="universityID" name="universityID">
+          <option value="1">Stellenbosch University</option>
+          <option value="2">University of Cape Town</option>
+          <option value="3">University of Johannesburg</option>
+          <option value="4">University of KwaZulu Natal</option>
+          <option value="5">North-West University</option>
+          <option value="6">University of Pretoria</option>
+          <option value="7">University of the Witwatersrand</option>
+          <option value="8">University of South Africa (Unisa)</option>
+          <option value="9">Rhodes University</option>
+          <option value="10">Tshwane University of Technology</option>
+        </select>
 
         <button type="submit">Submit</button>
     </form>
