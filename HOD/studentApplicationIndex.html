@@ -32,38 +32,94 @@
     </section>
   </nav>
   <main>
-    <form action="">
+    <form id="newStudentApplication">
       <h1>Student Application</h1>
       <section>
-        <label for="name"> ID Number:</label>
-        <input type="number" name="ID">
+        <label for="phoneNumber"> Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber">
       </section>
       <section>
-        <label for="name">Date of Birth:</label>
-        <input type="date" name="dob">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
       </section>
       <section>
-        <label for="name">Gender:</label>
-        <input type="text" name="gender">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
       </section>
       <section>
-        <label for="name">Ethnicity:</label>
-        <input type="text" name="ethnicity">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
       </section>
       <section>
-        <label for="name">Department:</label>
-        <input type="text" name="department">
+        <label for="studentIDNum">ID Number:</label>
+        <input type="text" id="studentIDNum" name="studentIDNum">
       </section>
       <section>
-        <label for="name">University:</label>
-        <input type="text" name="university">
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01" max="9999-12-31" required>
       </section>
+      <section>
+        <label for="genderID">Gender:</label>
+        <select id="genderID" name="genderID">
+          <option value="1">Female</option>
+          <option value="2">Male</option>
+        </select>
+      </section>
+      <section>
+        <label for="ethnicityID">Ethnicity:</label>
+        <select id="ethnicityID" name="ethnicityID">
+          <option value="1">African</option>
+          <option value="2">Indian</option>
+          <option value="3">Coloured</option>
+        </select>
+      </section>
+      <section>
+        <label for="departmentID">Department:</label>
+        <select id="departmentID" name="departmentID">
+          <option value="1">CompSci</option>
+          <option value="2">BEng</option>
+          <option value="3">GameDev</option>
+        </select>
+      </section>
+      <section>
+        <label for="universityID">University:</label>
+        <select id="universityID" name="universityID">
+          <option value="1">Stellenbosch University</option>
+          <option value="2">University of Cape Town</option>
+          <option value="3">University of Johannesburg</option>
+          <option value="4">University of KwaZulu Natal</option>
+          <option value="5">North-West University</option>
+          <option value="6">University of Pretoria</option>
+          <option value="7">University of the Witwatersrand</option>
+          <option value="8">University of South Africa (Unisa)</option>
+          <option value="9">Rhodes University</option>
+          <option value="10">Tshwane University of Technology</option>
+        </select>
+      </section>
+      <section>
+        <label for="amount">Amount (Rands):</label>
+        <input type="text" id="amount" name="amount">
+      </section>
+      <section>
+        <label for="studentMarks">Student Marks:</label>
+        <input type="number" id="studentMarks" name="studentMarks">
+      </section>
+      <section>
+        <label for="courseYear">Year of Study:</label>
+        <select id="courseYear" name="courseYear">
+          <option value="1">First Year</option>
+          <option value="2">Second Year</option>
+          <option value="3">Third Year</option>
+          <option value="4">Fourth Year</option>
+        </select>
 
       <section>
         <button id="submitLogIn" type="submit">Submit</button>
+        <span id="successMessage"></span>
     </form>
   </main>
 </body>
 <script src="../Scripts/navController.js"></script>
+<script src="../Scripts/createStudentApplication.js"></script>
 
 </html>
