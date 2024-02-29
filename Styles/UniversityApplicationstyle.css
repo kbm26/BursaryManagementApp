@@ -88,15 +88,6 @@ color: black;
   
 }
 
-/* form > label [for="universityID"]{
-  display: flex;
-  margin-bottom: 5px;
-  align-items: flex-start;
-  flex-direction: column;
-  align-items: center;
-  justify-content:center;
-
-} */
 
 input[type="file"],
 input[type="checkbox"],
