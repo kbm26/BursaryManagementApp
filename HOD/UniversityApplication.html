@@ -49,16 +49,7 @@
         </select>
         
         <label for="amountRequested">Amount Requested:</label>
-        <input type="text" id="amountRequested" name="amountRequested"><br><br>
-
-        <label for="universityID">University ID:</label>
-        <input type="text" id="universityID" name="universityID"><br><br>
-
-        <label for="applicationYear">Application Year:</label>
-        <input type="text" id="applicationYear" name="applicationYear"><br><br>
-
-        <label for="isLocked">Is Locked:</label>
-        <input type="checkbox" id="isLocked" name="isLocked"><br><br>
+        <input type="text" id="amountRequested" name="amountRequested" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
 
         <button type="submit">Submit</button>
     </form>
