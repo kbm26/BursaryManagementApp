@@ -71,8 +71,9 @@ const userDataInserter = ({ name, element, data }) => {
         const studentIdNumber = updateButton.getAttribute("studentIdNumber");
         const marks = updateButton.getAttribute("marks");
         const courseYear = updateButton.getAttribute("courseYear");
+        const allocationID = deleteButton.getAttribute("allocationID");
   
-        UpdateStudentAllocation(amount,applicationYear,studentIdNumber,marks,courseYear,status)
+        UpdateStudentAllocation(amount,applicationYear,studentIdNumber,marks,courseYear,status,allocationID)
         
       });
 
@@ -100,7 +101,7 @@ function deleteStudentAllocation(allocationID) {
   });
 }
 
-async function UpdateStudentAllocation(amount,allocationYear,studentIDNum,studentMarks,courseYear,applicationStatusID){
+async function UpdateStudentAllocation(amount,allocationYear,studentIDNum,studentMarks,courseYear,applicationStatusID,allocationID){
     const url = 'https://bursarywebapp.azurewebsites.net/api/StudentsAllocation';
     const data = {
         amount: amount,
@@ -109,9 +110,9 @@ async function UpdateStudentAllocation(amount,allocationYear,studentIDNum,studen
         studentMarks: studentMarks,
         courseYear: courseYear,
         applicationStatusID: applicationStatusID,
+        allocationID:allocationID
 
     }
-    console.log(data+"->")
     const options = {
         method: 'PUT',
         headers: {
