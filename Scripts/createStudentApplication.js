@@ -26,16 +26,21 @@ document.getElementById("newStudentApplication").addEventListener("submit", func
         .then(response => {
             if (response.ok) {
                 // Display success message
-                document.getElementById("successMessage").textContent = "Creating Application Successful. Response code: " + response.status;
+                document.getElementById("successMessage").textContent = "Creating Application Successful";
             } else {
                 // Display error message
-                document.getElementById("successMessage").textContent = 'Creating Application Failed. Response code: ' + response.status;
+                document.getElementById("successMessage").textContent = "Creating Application Failed";
             }
         })
         .catch(error => {
-            // Handle errors
-            console.error('Error:', error);
+            console.error("Error:", error);
         });
 });
 
-
+// Validate email address
+function validateEmail(input) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValid = emailPattern.test(input.value);
+    
+    input.setCustomValidity(isValid ? "" : "Please enter a valid email address");
+}

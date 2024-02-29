@@ -12,6 +12,10 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
     // Convert isLocked value to boolean
     postData.isLocked = document.getElementById('isLocked').checked;
 
+    // Default values
+    postData.applicationID = 0;
+    postData.applicationStatusID = 1; // Default pending
+
     // Define request options
     const requestOptions = {
         method: 'POST',
@@ -20,6 +24,9 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         },
         body: JSON.stringify(postData)
     };
+
+    // Check the structure
+    console.log(postData);
 
     // Make the POST request
     fetch('https://bursarywebapp.azurewebsites.net/api/UniversityApplication', requestOptions)
