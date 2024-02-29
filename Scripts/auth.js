@@ -1,5 +1,9 @@
 const btn = document.getElementById("submitLogIn");
+const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 
+document.getElementById("logInForm").setAttribute("method", "GET");
+document.getElementById("logInForm").setAttribute("action", oauth2Endpoint);
+//add env variable
 const YOUR_CLIENT_ID =
   "701328728829-c507ja8sc0q410m1bg250l7spinh0g5m.apps.googleusercontent.com";
 const YOUR_REDIRECT_URI = "https://ukukhulabursary.netlify.app";
@@ -8,7 +12,7 @@ let email = "";
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g,
   m;
-let userID;
+// let userID;
 
 while ((m = regex.exec(fragmentString))) {
   params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
@@ -46,11 +50,6 @@ function trySampleRequest() {
 }
 
 function oauth2SignIn() {
-  let oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
-
-  document.getElementById("logInForm").setAttribute("method", "GET");
-  document.getElementById("logInForm").setAttribute("action", oauth2Endpoint);
-
   let params = {
     client_id: YOUR_CLIENT_ID,
     redirect_uri: YOUR_REDIRECT_URI,
@@ -82,18 +81,22 @@ async function verifyRole() {
     }
 
     const data = await response.json();
-    userID = data["userID"];
+    // userID = data["userID"];
+    const userID = data["userID"];
+    const roleID = data["roleID"];
     roleFinder(data["roleID"]);
+    sessionStorage.setItem("userID", window.btoa(userID));
+    sessionStorage.setItem("roleID", window.btoa(roleID));
   } catch (error) {
     console.error("There was a problem with your fetch operation:", error);
   }
 
   function roleFinder(role) {
     return role === 1
-      ? (window.location.href = "./BBD/UniversityCollection?userId=" + userID)
+      ? (window.location.href = "/bbd")
       : role === 2
-      ? (window.location.href = "./HOD/StudentCollection?userId=" + userID)
-      : (window.location.href = "./error");
+      ? (window.location.href = "/hod")
+      : (window.location.href = "/error");
   }
 }
 

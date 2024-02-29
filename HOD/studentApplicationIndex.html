@@ -32,15 +32,15 @@
     </section>
   </nav>
   <main>
-    <form action="" class="addApplication">
+    <form id="newStudentApplication" class="addApplication">
       <h1>Student Application</h1>
       <section>
         <label for="phoneNumber"> Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber">
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
       </section>
       <section>
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="text" id="email" name="email" required oninput="validateEmail(this);">
       </section>
       <section>
         <label for="firstName">First Name:</label>
@@ -98,15 +98,16 @@
       </section>
       <section>
         <label for="amount">Amount (Rands):</label>
-        <input type="text" id="amount" name="amount">
+        <input type="text" id="amount" name="amount" required>
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
-        <input type="number" id="studentMarks" name="studentMarks">
+        <input type="text" id="studentMarks" name="studentMarks" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
       </section>
 
       <section>
         <button id="submitLogIn" type="submit">Submit</button>
+        <span id="successMessage"></span>
     </form>
   </main>
 </body>
