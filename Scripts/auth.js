@@ -3,7 +3,6 @@ const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 
 document.getElementById("logInForm").setAttribute("method", "GET");
 document.getElementById("logInForm").setAttribute("action", oauth2Endpoint);
-//add env variable
 const YOUR_CLIENT_ID =
   "701328728829-c507ja8sc0q410m1bg250l7spinh0g5m.apps.googleusercontent.com";
 const YOUR_REDIRECT_URI = "https://ukukhulabursary.netlify.app";
@@ -12,7 +11,6 @@ let email = "";
 let params = {};
 let regex = /([^&=]+)=([^&]*)/g,
   m;
-// let userID;
 
 while ((m = regex.exec(fragmentString))) {
   params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
@@ -21,11 +19,11 @@ while ((m = regex.exec(fragmentString))) {
 if (Object.keys(params).length > 0) {
   localStorage.setItem("oauth2-test-params", JSON.stringify(params));
   if (params["state"] && params["state"] == "try_sample_request") {
-    trySampleRequest();
+    TokenHandler();
   }
 }
 
-function trySampleRequest() {
+function TokenHandler() {
   let params = JSON.parse(localStorage.getItem("oauth2-test-params"));
   if (params && params["access_token"]) {
     let xhr = new XMLHttpRequest();
@@ -66,7 +64,6 @@ function oauth2SignIn() {
     input.setAttribute("value", params[p]);
     document.getElementById("logInForm").appendChild(input);
   }
-
   document.getElementById("logInForm").submit();
 }
 
@@ -81,7 +78,6 @@ async function verifyRole() {
     }
 
     const data = await response.json();
-    // userID = data["userID"];
     const userID = data["userID"];
     const roleID = data["roleID"];
     roleFinder(data["roleID"]);
@@ -100,4 +96,4 @@ async function verifyRole() {
   }
 }
 
-btn.addEventListener("click", trySampleRequest);
+btn.addEventListener("click", TokenHandler());
