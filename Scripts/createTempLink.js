@@ -1,4 +1,4 @@
-const tempLink = document.getElementById("createTempLink");
+// const tempLink = document.getElementById("createTempLink");
 const assignReviewer = document.getElementById("assignReviewer");
 
 assignReviewer.addEventListener("click", () => {

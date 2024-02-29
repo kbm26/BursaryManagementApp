@@ -239,7 +239,7 @@ select {
   color: white;
 }
 
-#createTempLink {
+/* #createTempLink {
   transition: 900ms;
   opacity: 0;
   display: none;
@@ -254,9 +254,9 @@ select {
   border: 4px solid rgb(255, 255, 255);
   margin: 30vh 25vw;
   border-radius: 17px;
-}
+} */
 
-#createTempLink input {
+/* #createTempLink input {
   max-width: 200px;
   height: 40px;
 }
@@ -267,4 +267,4 @@ select {
 
 #submitTempLink {
   padding: 1cqh 3cqw;
-}
+} */
