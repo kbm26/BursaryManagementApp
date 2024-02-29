@@ -22,7 +22,7 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select disabled name="Status" id="status">
+        <select name="Status" id="status">
         <option ${
           data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
@@ -36,25 +36,48 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="name">Amount Requested:</label>
-        <input class="userData" disabled placeholder=${
+        <input class="userData" id="amount" placeholder=${
           data.amount
         }  type="number" name="name">
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
-      <button class="updateData" type="submit">Update</button>
+      <button class="updateData" type="submit" 
+      oldAmount="${data.amount}"
+      applicationYear="${data.allocationYear}"
+      studentIdNumber="${data.studentIdNumber}"
+      marks="${data.studentMarks}"
+      courseyear="${data.courseYear}"
+      
+      >Update</button>
       </section>
     </form>`;
 
-    // Event listener to the delete button
     const deleteButton = element.querySelector(".deleteData");
+    const updateButton = element.querySelector(".updateData");
+
+    // Event listener to the delete button
     deleteButton.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent page from reloading when delete is clicked
       const allocationID = deleteButton.getAttribute("allocationID");
       deleteStudentAllocation(allocationID);
     });
 
+    updateButton.addEventListener("click",(event)=> {
+        event.preventDefault(); // Prevent page from reloading when delete is clicked
+        const applicationYear = updateButton.getAttribute("applicationYear");
+        const status = document.getElementById('status').value;
+        const amount = document.getElementById('amount').value == ''?  updateButton.getAttribute("oldAmount"): document.getElementById('amount').value;
+        const studentIdNumber = updateButton.getAttribute("studentIdNumber");
+        const marks = updateButton.getAttribute("marks");
+        const courseYear = updateButton.getAttribute("courseYear");
+  
+        UpdateStudentAllocation(amount,applicationYear,studentIdNumber,marks,courseYear,status)
+        
+      });
+
 };
+
 
 
 // Delete the Allocation with AllocationID attached to button
@@ -77,11 +100,45 @@ function deleteStudentAllocation(allocationID) {
   });
 }
 
+async function UpdateStudentAllocation(amount,allocationYear,studentIDNum,studentMarks,courseYear,applicationStatusID){
+    const url = 'https://bursarywebapp.azurewebsites.net/api/StudentsAllocation';
+    const data = {
+        amount: amount,
+        allocationYear: allocationYear,
+        studentIDNum: studentIDNum,
+        studentMarks: studentMarks,
+        courseYear: courseYear,
+        applicationStatusID: applicationStatusID,
+
+    }
+    console.log(data+"->")
+    const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json-patch+json'
+        },
+        body: JSON.stringify(data)
+    };
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const responseData = await response.json();
+        console.log('Response:', responseData);
+        // Handle response data here
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle errors here
+      }
+}
+
+
+
 const redirectToStudentInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
   const rowPos = parseInt(tableRow.id) + 2;
-  console.log(tableRow)
   if (e.target.textContent == "View") {
     for (const b of viewUniversityButtons) b.setAttribute("disabled", "");
     e.target.textContent = "Close";
