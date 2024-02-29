@@ -5,8 +5,11 @@ document.getElementById("newStudentApplication").addEventListener("submit", func
     // Get form input values from html
     const formData = new FormData(event.target);
     const postData = {};
+    
+     // Manually trim whitespace from values and add to postData
     formData.forEach((value, key) => {
-        postData[key] = value;
+        const trimmedValue = value.trim();
+        postData[key] = trimmedValue;
     });
 
 
@@ -19,7 +22,7 @@ document.getElementById("newStudentApplication").addEventListener("submit", func
         body: JSON.stringify(postData)
     };
 
-    console.log(postData);
+    console.log(JSON.stringify(postData));
 
     // Make the POST request
     fetch("https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/createStudentApplication", requestOptions)
