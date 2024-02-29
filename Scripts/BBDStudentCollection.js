@@ -6,7 +6,7 @@ let students;
 const tableMaker = (data) => {
   data.forEach((student, i) => {
     rowAdder(table, i, {
-      name: `${student.firstName} ${student.lastName} (ID: ${student.studentIdNumber})`,
+      name: `${student.firstName} ${student.lastName} (${student.university})`,
       status:
         student.applicationStatusID === 1
           ? "pending"
@@ -115,7 +115,7 @@ const redirectToStudentInfo = (e) => {
 
 async function getAllApplications() {
 
-    const url = `https://localhost:7162/api/StudentsAllocation/GetAllStudentAllocationsPro`;
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/GetAllStudentAllocationsPro`;
 
     fetch(url)
       .then((response) => {
