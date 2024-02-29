@@ -57,8 +57,8 @@ const userDataInserter = ({ name, element, data }) => {
 
     deleteButton.addEventListener("click", (event) => {
       event.preventDefault();
-
-
+      const allocationID = deleteButton.getAttribute("applicationID");
+      deleteApplication(allocationID)
 
     });
 
@@ -108,10 +108,24 @@ async function updateApplication(applicationID,applicationStatusID,amountRequest
   }
 }
 
-function deleteApplication(){
-
+function deleteApplication(allocationID) {
+  fetch(`https://bursarywebapp.azurewebsites.net/api/UniversityApplication/${allocationID}`, {
+    method: "DELETE",
+    headers: {
+      "accept": "*/*"
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log("Student Allocation successfully deleted.");
+    } else {
+      console.error("Failed to delete student allocation");
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
 }
-
 
 
 const redirectToUniInfo = (e) => {
