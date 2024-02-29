@@ -42,40 +42,43 @@ const userDataInserter = ({ name, element, data }) => {
         }  type="number" name="name">
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
+      <button class="deleteData" type="submit" allocationID="${
+        data.allocationID
+      }">Delete</button>
       <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
 
-    // Event listener to the delete button
-    const deleteButton = element.querySelector(".deleteData");
-    deleteButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent page from reloading when delete is clicked
-      const allocationID = deleteButton.getAttribute("allocationID");
-      deleteStudentAllocation(allocationID);
-    });
-
+  // Event listener to the delete button
+  const deleteButton = element.querySelector(".deleteData");
+  deleteButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent page from reloading when delete is clicked
+    const allocationID = deleteButton.getAttribute("allocationID");
+    deleteStudentAllocation(allocationID);
+  });
 };
-
 
 // Delete the Allocation with AllocationID attached to button
 function deleteStudentAllocation(allocationID) {
-  fetch(`https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`, {
-    method: "DELETE",
-    headers: {
-      "accept": "*/*"
+  fetch(
+    `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`,
+    {
+      method: "DELETE",
+      headers: {
+        accept: "*/*",
+      },
     }
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log("Student Allocation successfully deleted.");
-    } else {
-      console.error("Failed to delete student allocation");
-    }
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+  )
+    .then((response) => {
+      if (response.ok) {
+        console.log("Student Allocation successfully deleted.");
+      } else {
+        console.error("Failed to delete student allocation");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 const redirectToStudentInfo = (e) => {
@@ -115,11 +118,16 @@ const redirectToStudentInfo = (e) => {
 };
 
 async function getAllApplications() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get("userId");
+  // const urlParams = new URLSearchParams(window.location.search);
+  // const userId = urlParams.get("userId");
 
-  if (userId) {
-    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
+  // if (userId) {
+  //   const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
+  const tempUserId = sessionStorage.getItem("userID");
+  if (tempUserId) {
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
+      tempUserId
+    )}`;
 
     fetch(url)
       .then((response) => {
@@ -144,12 +152,14 @@ async function getAllApplications() {
       });
   } else {
     const errorMessage = document.createElement("p");
-    errorMessage.textContent = "HOD User ID not found in the URL.";
+    errorMessage.textContent = `HOD User ID not found. ${
+      tempUserId ? "Please retry later" : "Please allow cookies"
+    }`;
     document.body.appendChild(errorMessage);
+    // const errorMessage = document.createElement("p");
+    // errorMessage.textContent = "HOD User ID not found in the URL.";
+    // document.body.appendChild(errorMessage);
   }
 }
-
-
-
 
 getAllApplications();
