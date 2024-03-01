@@ -200,6 +200,11 @@ select {
   height: 25px;
 }
 
+
+.userData {
+  color: rgb(29, 29, 29);
+}
+
 .userData::placeholder,
 select {
   margin: 3px;
