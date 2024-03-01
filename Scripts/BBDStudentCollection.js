@@ -1,3 +1,4 @@
+
 const table = document.getElementById("dataTable");
 const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
 
@@ -56,6 +57,7 @@ const userDataInserter = ({ name, element, data }) => {
 
     const deleteButton = element.querySelector(".deleteData");
     const updateButton = element.querySelector(".updateData");
+    const downloadButton = element.querySelector(".downloadFile");
 
     // Event listener to the delete button
     deleteButton.addEventListener("click", (event) => {
@@ -77,6 +79,13 @@ const userDataInserter = ({ name, element, data }) => {
         UpdateStudentAllocation(amount,applicationYear,studentIdNumber,marks,courseYear,status,allocationID)
         
       });
+    
+    // Event listener to the download button
+    downloadButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent page from reloading when delete is clicked
+      const studentIDNum = downloadButton.getAttribute("studentIDNum");
+      getStudentDocuments(studentIDNum);
+    });
 
 };
 
