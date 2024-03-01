@@ -5,7 +5,7 @@ const rowAdder = (table, index, { name, status }) => {
   let c2 = row.insertCell(1);
   let c3 = row.insertCell(2);
 
-  const statusButton = document.createElement("button");
+  const statusButton = document.createElement("p");
   const viewButton = document.createElement("button");
   statusButton.textContent = status;
   viewButton.textContent = "View";
