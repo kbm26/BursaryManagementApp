@@ -2,17 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
-  <link rel="stylesheet" href="../Styles/mainStyle.css" />
-  <link rel="stylesheet" href="../Styles/collections.css" />
-  <title>Our Universities</title>
+  <link rel="stylesheet" href="../Styles/mainStyle.css">
+  <link rel="stylesheet" href="../Styles/newUniversityStyle.css">
+  <link rel="stylesheet" href="../Styles/collections.css">
+  <title>Document</title>
 </head>
 
 <body>
   <nav>
-    <h1><a href="/bbd">Ukukhula Bursary</a></h1>
+    <h1><a href="/hod">Ukukhula Bursary</a></h1>
     <svg id="burger" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0,0,256,256"
       style="fill:#000000;">
       <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
@@ -26,40 +27,26 @@
       </g>
     </svg>
     <section class="navigation">
-      <a href="/bbd/studentcollection">All Our Students</a>
-      <a href="/bbd/universitycollection">View All Universities</a>
-      <a href="/bbd/studenttemporarylink">Create Temporary Link</a>
+      <a href="/hod">Home</a>
+      <a href="/hod/studentcollection">All Students</a>
+      <a href="/hod/studenttemporarylink">Create Temporary Link For Student</a>
     </section>
   </nav>
-  <section class="navigationCenter">
-    <section class="informationCenter">
-      <h2>Universities</h2>
-    </section>
-    <section class="actionCenter">
-      <button class="add">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/ios/50/add--v1.png" alt="add--v1" />
-        Add University
-      </button>
-      <button class="assignReviewer">
-        <img class="addIcon" width="16" height="16" src="https://img.icons8.com/pastel-glyph/64/loop.png" alt="loop" />
-        Allocate Evenly
-      </button>
-    </section>
-  </section>
-  <main class="gridOfUsers">
-    <table id="dataTable">
-      <thead>
-        <td>University Name</td>
-        <td>Status</td>
-        <td></td>
-      </thead>
-    </table>
+  <main>
+    <form id="newStudentApplication" class="addApplication">
+      <h1>Add new university</h1>
+
+      <section>
+        <label for="universityID">University:</label>
+       <input type="text" id="universityName" name="universityName">
+      </section>
+      <section>
+        <button id="submitLogIn" type="submit">Submit</button>
+        <span id="successMessage"></span>
+    </form>
   </main>
 </body>
-<script src="../Scripts/statusColorCoder.js"></script>
-<script src="../Scripts/rowAdder.js"></script>
-<script src="../Scripts/universityCollections.js"></script>
 <script src="../Scripts/navController.js"></script>
-<script src="../Scripts/addUniversity.js"></script>
+<!-- <script src="../Scripts/createStudentApplication.js"></script> -->
 
 </html>
