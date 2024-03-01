@@ -3,16 +3,13 @@ const statusColorCoder = () => {
   for (const status of statuses) {
     switch (status.innerHTML) {
       case "pending":
-        status.style.backgroundColor = "#f2953fc6";
-        status.style.color = "white";
+        status.style.color = "#f2953fc6";
         break;
       case "approved":
-        status.style.backgroundColor = "#23c68b";
-        status.style.color = "white";
+        status.style.color = "#23c68b";
         break;
       case "rejected":
-        status.style.backgroundColor = "#ea3a4b";
-        status.style.color = "white";
+        status.style.color = "#ea3a4b";
         break;
     }
   }
