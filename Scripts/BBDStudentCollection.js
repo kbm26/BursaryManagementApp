@@ -42,15 +42,15 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit" allocationID="${data.allocationID}">Delete</button>
+     
       <button class="updateData" type="submit" 
       allocationID="${data.allocationID}
       oldAmount="${data.amount}"
       applicationYear="${data.allocationYear}"
       studentIdNumber="${data.studentIdNumber}"
       marks="${data.studentMarks}"
-      courseyear="${data.courseYear}"
-      
-      >Update</button>
+      courseyear="${data.courseYear}">Update</button>
+      <button class="downloadFile" type="submit" studentID="${data.studentIDNum}">Download</button>
       </section>
     </form>`;
 
