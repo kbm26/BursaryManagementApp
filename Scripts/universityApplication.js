@@ -27,10 +27,10 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         .then(response => {
             if (response.ok) {
                 // Display success message
-                document.getElementById('response').textContent = 'Request successful. Response code: ' + response.status;
+                document.getElementById("successMessage").textContent = "Application Submitted";
             } else {
                 // Display error message
-                document.getElementById('response').textContent = 'Request failed. Response code: ' + response.status;
+                document.getElementById("successMessage").textContent = "Failed to submit application";
             }
         })
         .catch(error => {
