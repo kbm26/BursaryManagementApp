@@ -39,6 +39,7 @@ const userDataInserter = ({ name, element, data }) => {
         <input class="userData" id="amount" placeholder=${
           data.amountRequested
         }  type="number" name="amount">
+        <button type="button" class="lock-button" value=true>LOCKED</button>
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
@@ -52,6 +53,13 @@ const userDataInserter = ({ name, element, data }) => {
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
     deleteApplication(data.applicationID);
+  });
+
+  lockButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    lockButton.innerText =
+      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
+    lockButton.value = lockButton.value === "true" ? "false" : "true";
   });
 
   const fd = document.getElementById("fd");
