@@ -1,7 +1,8 @@
 
 const addStudentButton = document.querySelector('.add');
 
-addStudentButton.addEventListener('click', function() {
-
- window.location.href = '/hod/studentapplicationindex';
+addStudentButton.addEventListener("click", () => {
+    window.location.pathname = `/${
+     window.location.pathname.split("/")[1] 
+    }/studentapplicationindex`;
 });
