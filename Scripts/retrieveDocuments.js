@@ -28,7 +28,7 @@ function getStudentDocuments(studentIDNum) {
             academicTranscriptAnchor.href = academicTranscriptLink;
             academicTranscriptAnchor.target = "_blank"; // Open in new tab
 
-            const idAnchor = document.createElement('a');
+            const idAnchor = document.createElement("a");
             idAnchor.href = idLink;
             idAnchor.target = "_blank"; // Open in new tab
 
