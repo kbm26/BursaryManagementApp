@@ -190,7 +190,10 @@ async function getAllApplications() {
       return response.json();
     })
     .then((jsonData) => {
-      unis = jsonData;
+      console.log(jsonData);
+      unis = jsonData.sort((a, b) => {
+        return b.applicationYear - a.applicationYear;
+      });
       tableMaker(jsonData);
       statusColorCoder();
       for (const b of viewUniversityButtons)

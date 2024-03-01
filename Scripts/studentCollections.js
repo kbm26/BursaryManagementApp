@@ -118,11 +118,6 @@ const redirectToStudentInfo = (e) => {
 };
 
 async function getAllApplications() {
-  // const urlParams = new URLSearchParams(window.location.search);
-  // const userId = urlParams.get("userId");
-
-  // if (userId) {
-  //   const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${userId}`;
   const tempUserId = sessionStorage.getItem("userID");
   if (tempUserId) {
     const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
@@ -138,7 +133,9 @@ async function getAllApplications() {
         }
       })
       .then((data) => {
-        students = data;
+        students = data.sort((a, b) => {
+          return b.allocationYear - a.allocationYear;
+        });
         tableMaker(data);
         statusColorCoder();
         for (const b of viewUniversityButtons)
@@ -156,9 +153,6 @@ async function getAllApplications() {
       tempUserId ? "Please retry later" : "Please allow cookies"
     }`;
     document.body.appendChild(errorMessage);
-    // const errorMessage = document.createElement("p");
-    // errorMessage.textContent = "HOD User ID not found in the URL.";
-    // document.body.appendChild(errorMessage);
   }
 }
 
