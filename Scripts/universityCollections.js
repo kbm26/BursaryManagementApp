@@ -39,7 +39,9 @@ const userDataInserter = ({ name, element, data }) => {
         <input class="userData" id="amount" placeholder=${
           data.amountRequested
         }  type="number" name="amount">
-        <button type="button" class="lock-button" value=true>LOCKED</button>
+        <button type="button" class="lock-button" value=true>${
+          data.isLocked === true ? "LOCKED" : "UNLOCKED"
+        }</button>
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
