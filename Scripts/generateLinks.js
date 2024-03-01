@@ -1,10 +1,6 @@
 
- // Generate a Temporary Link for a student (Need to provide StudentIDNum)
- document.getElementById("tempLinkForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload
-
-    // Get studentIDNum input value
-    const studentIDNum = document.getElementById("studentIDNum").value;
+//Get the Email address of the student and open a mailto for the link
+function generateLinkandEmail(studentIDNum, studentEmail) {
 
     // Endpoint URL with the studentIDNum parameter
     const url = `https://bursarywebapp.azurewebsites.net/api/Token/generateToken?studentIDNum=${studentIDNum}`;
@@ -25,16 +21,33 @@
                 console.log(response.json);
                 return response.json();
             } else {
-                document.getElementById("tokenUrl").textContent = "Error: " + response.statusText;
+                console.log("Error: " + response.statusText);
+                
             }
         })
         .then(data => {
-            // Display token URL to copy
-            document.getElementById("tokenUrl").textContent = "Link generated: " + data.tokenUrl;
+            console.log("Link generated: " + data.tokenUrl);
+            // Generate email body and then open email for supplied studentEmail
+            const emailBody = `Dear Student,\n\nPlease find your link to upload application documents below:\n${data.tokenUrl}\n\nBest regards,\nYour Institution`;
+
+            // Encode email body and subject for mailto link
+            const encodedBody = encodeURIComponent(emailBody);
+            const encodedSubject = encodeURIComponent("Token Link");
+
+            // Create MailtoLink
+            const mailtoLink = `mailto:${studentEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+
+            // Open Mail client 
+            window.location.href = mailtoLink;
+            
         })
         .catch(error => {
-
             console.error("Error:", error);
-            document.getElementById("tokenUrl").textContent = "Error: " + error.message;
+            
         });
-});
+
+
+
+}
+
+ 

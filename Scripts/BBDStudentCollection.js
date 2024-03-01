@@ -51,13 +51,15 @@ const userDataInserter = ({ name, element, data }) => {
       studentIdNumber="${data.studentIdNumber}"
       marks="${data.studentMarks}"
       courseyear="${data.courseYear}">Update</button>
-      <button class="downloadFile" type="submit" studentID="${data.studentIDNum}">Download</button>
+      <button class="downloadFile" type="submit" studentID="${data.studentIdNumber}">Download</button>
+      <button class="createLink" type="submit" studentIDNum="${data.studentIdNumber}" studentEmail="${data.email}">Send Link</button>
       </section>
     </form>`;
 
     const deleteButton = element.querySelector(".deleteData");
     const updateButton = element.querySelector(".updateData");
     const downloadButton = element.querySelector(".downloadFile");
+    const createLinkButton = element.querySelector(".createLink");
 
     // Event listener to the delete button
     deleteButton.addEventListener("click", (event) => {
@@ -65,6 +67,7 @@ const userDataInserter = ({ name, element, data }) => {
       const allocationID = deleteButton.getAttribute("allocationID");
       deleteStudentAllocation(allocationID);
     });
+
 
     updateButton.addEventListener("click",(event)=> {
         event.preventDefault(); // Prevent page from reloading when delete is clicked
@@ -82,9 +85,17 @@ const userDataInserter = ({ name, element, data }) => {
     
     // Event listener to the download button
     downloadButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent page from reloading when delete is clicked
-      const studentIDNum = downloadButton.getAttribute("studentIDNum");
+      event.preventDefault();
+      const studentIDNum = downloadButton.getAttribute("studentID");
       getStudentDocuments(studentIDNum);
+    });
+
+    // Event listener for generating and mailing a student a link. 
+    createLinkButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      const studentIDNum = createLinkButton.getAttribute("studentIDNum");
+      const studentEmail = createLinkButton.getAttribute("studentEmail");
+      generateLinkandEmail(studentIDNum,studentEmail);
     });
 
 };
