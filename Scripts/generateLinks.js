@@ -1,11 +1,4 @@
-
- // Generate a Temporary Link for a student (Need to provide StudentIDNum)
- document.getElementById("tempLinkForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload
-
-    // Get studentIDNum input value
-    const studentIDNum = document.getElementById("studentIDNum").value;
-
+function generateLinkandEmail(studentIDNum, studentEmail) {
     // Endpoint URL with the studentIDNum parameter
     const url = `https://bursarywebapp.azurewebsites.net/api/Token/generateToken?studentIDNum=${studentIDNum}`;
 
@@ -21,20 +14,31 @@
     fetch(url, requestOptions)
         .then(response => {
             if (response.ok) {
-                // Get token URL 
-                console.log(response.json);
                 return response.json();
             } else {
-                document.getElementById("tokenUrl").textContent = "Error: " + response.statusText;
+                throw new Error("Error: " + response.statusText);
             }
         })
         .then(data => {
-            // Display token URL to copy
-            document.getElementById("tokenUrl").textContent = "Link generated: " + data.tokenUrl;
+            // Generate the email body
+            const emailBody = `Dear Student,\n\nPlease find your temporary link below:\n${data.tokenUrl}\n\nBest regards,\nYour Institution`;
+
+            // Encode email body and subject for mailto link
+            const encodedBody = encodeURIComponent(emailBody);
+            const encodedSubject = encodeURIComponent("Temporary Link");
+
+            // Construct the mailto link
+            const mailtoLink = `mailto:${studentEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+
+            // Open the email client with the mailto link
+            window.location.href = mailtoLink;
         })
         .catch(error => {
-
             console.error("Error:", error);
-            document.getElementById("tokenUrl").textContent = "Error: " + error.message;
+            console.log(url);
+            alert("Error: " + error.message);
         });
-});
+}
+
+// Example usage:
+// generateLinkandEmail("123456", "example@example.com");
