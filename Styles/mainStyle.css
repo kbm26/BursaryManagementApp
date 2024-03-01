@@ -182,9 +182,9 @@ h1 a {
   color: white;
 }
 
-.addApplication{
+.addApplication {
   width: 100vw;
   padding: 3vh 20vw;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 88vh;
 }
