@@ -47,6 +47,7 @@ const userDataInserter = ({ name, element, data }) => {
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
+  const lockButton = element.querySelector(".lock-button");
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -57,6 +58,7 @@ const userDataInserter = ({ name, element, data }) => {
   fd.addEventListener("submit", () => {
     event.preventDefault();
     const formData = new FormData(fd);
+    const isLocked = lockButton.value === "true";
     const amount = formData.get("amount")
       ? formData.get("amount")
       : data.amountRequested;
@@ -66,7 +68,7 @@ const userDataInserter = ({ name, element, data }) => {
       amount,
       data.universityID,
       data.applicationYear,
-      data.isLocked
+      isLocked
     );
   });
 };
@@ -104,10 +106,8 @@ async function updateApplication(
     }
     const responseData = await response.json();
     console.log("Response:", responseData);
-    // Handle response data here
   } catch (error) {
     console.error("Error:", error);
-    // Handle errors here
   }
 }
 
