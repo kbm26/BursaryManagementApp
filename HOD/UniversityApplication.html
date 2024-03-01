@@ -25,9 +25,9 @@
           </g>
         </svg>
         <section class="navigation">
-          <a href="#">Students</a>
-          <a href="#">Universities</a>
-          <a href="#">Create Temporary Link</a>
+          <a href="/HOD/studentApplicationIndex">Students</a>
+          <a href="/HOD/UniversityApplication">Universities</a>
+          <a href="/HOD/studentTemporaryLink">Create Temporary Link</a>
         </section>
       </nav>
     
@@ -52,6 +52,7 @@
         <input type="text" id="amountRequested" name="amountRequested" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
 
         <button type="submit">Submit</button>
+        <span id="successMessage"></span>
     </form>
 
     <div id="response"></div>
