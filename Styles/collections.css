@@ -234,6 +234,14 @@ select {
 }
 
 .updateData,
-.deleteData {
+.deleteData, .downloadFile {
   color: white;
 }
+
+.downloadFile{
+  background-color: #797878;
+}
+
+
+
+
