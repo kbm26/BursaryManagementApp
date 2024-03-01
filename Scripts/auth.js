@@ -96,4 +96,4 @@ async function verifyRole() {
   }
 }
 
-btn.addEventListener("click", TokenHandler());
+btn.addEventListener("click", TokenHandler);
