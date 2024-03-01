@@ -90,12 +90,11 @@ const userDataInserter = ({ name, element, data }) => {
       getStudentDocuments(studentIDNum);
     });
 
+    // Event listener for generating and mailing a student a link. 
     createLinkButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent page from reloading when button is clicked
+      event.preventDefault();
       const studentIDNum = createLinkButton.getAttribute("studentIDNum");
-      console.log(studentIDNum);
       const studentEmail = createLinkButton.getAttribute("studentEmail");
-      console.log(studentEmail);
       generateLinkandEmail(studentIDNum,studentEmail);
     });
 
