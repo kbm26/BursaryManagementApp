@@ -1,8 +1,7 @@
-const newStudent = document.getElementById("add");
 
+const addStudentButton = document.querySelector('.add');
 
-assignReviewer.addEventListener("click", () => {
-  window.location.pathname = `/${
-    window.location.pathname.split("/")[1]
-  }/studenttemporarylink`;
+addStudentButton.addEventListener('click', function() {
+
+ window.location.href = '/hod/studentapplicationindex';
 });
