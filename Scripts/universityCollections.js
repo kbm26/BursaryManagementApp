@@ -18,8 +18,8 @@ function tableMaker(list) {
 }
 
 const userDataInserter = ({ name, element, data }) => {
-  console.log(data)
-  element.innerHTML = ` <form action="">
+  console.log(data);
+  element.innerHTML = ` <form id="fd" action="">
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
@@ -40,9 +40,12 @@ const userDataInserter = ({ name, element, data }) => {
         <input class="userData" id="amount" placeholder=${
           data.amountRequested
         }  type="number" name="name">
+        <button class="lock-button" value=true>LOCKED</button>
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" applicationID=${data.applicationID} type="submit">Delete</button>
+      <button class="deleteData" applicationID=${
+        data.applicationID
+      } type="submit">Delete</button>
       <button class="updateData" applicationID=${data.applicationID} 
       oldamountRequested=${data.amountRequested}
       applicationYear=${data.applicationYear}
@@ -52,32 +55,55 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
     </form>`;
 
-    const deleteButton = element.querySelector(".deleteData");
-    const updateButton = element.querySelector(".updateData");
+  const deleteButton = element.querySelector(".deleteData");
+  const updateButton = element.querySelector(".updateData");
+  const lockButton = element.querySelector(".lock-button");
 
-    deleteButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      const allocationID = deleteButton.getAttribute("applicationID");
-      deleteApplication(allocationID)
+  deleteButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const allocationID = deleteButton.getAttribute("applicationID");
+    deleteApplication(allocationID);
+  });
 
-    });
+  updateButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const allocationID = deleteButton.getAttribute("applicationID");
+    const status = document.getElementById("status").value;
+    const amount =
+      document.getElementById("amount").value == ""
+        ? updateButton.getAttribute("oldamountRequested")
+        : document.getElementById("amount").value;
+    const universityID = updateButton.getAttribute("universityID");
+    const applicationYear = updateButton.getAttribute("applicationYear");
+    const isLocked = lockButton.value === "true";
+    updateApplication(
+      allocationID,
+      status,
+      amount,
+      universityID,
+      applicationYear,
+      isLocked
+    );
+  });
 
-    updateButton.addEventListener("click",(event)=> {
-      event.preventDefault();
-      const allocationID = deleteButton.getAttribute("applicationID");
-      const status = document.getElementById('status').value;
-      const amount = document.getElementById('amount').value == ''?  updateButton.getAttribute("oldamountRequested"): document.getElementById('amount').value;
-      const universityID = updateButton.getAttribute("universityID");
-      const applicationYear = updateButton.getAttribute("applicationYear");
-      const isLocked = updateButton.getAttribute("isLocked");
-      updateApplication(allocationID,status,amount,universityID,applicationYear,isLocked)
-    })
+  lockButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    lockButton.innerText =
+      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
+    lockButton.value = lockButton.value === "true" ? "false" : "true";
+  });
+};
 
-}
-
-async function updateApplication(applicationID,applicationStatusID,amountRequested,universityID,applicationYear,isLocked){
-
-  const url = "https://bursarywebapp.azurewebsites.net/api/UniversityApplication"
+async function updateApplication(
+  applicationID,
+  applicationStatusID,
+  amountRequested,
+  universityID,
+  applicationYear,
+  isLocked
+) {
+  const url =
+    "https://bursarywebapp.azurewebsites.net/api/UniversityApplication";
 
   const data = {
     applicationID: applicationID,
@@ -85,14 +111,14 @@ async function updateApplication(applicationID,applicationStatusID,amountRequest
     amountRequested: amountRequested,
     universityID: universityID,
     applicationYear: applicationYear,
-    isLocked: isLocked
-  }
+    isLocked: isLocked,
+  };
   const options = {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json-patch+json'
+      "Content-Type": "application/json-patch+json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   };
   try {
     const response = await fetch(url, options);
@@ -100,33 +126,35 @@ async function updateApplication(applicationID,applicationStatusID,amountRequest
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
-    console.log('Response:', responseData);
+    console.log("Response:", responseData);
     // Handle response data here
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     // Handle errors here
   }
 }
 
 function deleteApplication(allocationID) {
-  fetch(`https://bursarywebapp.azurewebsites.net/api/UniversityApplication/${allocationID}`, {
-    method: "DELETE",
-    headers: {
-      "accept": "*/*"
+  fetch(
+    `https://bursarywebapp.azurewebsites.net/api/UniversityApplication/${allocationID}`,
+    {
+      method: "DELETE",
+      headers: {
+        accept: "*/*",
+      },
     }
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log("Student Allocation successfully deleted.");
-    } else {
-      console.error("Failed to delete student allocation");
-    }
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+  )
+    .then((response) => {
+      if (response.ok) {
+        console.log("Student Allocation successfully deleted.");
+      } else {
+        console.error("Failed to delete student allocation");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
-
 
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
@@ -188,7 +216,6 @@ async function getAllApplications() {
 
 getAllApplications();
 
-
 // {
 //   //Data object
 //   amountRequested, +
@@ -199,6 +226,3 @@ getAllApplications();
 //   universityID, +
 //   universityName
 // }
-
-
-
