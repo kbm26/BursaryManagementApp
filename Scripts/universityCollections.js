@@ -18,7 +18,6 @@ function tableMaker(list) {
 }
 
 const userDataInserter = ({ name, element, data }) => {
-  console.log(data);
   element.innerHTML = ` <form id="fd" action="">
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
@@ -36,54 +35,24 @@ const userDataInserter = ({ name, element, data }) => {
       </select>
       </section>
       <section class="formInput">
-        <label for="name">Amount Requested:</label>
+        <label for="amount">Amount Requested:</label>
         <input class="userData" id="amount" placeholder=${
           data.amountRequested
-        }  type="number" name="name">
-        <button class="lock-button" value=true>LOCKED</button>
+        }  type="number" name="amount">
+        <button type="button" class="lock-button" value=true>LOCKED</button>
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" applicationID=${
-        data.applicationID
-      } type="submit">Delete</button>
-      <button class="updateData" applicationID=${data.applicationID} 
-      oldamountRequested=${data.amountRequested}
-      applicationYear=${data.applicationYear}
-      isLocked=${data.isLocked}
-      universityID=${data.universityID}
-      type="submit">Update</button>
+      <button class="deleteData" type="submit">Delete</button>
+      <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
-  const updateButton = element.querySelector(".updateData");
   const lockButton = element.querySelector(".lock-button");
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
-    const allocationID = deleteButton.getAttribute("applicationID");
-    deleteApplication(allocationID);
-  });
-
-  updateButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const allocationID = deleteButton.getAttribute("applicationID");
-    const status = document.getElementById("status").value;
-    const amount =
-      document.getElementById("amount").value == ""
-        ? updateButton.getAttribute("oldamountRequested")
-        : document.getElementById("amount").value;
-    const universityID = updateButton.getAttribute("universityID");
-    const applicationYear = updateButton.getAttribute("applicationYear");
-    const isLocked = lockButton.value === "true";
-    updateApplication(
-      allocationID,
-      status,
-      amount,
-      universityID,
-      applicationYear,
-      isLocked
-    );
+    deleteApplication(data.applicationID);
   });
 
   lockButton.addEventListener("click", (event) => {
@@ -91,6 +60,24 @@ const userDataInserter = ({ name, element, data }) => {
     lockButton.innerText =
       lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
     lockButton.value = lockButton.value === "true" ? "false" : "true";
+  });
+
+  const fd = document.getElementById("fd");
+  fd.addEventListener("submit", () => {
+    event.preventDefault();
+    const formData = new FormData(fd);
+    const isLocked = lockButton.value === "true";
+    const amount = formData.get("amount")
+      ? formData.get("amount")
+      : data.amountRequested;
+    updateApplication(
+      data.applicationID,
+      formData.get("Status"),
+      amount,
+      data.universityID,
+      data.applicationYear,
+      isLocked
+    );
   });
 };
 
@@ -127,10 +114,8 @@ async function updateApplication(
     }
     const responseData = await response.json();
     console.log("Response:", responseData);
-    // Handle response data here
   } catch (error) {
     console.error("Error:", error);
-    // Handle errors here
   }
 }
 
@@ -215,14 +200,3 @@ async function getAllApplications() {
 }
 
 getAllApplications();
-
-// {
-//   //Data object
-//   amountRequested, +
-//   applicationID, +
-//   applicationStatusID, +
-//   applicationYear, +
-//   isLocked, +
-//   universityID, +
-//   universityName
-// }
