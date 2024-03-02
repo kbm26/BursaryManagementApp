@@ -188,3 +188,21 @@ h1 a {
   overflow-y: auto;
   height: 88vh;
 }
+
+#home {
+  min-height: 30vh;
+  min-width: 100vw;
+  margin: 0;
+  border: none;
+  padding: 0;
+  text-wrap: wrap;
+  text-align: center;
+}
+
+.current {
+  font-size: 2rem;
+}
+
+.total {
+  color: #000000a4;
+}
