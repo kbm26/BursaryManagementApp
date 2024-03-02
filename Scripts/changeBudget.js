@@ -1,15 +1,16 @@
+// Update the Budget for the year
 document.getElementById("updateBudgetForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     try {
         // Fetch current budget data
-        const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/GetCurrentBudget");
+        const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024");
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const responseData = await response.json();
-        const oldBudgetAllocated = responseData["allocated"];
-        const oldBudgetAmount = responseData["budget"];
+        const oldBudgetAllocated = responseData["totalAmountAllocated"];
+        const oldBudgetAmount = responseData["totalBudget"];
 
         // Get new budget amount from form input
         const newBudgetAmount = document.getElementById("newBudgetAmount").value;
