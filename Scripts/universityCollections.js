@@ -149,7 +149,16 @@ const redirectToUniInfo = (e) => {
   const rowPos = parseInt(tableRow.id) + 2;
 
   if (e.target.textContent == "View") {
-    for (const b of viewUniversityButtons) b.setAttribute("disabled", "");
+    const viewButtons = document.getElementsByClassName("viewUniversity");
+
+    for (let i = 0; i < unis.length; i++) {
+      if (i !== rowPos && document.getElementById(`info-${i}`)) {
+        document.getElementById(`info-${i}`).remove();
+      }
+
+      if (viewButtons[i].textContent === "Close")
+        viewButtons[i].textContent = "View";
+    }
     e.target.textContent = "Close";
     const infoCell = table.insertRow(rowPos).insertCell(0);
     infoCell.classList.add("info");
@@ -165,9 +174,7 @@ const redirectToUniInfo = (e) => {
       infoCell.style.padding = "10vh 5vw";
       infoCell.style.opacity = "1";
     }, 100);
-    e.target.removeAttribute("disabled");
   } else if (e.target.textContent == "Close") {
-    for (const b of viewUniversityButtons) b.removeAttribute("disabled");
     const infoStyle = document.getElementsByClassName("info")[0].style;
     infoStyle.height = "0vh";
     infoStyle.padding = "0px";
@@ -190,7 +197,6 @@ async function getAllApplications() {
       return response.json();
     })
     .then((jsonData) => {
-      console.log(jsonData);
       unis = jsonData.sort((a, b) => {
         return b.applicationYear - a.applicationYear;
       });
