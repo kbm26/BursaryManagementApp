@@ -16,29 +16,47 @@ function getStudentDocuments(studentIDNum) {
     })
     .then(data => {
         console.log("Documents for Student retrieved:", data);
-        const documentLinks = data;
 
-        // Define keys to open in new tabs
-        const keysToOpenInNewTab = ["id", "academicTranscript"];
+        // Extract individual links from the response data
+        const academicTranscriptLink = data.academicTranscript;
+        const idLink = data.id;
 
-        /*
-        Loops through each key in the keysToOpenInNewTab array.
-        Then checks if the documentLinks object has the current key.
-        Creates an anchor href attribute of the anchor element to the link associated with the current key.
-        Targe attribute '_blank' opens the created link in new tab. 
-        anchor gets removed when function is completed. 
-        */
-        keysToOpenInNewTab.forEach(key => {
-            if (documentLinks.hasOwnProperty(key)) {
-                const link = documentLinks[key];
-                const anchor = document.createElement('a');
-                anchor.href = link;
-                anchor.target = '_blank'; // Open in new tab
-                document.body.appendChild(anchor);
-                anchor.click();
-                document.body.removeChild(anchor);
-            }
-        });
+        // Check if both links are available
+        if (academicTranscriptLink && idLink) {
+            // Create anchor elements for each link
+            const academicTranscriptAnchor = document.createElement("a");
+            academicTranscriptAnchor.href = academicTranscriptLink;
+            academicTranscriptAnchor.target = "_blank"; // Open in new tab
+
+            const idAnchor = document.createElement("a");
+            idAnchor.href = idLink;
+            idAnchor.target = "_blank"; // Open in new tab
+
+            // Append the first anchor element to the document body
+            document.body.appendChild(academicTranscriptAnchor);
+
+            // Trigger download of the first file
+            academicTranscriptAnchor.click();
+
+            // Remove the first anchor element after download
+            academicTranscriptAnchor.addEventListener("click", () => {
+                document.body.removeChild(academicTranscriptAnchor);
+
+                // Append the second anchor element to the document body
+                document.body.appendChild(idAnchor);
+
+                // Trigger download of the second file
+                idAnchor.click();
+
+                // Remove the second anchor element after download
+                idAnchor.addEventListener("click", () => {
+                    document.body.removeChild(idAnchor);
+                });
+            });
+        } else {
+            console.error("Error: Missing link(s) in the response data");
+            alert("Error: Missing link(s) in the response data");
+        }
 
         alert("Documents retrieved successfully.");
     })
