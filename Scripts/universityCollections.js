@@ -22,7 +22,9 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-       <select name="Status" id="status">
+       <select ${
+         data.applicationStatusID !== 1 && "disabled"
+       } name="Status" id="status">
         <option ${
           data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
@@ -36,9 +38,11 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input class="userData" id="amount" placeholder=${
-          data.amountRequested
-        }  type="number" name="amount">
+        <input ${
+          data.applicationStatusID !== 1 && "disabled"
+        } class="userData" id="amount" placeholder=${
+    data.amountRequested
+  }  type="number" name="amount">
         <button type="button" class="lock-button" value=true>${
           data.isLocked === true ? "LOCKED" : "UNLOCKED"
         }</button>
