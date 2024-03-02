@@ -104,14 +104,6 @@ section:hover {
     padding: 8px;
 }
 
-#home {
-    min-height: 30vh;
-    min-width: 100vw;
-    margin: 0;
-    border: none;
-    padding: 0;
-}
-
 a:active {
     transition: 20ms;
     border-color: rgba(47, 44, 44, 0.993);

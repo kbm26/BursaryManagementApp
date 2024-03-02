@@ -22,7 +22,9 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.applicationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-       <select name="Status" id="status">
+       <select ${
+         data.applicationStatusID !== 1 && "disabled"
+       } name="Status" id="status">
         <option ${
           data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
@@ -36,9 +38,11 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input class="userData" id="amount" placeholder=${
-          data.amountRequested
-        }  type="number" name="amount">
+        <input ${
+          data.applicationStatusID !== 1 && "disabled"
+        } class="userData" id="amount" placeholder=${
+    data.amountRequested
+  }  type="number" name="amount">
         <button type="button" class="lock-button" value=true>${
           data.isLocked === true ? "LOCKED" : "UNLOCKED"
         }</button>
@@ -149,7 +153,15 @@ const redirectToUniInfo = (e) => {
   const rowPos = parseInt(tableRow.id) + 2;
 
   if (e.target.textContent == "View") {
-    for (const b of viewUniversityButtons) b.setAttribute("disabled", "");
+    const viewButtons = document.getElementsByClassName("viewUniversity");
+
+    for (let i = 0; i < unis.length + 2; i++) {
+      if (i !== rowPos && document.getElementById(`info-${i}`)) {
+        document.getElementById(`info-${i}`).remove();
+      }
+
+      if (document.getElementById(i)) viewButtons[i].textContent = "View";
+    }
     e.target.textContent = "Close";
     const infoCell = table.insertRow(rowPos).insertCell(0);
     infoCell.classList.add("info");
@@ -165,9 +177,7 @@ const redirectToUniInfo = (e) => {
       infoCell.style.padding = "10vh 5vw";
       infoCell.style.opacity = "1";
     }, 100);
-    e.target.removeAttribute("disabled");
   } else if (e.target.textContent == "Close") {
-    for (const b of viewUniversityButtons) b.removeAttribute("disabled");
     const infoStyle = document.getElementsByClassName("info")[0].style;
     infoStyle.height = "0vh";
     infoStyle.padding = "0px";
@@ -190,7 +200,6 @@ async function getAllApplications() {
       return response.json();
     })
     .then((jsonData) => {
-      console.log(jsonData);
       unis = jsonData.sort((a, b) => {
         return b.applicationYear - a.applicationYear;
       });
