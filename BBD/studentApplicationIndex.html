@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
+  <link rel="stylesheet" href="../Styles/mainStyle.css">
+  <link rel="stylesheet" href="../Styles/studentApplicationStyle.css">
+  <link rel="stylesheet" href="../Styles/collections.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav>
+    <h1><a href="/bbd">Ukukhula Bursary</a></h1>
+    <svg id="burger" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0,0,256,256"
+      style="fill:#000000;">
+      <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path
+            d="M3,9c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,24c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,39c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <section class="navigation">
+      <a href="/bbd/hodUser">Add HOD</a>
+      <a href="/bbd/bbdUser">Add BBD user</a>
+      <a href="/bbd/studentcollection">All Our Students</a>
+      <a href="/bbd/universitycollection">View All Universities</a>
+      <a href="/bbd/studenttemporarylink">Create Temporary Link</a>
+    </section>
+  </nav>
+  <main>
+    <form id="newStudentApplication" class="addApplication">
+      <h1>Student Application</h1>
+      <section>
+        <label for="phoneNumber"> Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+      </section>
+      <section>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required oninput="validateEmail(this);">
+      </section>
+      <section>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+      </section>
+      <section>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+      </section>
+      <section>
+        <label for="studentIDNum">ID Number:</label>
+        <input type="text" id="studentIDNum" name="studentIDNum">
+      </section>
+      <section>
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01"
+          max="9999-12-31" required>
+      </section>
+      <section>
+        <label for="genderID">Gender:</label>
+        <select id="genderID" name="genderID">
+          <option value="1">Female</option>
+          <option value="2">Male</option>
+        </select>
+      </section>
+      <section>
+        <label for="ethnicityID">Ethnicity:</label>
+        <select id="ethnicityID" name="ethnicityID">
+          <option value="1">African</option>
+          <option value="2">Indian</option>
+          <option value="3">Coloured</option>
+        </select>
+      </section>
+      <section>
+        <label for="departmentID">Department:</label>
+        <select id="departmentID" name="departmentID">
+          <option value="1">CompSci</option>
+          <option value="2">BEng</option>
+          <option value="3">GameDev</option>
+        </select>
+      </section>
+      <section>
+        <label for="universityID">University:</label>
+        <select id="universityID" name="universityID">
+          <option value="1">Stellenbosch University</option>
+          <option value="2">University of Cape Town</option>
+          <option value="3">University of Johannesburg</option>
+          <option value="4">University of KwaZulu Natal</option>
+          <option value="5">North-West University</option>
+          <option value="6">University of Pretoria</option>
+          <option value="7">University of the Witwatersrand</option>
+          <option value="8">University of South Africa (Unisa)</option>
+          <option value="9">Rhodes University</option>
+          <option value="10">Tshwane University of Technology</option>
+        </select>
+      </section>
+      <section>
+        <label for="amount">Amount (Rands):</label>
+        <input type="text" id="amount" name="amount" required>
+      </section>
+      <section>
+        <label for="studentMarks">Student Marks:</label>
+        <input type="text" id="studentMarks" name="studentMarks"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+      </section>
+
+      <section>
+        <button id="submitLogIn" type="submit">Submit</button>
+        <span id="successMessage"></span>
+    </form>
+  </main>
+</body>
+<script src="../Scripts/navController.js"></script>
+<script src="../Scripts/createStudentApplication.js"></script>
+<script src="../Scripts/addStudent.js"></script>
+
+</html>
