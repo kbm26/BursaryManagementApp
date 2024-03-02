@@ -206,3 +206,13 @@ h1 a {
 .total {
   color: #000000a4;
 }
+
+.filterSection {
+  opacity: 0;
+  transition: 400ms;
+  display: none;
+  width: 100vw;
+  height: 0vh;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -1,7 +1,12 @@
 const table = document.getElementById("dataTable");
 const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
+const nameFilter = document.getElementById("nameFilter");
+const approvedFilter = document.getElementById("approvedFilter");
+const pendingFilter = document.getElementById("pendingFilter");
+const rejectedFilter = document.getElementById("rejectedFilter");
 
 let students;
+let tempStudents;
 
 const tableMaker = (data) => {
   data.forEach((student, i) => {
@@ -177,7 +182,7 @@ function deleteStudentAllocation(allocationID) {
 const redirectToStudentInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 2;
+  const rowPos = parseInt(tableRow.id) + 1;
 
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
@@ -216,6 +221,15 @@ const redirectToStudentInfo = (e) => {
   }
 };
 
+const tableUpdater = (data) => {
+  table.innerHTML = "";
+  students = data;
+  tableMaker(data);
+  statusColorCoder();
+  for (const b of viewUniversityButtons)
+    b.addEventListener("click", redirectToStudentInfo);
+};
+
 async function getAllApplications() {
   const tempUserId = sessionStorage.getItem("userID");
   if (tempUserId) {
@@ -232,13 +246,13 @@ async function getAllApplications() {
         }
       })
       .then((data) => {
+        tempStudents = data.sort((a, b) => {
+          return b.allocationYear - a.allocationYear;
+        });
         students = data.sort((a, b) => {
           return b.allocationYear - a.allocationYear;
         });
-        tableMaker(data);
-        statusColorCoder();
-        for (const b of viewUniversityButtons)
-          b.addEventListener("click", redirectToStudentInfo);
+        tableUpdater(data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -254,5 +268,78 @@ async function getAllApplications() {
     document.body.appendChild(errorMessage);
   }
 }
+
+nameFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const sortedStudentsAsc = students.slice().sort((a, b) => {
+    const nameA = a.studentFirstName; // ignore upper and lowercase
+    const nameB = b.studentFirstName; // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+  const sortedStudentsDec = students.slice().sort((a, b) => {
+    const nameA = a.studentFirstName; // ignore upper and lowercase
+    const nameB = b.studentFirstName; // ignore upper and lowercase
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+  console.log(students);
+  tableUpdater(
+    students[0]["studentFirstName"] == sortedStudentsAsc[0]["studentFirstName"]
+      ? sortedStudentsDec
+      : sortedStudentsAsc
+  );
+});
+
+approvedFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const approvedStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 2
+  );
+
+  tableUpdater(
+    students.length === approvedStudents.length
+      ? tempStudents
+      : approvedStudents
+  );
+});
+
+pendingFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const pendingStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 1
+  );
+
+  tableUpdater(
+    students.length === pendingStudents.length ? tempStudents : pendingStudents
+  );
+});
+
+rejectedFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const rejectedStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 3
+  );
+
+  tableUpdater(
+    students.length === rejectedStudents.length
+      ? tempStudents
+      : rejectedStudents
+  );
+});
 
 getAllApplications();
