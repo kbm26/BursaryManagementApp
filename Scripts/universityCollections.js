@@ -73,7 +73,7 @@ const userDataInserter = ({ name, element, data }) => {
 
   payUniversityButton.addEventListener("click", (event) => {
     event.preventDefault();
-    payMoneytoUniversity(data.universityID, data.applicationID, data.amountRequested);
+    payMoneytoUniversity(data.universityID, data.applicationID, data.amountRequested, data.applicationStatusID);
   });
 
   const fd = document.getElementById("fd");
@@ -224,53 +224,61 @@ async function getAllApplications() {
 getAllApplications();
 
 
-async function payMoneytoUniversity(universityID, applicationID, amountRequested) {
-
-  preventDefault();
+async function payMoneytoUniversity(universityID, applicationID, amountRequested, applicationStatusID) {
 
   try {
-    // Fetch current budget data
-    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/GetCurrentBudget");
+    // Fetch current budget data NB: Changed endpoint
+    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024");
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
-    const oldBudgetAllocated = responseData["allocated"];
-    const oldBudgetAmount = responseData["budget"];
-
-    // Get new budget amount from form input
-    const newBudgetAmount = document.getElementById("newBudgetAmount").value;
+    const BudgetAmount = responseData["totalBudget"];
+    const availableFunds = responseData["amountRemaining"];
     
-    // Check that new budget is higher 
-    if (newBudgetAmount > oldBudgetAmount) {
+    // Check that you have funds available
+    if (amountRequested <= availableFunds) {
+
+      if (applicationStatusID == 2) {
 
         const requestOptions = {
-            method: "PUT",
-            headers: {
-                "accept": "*/*",
-                "Content-Type": "application/json-patch+json"
-            },
-            body: JSON.stringify({
-                budget: newBudgetAmount,
-                amountAllocated: oldBudgetAllocated,
-                budgetYear: new Date().getFullYear()
-            })
-        };
+          method: "POST",
+          headers: {
+              "accept": "*/*",
+              "Content-Type": "application/json-patch+json"
+          },
+          body: JSON.stringify({
+              universityID,
+              amountAlloc: amountRequested,
+              allocationYear: new Date().getFullYear(),
+              universityApplicationID: applicationID
+          })
+      };
 
-        // Send request to update the budget
-        const updateResponse = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024", requestOptions);
-        if (updateResponse.ok) {
-            console.log("Budget updated successfully");
-            
-        } else {
-            console.error("Error updating budget:", updateResponse.statusText);
-            
-        }
-            
-        }
+      // Send request to update the budget
+      const updateResponse = await fetch("https://bursarywebapp.azurewebsites.net/api/BursaryAllocation", requestOptions);
+      if (updateResponse.ok) {
+          console.log("Budget updated successfully");
+          alert("Funds have been processed");
+          
+      } else {
+          console.error("Error updating budget:", updateResponse.statusText);
+          console.log(updateResponse.statusText);
+          alert("You have already allocated funds to this application"); 
+      }
+          
+      }
+      else {
+        alert ("This application has not been approved");
+      }
+
+    }
+      
+
+        
     else {
 
-        alert("New budget must be higher than old budget");
+        alert("Insufficient funds for this allocation");
 
     }
 
