@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
   <link rel="stylesheet" href="../Styles/mainStyle.css">
-  <link rel="stylesheet" href="../Styles/hodUserStyle.css">
+  <link rel="stylesheet" href="../Styles/studentApplicationStyle.css">
   <link rel="stylesheet" href="../Styles/collections.css">
   <title>Document</title>
 </head>
@@ -27,14 +27,16 @@
       </g>
     </svg>
     <section class="navigation">
-      <a href="/hod">Home</a>
-      <a href="/hod/studentcollection">All Students</a>
-      <a href="/hod/studenttemporarylink">Create Temporary Link For Student</a>
+      <a href="/bbd/hodUser">Add HOD</a>
+      <a href="/bbd/bbdUser">Add BBD user</a>
+      <a href="/bbd/studentcollection">All Our Students</a>
+      <a href="/bbd/universitycollection">View All Universities</a>
+      <a href="/bbd/studenttemporarylink">Create Temporary Link</a>
     </section>
   </nav>
   <main>
     <form id="newStudentApplication" class="addApplication">
-      <h1>Add new HOD</h1>
+      <h1>Student Application</h1>
       <section>
         <label for="phoneNumber"> Phone Number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" required>
@@ -50,6 +52,30 @@
       <section>
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" name="lastName">
+      </section>
+      <section>
+        <label for="studentIDNum">ID Number:</label>
+        <input type="text" id="studentIDNum" name="studentIDNum">
+      </section>
+      <section>
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01"
+          max="9999-12-31" required>
+      </section>
+      <section>
+        <label for="genderID">Gender:</label>
+        <select id="genderID" name="genderID">
+          <option value="1">Female</option>
+          <option value="2">Male</option>
+        </select>
+      </section>
+      <section>
+        <label for="ethnicityID">Ethnicity:</label>
+        <select id="ethnicityID" name="ethnicityID">
+          <option value="1">African</option>
+          <option value="2">Indian</option>
+          <option value="3">Coloured</option>
+        </select>
       </section>
       <section>
         <label for="departmentID">Department:</label>
@@ -75,6 +101,16 @@
         </select>
       </section>
       <section>
+        <label for="amount">Amount (Rands):</label>
+        <input type="text" id="amount" name="amount" required>
+      </section>
+      <section>
+        <label for="studentMarks">Student Marks:</label>
+        <input type="text" id="studentMarks" name="studentMarks"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+      </section>
+
+      <section>
         <button id="submitLogIn" type="submit">Submit</button>
         <span id="successMessage"></span>
     </form>
@@ -82,5 +118,6 @@
 </body>
 <script src="../Scripts/navController.js"></script>
 <script src="../Scripts/createStudentApplication.js"></script>
+<script src="../Scripts/addStudent.js"></script>
 
 </html>

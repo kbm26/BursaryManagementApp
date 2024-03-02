@@ -5,7 +5,6 @@ let students;
 
 const tableMaker = (data) => {
   data.forEach((student, i) => {
-    console.log(student);
     rowAdder(table, i, {
       name: `${student.studentFirstName} ${student.studentLastName} (ID: ${student.studentIDNum})`,
       status:
@@ -19,11 +18,13 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  element.innerHTML = ` <form action="">
+  element.innerHTML = ` <form  id="fd" action="">
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select disabled name="Status" id="status">
+        <select ${
+          data.applicationID !== 1 && "disabled"
+        } name="Status" id="status">
         <option ${
           data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
@@ -36,29 +37,117 @@ const userDataInserter = ({ name, element, data }) => {
       </select>
       </section>
       <section class="formInput">
-        <label for="name">Amount Requested:</label>
-        <input class="userData" disabled placeholder=${
-          data.amount
-        }  type="number" name="name">
+        <label for="amount">Amount Requested:</label>
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.amount}  type="number" name="amount">
+        <label for="courseYear">Course Year:</label>
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.courseYear}  type="number" name="courseYear">
+        <label for="studentMarks">Student Mark:</label>
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.studentMarks}  type="number" name="studentMarks">
+        <button type="button" class="lock-button" value=true>${
+          data.isLocked === true ? "LOCKED" : "UNLOCKED"
+        }</button>
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" type="submit" allocationID="${
-        data.allocationID
-      }">Delete</button>
+      <button class="deleteData" type="submit">Delete</button>
       <button class="updateData" type="submit">Update</button>
+      </section>
+      <section class="dataModButtons">
+      <button class="downloadFile" type="submit">Download</button>
+      <button class="createLink" type="submit">Send Link</button>
       </section>
     </form>`;
 
-  // Event listener to the delete button
   const deleteButton = element.querySelector(".deleteData");
+  const lockButton = element.querySelector(".lock-button");
+
   deleteButton.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent page from reloading when delete is clicked
-    const allocationID = deleteButton.getAttribute("allocationID");
-    deleteStudentAllocation(allocationID);
+    event.preventDefault();
+    deleteStudentAllocation(data.applicationID);
+  });
+
+  lockButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    lockButton.innerText =
+      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
+    lockButton.value = lockButton.value === "true" ? "false" : "true";
+  });
+
+  const fd = document.getElementById("fd");
+  fd.addEventListener("submit", () => {
+    event.preventDefault();
+    const formData = new FormData(fd);
+    // const isLocked = lockButton.value === "true";
+    UpdateStudentAllocation(
+      formData.get("amount") ? formData.get("amount") : data.amountRequested,
+      data.allocationYear,
+      data.studentIDNum,
+      formData.get("studentMarks")
+        ? formData.get("studentMarks")
+        : data.studentMarks,
+      data.courseYear,
+      formData.get("Status")
+        ? formData.get("Status")
+        : data.applicationStatusID,
+      data.allocationID
+    );
+  });
+
+  downloadButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    getStudentDocuments(data.studentIDNum);
+  });
+
+  createLinkButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    generateLinkandEmail(data.studentIDNum, data.email);
   });
 };
 
-// Delete the Allocation with AllocationID attached to button
+async function UpdateStudentAllocation(
+  amount,
+  allocationYear,
+  studentIDNum,
+  studentMarks,
+  courseYear,
+  applicationStatusID,
+  allocationID
+) {
+  const url = "https://bursarywebapp.azurewebsites.net/api/StudentsAllocation";
+  const data = {
+    amount: amount,
+    allocationYear: allocationYear,
+    studentIDNum: studentIDNum,
+    studentMarks: studentMarks,
+    courseYear: courseYear,
+    applicationStatusID: applicationStatusID,
+    allocationID: allocationID,
+  };
+  console.log(data);
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json-patch+json",
+    },
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const responseData = await response.json();
+    console.log("Response:", responseData);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 function deleteStudentAllocation(allocationID) {
   fetch(
     `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`,
@@ -73,7 +162,10 @@ function deleteStudentAllocation(allocationID) {
       if (response.ok) {
         console.log("Student Allocation successfully deleted.");
       } else {
-        console.error("Failed to delete student allocation");
+        alert("Cannot delete application under review");
+        console.error(
+          "Failed to delete student allocation. It has an assigned reviewer"
+        );
       }
     })
     .catch((error) => {
@@ -87,7 +179,15 @@ const redirectToStudentInfo = (e) => {
   const rowPos = parseInt(tableRow.id) + 2;
 
   if (e.target.textContent == "View") {
-    for (const b of viewUniversityButtons) b.setAttribute("disabled", "");
+    const viewButtons = document.getElementsByClassName("viewUniversity");
+
+    for (let i = 0; i < students.length + 2; i++) {
+      if (i !== rowPos && document.getElementById(`info-${i}`)) {
+        document.getElementById(`info-${i}`).remove();
+      }
+
+      if (document.getElementById(i)) viewButtons[i].textContent = "View";
+    }
     e.target.textContent = "Close";
     const infoCell = table.insertRow(rowPos).insertCell(0);
     infoCell.classList.add("info");
@@ -103,9 +203,7 @@ const redirectToStudentInfo = (e) => {
       infoCell.style.padding = "10vh 5vw";
       infoCell.style.opacity = "1";
     }, 100);
-    e.target.removeAttribute("disabled");
   } else if (e.target.textContent == "Close") {
-    for (const b of viewUniversityButtons) b.removeAttribute("disabled");
     const infoStyle = document.getElementsByClassName("info")[0].style;
     infoStyle.height = "0vh";
     infoStyle.padding = "0px";
