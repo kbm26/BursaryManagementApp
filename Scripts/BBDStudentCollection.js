@@ -1,5 +1,9 @@
 const table = document.getElementById("dataTable");
 const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
+const nameFilter = document.getElementById("nameFilter");
+const approvedFilter = document.getElementById("approvedFilter");
+const pendingFilter = document.getElementById("pendingFilter");
+const rejectedFilter = document.getElementById("rejectedFilter");
 
 let students;
 
@@ -185,7 +189,7 @@ function deleteStudentAllocation(allocationID) {
 const redirectToStudentInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 2;
+  const rowPos = parseInt(tableRow.id) + 1;
 
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
@@ -224,6 +228,15 @@ const redirectToStudentInfo = (e) => {
   }
 };
 
+const tableUpdater = (data) => {
+  table.innerHTML = "";
+  students = data;
+  tableMaker(data);
+  statusColorCoder();
+  for (const b of viewUniversityButtons)
+    b.addEventListener("click", redirectToStudentInfo);
+};
+
 async function getAllApplications() {
   const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/GetAllStudentAllocationsPro`;
 
@@ -236,11 +249,7 @@ async function getAllApplications() {
       }
     })
     .then((data) => {
-      students = data;
-      tableMaker(data);
-      statusColorCoder();
-      for (const b of viewUniversityButtons)
-        b.addEventListener("click", redirectToStudentInfo);
+      tableUpdater(data);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -249,5 +258,41 @@ async function getAllApplications() {
       document.body.appendChild(errorMessage);
     });
 }
+
+nameFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const sortedStudentsAsc = students.slice().sort((a, b) => {
+    const nameA = a.firstName; // ignore upper and lowercase
+    const nameB = b.firstName; // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+  const sortedStudentsDec = students.slice().sort((a, b) => {
+    const nameA = a.firstName; // ignore upper and lowercase
+    const nameB = b.firstName; // ignore upper and lowercase
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+
+  tableUpdater(
+    students[0]["firstName"] == sortedStudentsAsc[0]["firstName"]
+      ? sortedStudentsDec
+      : sortedStudentsAsc
+  );
+});
 
 getAllApplications();
