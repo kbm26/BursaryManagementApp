@@ -14,13 +14,14 @@ async function universityBudgetFinder() {
             return; // Exit function early if userID is not found
         }
 
-        const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(tempUserId)}`;
+        const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${tempUserId}`;
 
         const userDataResponse = await fetch(url);
         if (!userDataResponse.ok) {
             throw new Error("Network response was not ok");
         }
         const userData = await userDataResponse.json();
+        console.log(userData);
         let universityID = userData.universityID;
         const allocationYear = new Date().getFullYear();
 
