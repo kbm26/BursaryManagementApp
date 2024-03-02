@@ -303,7 +303,11 @@ approvedFilter.addEventListener("click", (e) => {
     (student) => student.applicationStatusID === 2
   );
 
-  tableUpdater(approvedStudents);
+  tableUpdater(
+    students.length === approvedStudents.length
+      ? tempStudents
+      : approvedStudents
+  );
 });
 
 pendingFilter.addEventListener("click", (e) => {
@@ -312,7 +316,9 @@ pendingFilter.addEventListener("click", (e) => {
     (student) => student.applicationStatusID === 1
   );
 
-  tableUpdater(pendingStudents);
+  tableUpdater(
+    students.length === pendingStudents.length ? tempStudents : pendingStudents
+  );
 });
 
 rejectedFilter.addEventListener("click", (e) => {
@@ -321,7 +327,11 @@ rejectedFilter.addEventListener("click", (e) => {
     (student) => student.applicationStatusID === 3
   );
 
-  tableUpdater(rejectedStudents);
+  tableUpdater(
+    students.length === rejectedStudents.length
+      ? tempStudents
+      : rejectedStudents
+  );
 });
 
 getAllApplications();
