@@ -29,7 +29,6 @@
     <section class="navigation">
       <a href="/hod">Home</a>
       <a href="/hod/studentcollection">All Students</a>
-      <a href="/hod/studenttemporarylink">Create Temporary Link For Student</a>
     </section>
   </nav>
   <main>
@@ -57,7 +56,8 @@
       </section>
       <section>
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01" max="9999-12-31" required>
+        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01"
+          max="9999-12-31" required>
       </section>
       <section>
         <label for="genderID">Gender:</label>
@@ -103,7 +103,8 @@
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
-        <input type="text" id="studentMarks" name="studentMarks" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+        <input type="text" id="studentMarks" name="studentMarks"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
       </section>
 
       <section>

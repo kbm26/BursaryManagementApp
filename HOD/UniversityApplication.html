@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
-    <link rel="stylesheet" href="../Styles/mainStyle.css">
-    <link rel="stylesheet" href="../Styles/collections.css">
-    <link rel="stylesheet" href="../Styles/UniversityApplicationstyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
+  <link rel="stylesheet" href="../Styles/mainStyle.css">
+  <link rel="stylesheet" href="../Styles/collections.css">
+  <link rel="stylesheet" href="../Styles/UniversityApplicationstyle.css">
 
-    <title>Make a University Application</title>
+  <title>Make a University Application</title>
 </head>
+
 <body>
-    <nav>
-        <h1><a href="/hod">Ukukhula Bursary</a></h1>
-        <svg id="burger" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0,0,256,256"
-          style="fill:#000000;">
-          <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
-            stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
-            font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-            <g transform="scale(5.12,5.12)">
-              <path
-                d="M3,9c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,24c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,39c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587z">
-              </path>
-            </g>
-          </g>
-        </svg>
-        <section class="navigation">
-          <a href="/HOD/studentApplicationIndex">Students</a>
-          <a href="/HOD/UniversityApplication">Universities</a>
-          <a href="/HOD/studentTemporaryLink">Create Temporary Link</a>
-        </section>
-      </nav>
-    
-    <form id="postForm" class="addApplication">
-        <h2>Funding Application</h2>
-        
-        <label for="universityID">University:</label>
-        <select id="universityID" name="universityID">
-            <option value="1">Stellenbosch University</option>
-            <option value="2">University of Cape Town</option>
-            <option value="3">University of Johannesburg</option>
-            <option value="4">University of KwaZulu Natal</option>
-            <option value="5">North-West University</option>
-            <option value="6">University of Pretoria</option>
-            <option value="7">University of the Witwatersrand</option>
-            <option value="8">University of South Africa (Unisa)</option>
-            <option value="9">Rhodes University</option>
-            <option value="10">Tshwane University of Technology</option>
-        </select>
-        
-        <label for="amountRequested">Amount Requested:</label>
-        <input type="text" id="amountRequested" name="amountRequested" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
+  <nav>
+    <h1><a href="/hod">Ukukhula Bursary</a></h1>
+    <svg id="burger" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0,0,256,256"
+      style="fill:#000000;">
+      <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path
+            d="M3,9c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,24c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,39c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h44c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <section class="navigation">
+      <a href="/HOD/studentapplicationindex">Students</a>
+      <a href="/HOD/universityapplication">Universities</a>
+    </section>
+  </nav>
 
-        <button type="submit">Submit</button>
-        <span id="successMessage"></span>
-    </form>
+  <form id="postForm" class="addApplication">
+    <h2>Funding Application</h2>
 
-    <div id="response"></div>
+    <label for="universityID">University:</label>
+    <select id="universityID" name="universityID">
+      <option value="1">Stellenbosch University</option>
+      <option value="2">University of Cape Town</option>
+      <option value="3">University of Johannesburg</option>
+      <option value="4">University of KwaZulu Natal</option>
+      <option value="5">North-West University</option>
+      <option value="6">University of Pretoria</option>
+      <option value="7">University of the Witwatersrand</option>
+      <option value="8">University of South Africa (Unisa)</option>
+      <option value="9">Rhodes University</option>
+      <option value="10">Tshwane University of Technology</option>
+    </select>
 
-    <script src="/Scripts/universityApplication.js"></script>
-    <script src="../Scripts/navController.js"></script>
+    <label for="amountRequested">Amount Requested:</label>
+    <input type="text" id="amountRequested" name="amountRequested"
+      oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
+
+    <button type="submit">Submit</button>
+    <span id="successMessage"></span>
+  </form>
+
+  <div id="response"></div>
+
+  <script src="/Scripts/universityApplication.js"></script>
+  <script src="../Scripts/navController.js"></script>
 </body>
+
 </html>

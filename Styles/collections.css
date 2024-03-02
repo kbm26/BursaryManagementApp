@@ -102,19 +102,19 @@ nav h1 a {
   margin-right: 1cqw;
 }
 
-.assignReviewer {
+.filterButton {
   border: 2px solid var(--bbd-tertiary-color);
   background-color: transparent;
   min-width: 62%;
 }
 
-.assignReviewer:hover {
+.filterButton:hover {
   background-color: var(--bbd-tertiary-color);
   color: black;
   border-color: black;
 }
 
-.assignReviewer,
+.filterButton,
 .add {
   display: inherit;
   align-items: center;
