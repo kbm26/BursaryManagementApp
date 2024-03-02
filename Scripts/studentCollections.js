@@ -79,16 +79,17 @@ const userDataInserter = ({ name, element, data }) => {
     event.preventDefault();
     const formData = new FormData(fd);
     // const isLocked = lockButton.value === "true";
-    const amount = formData.get("amount")
-      ? formData.get("amount")
-      : data.amountRequested;
     UpdateStudentAllocation(
-      amount,
+      formData.get("amount") ? formData.get("amount") : data.amountRequested,
       data.allocationYear,
       data.studentIDNum,
-      data.studentMarks,
+      formData.get("studentMarks")
+        ? formData.get("studentMarks")
+        : data.studentMarks,
       data.courseYear,
-      formData.get("Status"),
+      formData.get("Status")
+        ? formData.get("Status")
+        : data.applicationStatusID,
       data.allocationID
     );
   });
@@ -113,6 +114,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
+  console.log(data);
   const options = {
     method: "PUT",
     headers: {
@@ -127,10 +129,8 @@ async function UpdateStudentAllocation(
     }
     const responseData = await response.json();
     console.log("Response:", responseData);
-    // Handle response data here
   } catch (error) {
     console.error("Error:", error);
-    // Handle errors here
   }
 }
 
