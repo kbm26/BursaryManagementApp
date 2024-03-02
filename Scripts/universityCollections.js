@@ -58,7 +58,6 @@ const userDataInserter = ({ name, element, data }) => {
   const lockButton = element.querySelector(".lock-button");
   const payUniversityButton = element.querySelector(".payUniversity");
 
-
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
     deleteApplication(data.applicationID);
@@ -73,7 +72,11 @@ const userDataInserter = ({ name, element, data }) => {
 
   payUniversityButton.addEventListener("click", (event) => {
     event.preventDefault();
-    payMoneytoUniversity(data.universityID, data.applicationID, data.amountRequested);
+    payMoneytoUniversity(
+      data.universityID,
+      data.applicationID,
+      data.amountRequested
+    );
   });
 
   const fd = document.getElementById("fd");
@@ -158,7 +161,7 @@ function deleteApplication(allocationID) {
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 2;
+  const rowPos = parseInt(tableRow.id) + 1;
 
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
@@ -223,16 +226,20 @@ async function getAllApplications() {
 
 getAllApplications();
 
-
-async function payMoneytoUniversity(universityID, applicationID, amountRequested) {
-
+async function payMoneytoUniversity(
+  universityID,
+  applicationID,
+  amountRequested
+) {
   preventDefault();
 
   try {
     // Fetch current budget data
-    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/GetCurrentBudget");
+    const response = await fetch(
+      "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/GetCurrentBudget"
+    );
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
     const oldBudgetAllocated = responseData["allocated"];
@@ -240,46 +247,36 @@ async function payMoneytoUniversity(universityID, applicationID, amountRequested
 
     // Get new budget amount from form input
     const newBudgetAmount = document.getElementById("newBudgetAmount").value;
-    
-    // Check that new budget is higher 
+
+    // Check that new budget is higher
     if (newBudgetAmount > oldBudgetAmount) {
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          accept: "*/*",
+          "Content-Type": "application/json-patch+json",
+        },
+        body: JSON.stringify({
+          budget: newBudgetAmount,
+          amountAllocated: oldBudgetAllocated,
+          budgetYear: new Date().getFullYear(),
+        }),
+      };
 
-        const requestOptions = {
-            method: "PUT",
-            headers: {
-                "accept": "*/*",
-                "Content-Type": "application/json-patch+json"
-            },
-            body: JSON.stringify({
-                budget: newBudgetAmount,
-                amountAllocated: oldBudgetAllocated,
-                budgetYear: new Date().getFullYear()
-            })
-        };
-
-        // Send request to update the budget
-        const updateResponse = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024", requestOptions);
-        if (updateResponse.ok) {
-            console.log("Budget updated successfully");
-            
-        } else {
-            console.error("Error updating budget:", updateResponse.statusText);
-            
-        }
-            
-        }
-    else {
-
-        alert("New budget must be higher than old budget");
-
+      // Send request to update the budget
+      const updateResponse = await fetch(
+        "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024",
+        requestOptions
+      );
+      if (updateResponse.ok) {
+        console.log("Budget updated successfully");
+      } else {
+        console.error("Error updating budget:", updateResponse.statusText);
+      }
+    } else {
+      alert("New budget must be higher than old budget");
     }
-
-    
-} catch (error) {
+  } catch (error) {
     console.error("Error:", error);
-}
-
-
-
-
+  }
 }
