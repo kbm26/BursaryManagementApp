@@ -151,13 +151,12 @@ const redirectToUniInfo = (e) => {
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
 
-    for (let i = 0; i < unis.length; i++) {
+    for (let i = 0; i < unis.length + 2; i++) {
       if (i !== rowPos && document.getElementById(`info-${i}`)) {
         document.getElementById(`info-${i}`).remove();
       }
 
-      if (viewButtons[i].textContent === "Close")
-        viewButtons[i].textContent = "View";
+      if (document.getElementById(i)) viewButtons[i].textContent = "View";
     }
     e.target.textContent = "Close";
     const infoCell = table.insertRow(rowPos).insertCell(0);
