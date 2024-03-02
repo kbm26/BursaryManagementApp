@@ -6,6 +6,7 @@ const pendingFilter = document.getElementById("pendingFilter");
 const rejectedFilter = document.getElementById("rejectedFilter");
 
 let students;
+let tempStudents;
 
 const tableMaker = (data) => {
   data.forEach((student, i) => {
@@ -249,6 +250,7 @@ async function getAllApplications() {
       }
     })
     .then((data) => {
+      tempStudents = data;
       tableUpdater(data);
     })
     .catch((error) => {
@@ -293,6 +295,33 @@ nameFilter.addEventListener("click", (e) => {
       ? sortedStudentsDec
       : sortedStudentsAsc
   );
+});
+
+approvedFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const approvedStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 2
+  );
+
+  tableUpdater(approvedStudents);
+});
+
+pendingFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const pendingStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 1
+  );
+
+  tableUpdater(pendingStudents);
+});
+
+rejectedFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  const rejectedStudents = tempStudents.filter(
+    (student) => student.applicationStatusID === 3
+  );
+
+  tableUpdater(rejectedStudents);
 });
 
 getAllApplications();
