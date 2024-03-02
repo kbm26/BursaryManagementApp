@@ -52,9 +52,7 @@ const userDataInserter = ({ name, element, data }) => {
         }</button>
       </section>
       <section class="dataModButtons">
-      <button class="deleteData" type="submit" allocationID="${
-        data.allocationID
-      }">Delete</button>
+      <button class="deleteData" type="submit">Delete</button>
       <button class="updateData" type="submit">Update</button>
       </section>
     </form>`;
