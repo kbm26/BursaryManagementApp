@@ -22,7 +22,9 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select disabled name="Status" id="status">
+        <select ${
+          data.applicationID !== 1 && "disabled"
+        } name="Status" id="status">
         <option ${
           data.applicationStatusID == "1" && "selected"
         } value="1">Pending</option>
@@ -36,17 +38,17 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input class="userData" disabled placeholder=${
-          data.amount
-        }  type="number" name="amount">
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.amount}  type="number" name="amount">
         <label for="courseYear">Course Year:</label>
-        <input class="userData" disabled placeholder=${
-          data.courseYear
-        }  type="number" name="courseYear">
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.courseYear}  type="number" name="courseYear">
         <label for="studentMarks">Student Mark:</label>
-        <input class="userData" disabled placeholder=${
-          data.studentMarks
-        }  type="number" name="studentMarks">
+        <input class="userData" ${
+          data.applicationID !== 1 && "disabled"
+        } placeholder=${data.studentMarks}  type="number" name="studentMarks">
         <button type="button" class="lock-button" value=true>${
           data.isLocked === true ? "LOCKED" : "UNLOCKED"
         }</button>
@@ -54,6 +56,10 @@ const userDataInserter = ({ name, element, data }) => {
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
       <button class="updateData" type="submit">Update</button>
+      </section>
+      <section class="dataModButtons">
+      <button class="downloadFile" type="submit">Download</button>
+      <button class="createLink" type="submit">Send Link</button>
       </section>
     </form>`;
 
@@ -90,6 +96,16 @@ const userDataInserter = ({ name, element, data }) => {
         : data.applicationStatusID,
       data.allocationID
     );
+  });
+
+  downloadButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    getStudentDocuments(data.studentIDNum);
+  });
+
+  createLinkButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    generateLinkandEmail(data.studentIDNum, data.email);
   });
 };
 
