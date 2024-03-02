@@ -104,7 +104,8 @@ const userDataInserter = ({ name, element, data }) => {
 
 // Delete the Allocation with AllocationID attached to button
 function deleteStudentAllocation(allocationID) {
-  fetch(`https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`, {
+  const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`;
+  fetch(url, {
     method: "DELETE",
     headers: {
       "accept": "*/*"
@@ -114,7 +115,8 @@ function deleteStudentAllocation(allocationID) {
     if (response.ok) {
       console.log("Student Allocation successfully deleted.");
     } else {
-      console.error("Failed to delete student allocation");
+      alert("Cannot delete application under review");
+      console.error("Failed to delete student allocation. It has an assigned reviwer");
     }
   })
   .catch(error => {
