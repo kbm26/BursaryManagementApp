@@ -18,6 +18,7 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
+  console.log(data);
   element.innerHTML = ` <form  id="fd" action="">
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">

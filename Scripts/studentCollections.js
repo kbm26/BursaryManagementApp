@@ -65,6 +65,7 @@ const userDataInserter = ({ name, element, data }) => {
 
   const deleteButton = element.querySelector(".deleteData");
   const lockButton = element.querySelector(".lock-button");
+  const downloadButton = element.querySelector(".downloadFile");
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
