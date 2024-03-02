@@ -50,11 +50,14 @@ const userDataInserter = ({ name, element, data }) => {
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
       <button class="updateData" type="submit">Update</button>
+      <button class="payUniversity" type="submit">Allocate Funds</button>
       </section>
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
   const lockButton = element.querySelector(".lock-button");
+  const payUniversityButton = element.querySelector(".payUniversity");
+
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -66,6 +69,11 @@ const userDataInserter = ({ name, element, data }) => {
     lockButton.innerText =
       lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
     lockButton.value = lockButton.value === "true" ? "false" : "true";
+  });
+
+  payUniversityButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    payMoneytoUniversity(data.universityID, data.applicationID, data.amountRequested);
   });
 
   const fd = document.getElementById("fd");
@@ -214,3 +222,64 @@ async function getAllApplications() {
 }
 
 getAllApplications();
+
+
+async function payMoneytoUniversity(universityID, applicationID, amountRequested) {
+
+  preventDefault();
+
+  try {
+    // Fetch current budget data
+    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/GetCurrentBudget");
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const responseData = await response.json();
+    const oldBudgetAllocated = responseData["allocated"];
+    const oldBudgetAmount = responseData["budget"];
+
+    // Get new budget amount from form input
+    const newBudgetAmount = document.getElementById("newBudgetAmount").value;
+    
+    // Check that new budget is higher 
+    if (newBudgetAmount > oldBudgetAmount) {
+
+        const requestOptions = {
+            method: "PUT",
+            headers: {
+                "accept": "*/*",
+                "Content-Type": "application/json-patch+json"
+            },
+            body: JSON.stringify({
+                budget: newBudgetAmount,
+                amountAllocated: oldBudgetAllocated,
+                budgetYear: new Date().getFullYear()
+            })
+        };
+
+        // Send request to update the budget
+        const updateResponse = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024", requestOptions);
+        if (updateResponse.ok) {
+            console.log("Budget updated successfully");
+            
+        } else {
+            console.error("Error updating budget:", updateResponse.statusText);
+            
+        }
+            
+        }
+    else {
+
+        alert("New budget must be higher than old budget");
+
+    }
+
+    
+} catch (error) {
+    console.error("Error:", error);
+}
+
+
+
+
+}
