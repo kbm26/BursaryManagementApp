@@ -4,6 +4,7 @@ const nameFilter = document.getElementById("nameFilter");
 const approvedFilter = document.getElementById("approvedFilter");
 const pendingFilter = document.getElementById("pendingFilter");
 const rejectedFilter = document.getElementById("rejectedFilter");
+const loadingScreen = document.getElementsByClassName("loadingScreen");
 
 let students;
 let tempStudents;
@@ -244,9 +245,12 @@ async function getAllApplications() {
     const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
       tempUserId
     )}`;
+    loadingScreen[0].style.opacity = 1;
+    loadingScreen[0].style.height = "70vh";
 
     fetch(url)
       .then((response) => {
+        table.innerHTML = "";
         if (response.ok) {
           return response.json();
         } else {
@@ -254,6 +258,8 @@ async function getAllApplications() {
         }
       })
       .then((data) => {
+        loadingScreen[0].style.opacity = 0;
+        loadingScreen[0].style.height = "0vh";
         tempStudents = data.sort((a, b) => {
           return b.allocationYear - a.allocationYear;
         });
@@ -280,8 +286,8 @@ async function getAllApplications() {
 nameFilter.addEventListener("click", (e) => {
   e.preventDefault();
   const sortedStudentsAsc = students.slice().sort((a, b) => {
-    const nameA = a.studentFirstName; // ignore upper and lowercase
-    const nameB = b.studentFirstName; // ignore upper and lowercase
+    const nameA = a.studentFirstName;
+    const nameB = b.studentFirstName;
     if (nameA < nameB) {
       return -1;
     }
@@ -293,8 +299,8 @@ nameFilter.addEventListener("click", (e) => {
     return 0;
   });
   const sortedStudentsDec = students.slice().sort((a, b) => {
-    const nameA = a.studentFirstName; // ignore upper and lowercase
-    const nameB = b.studentFirstName; // ignore upper and lowercase
+    const nameA = a.studentFirstName;
+    const nameB = b.studentFirstName;
     if (nameA > nameB) {
       return -1;
     }

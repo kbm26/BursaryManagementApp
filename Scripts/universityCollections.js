@@ -1,5 +1,6 @@
 const table = document.getElementById("dataTable");
 const viewUniversityButtons = document.getElementsByClassName("viewUniversity");
+const loadingScreen = document.getElementsByClassName("loadingScreen");
 
 let unis;
 
@@ -202,16 +203,21 @@ const redirectToUniInfo = (e) => {
 };
 
 async function getAllApplications() {
+  loadingScreen[0].style.opacity = 1;
+  loadingScreen[0].style.height = "70vh";
   fetch(
     "https://bursarywebapp.azurewebsites.net/api/UniversityApplication/getAllUniversityApplicationsWithName"
   )
     .then((response) => {
+      table.innerHTML = "";
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((jsonData) => {
+      loadingScreen[0].style.opacity = 0;
+      loadingScreen[0].style.height = "0vh";
       unis = jsonData.sort((a, b) => {
         return b.applicationYear - a.applicationYear;
       });

@@ -216,3 +216,9 @@ h1 a {
   align-items: center;
   justify-content: space-around;
 }
+
+.loadingScreen {
+  height: 0vh;
+  opacity: 0;
+  display: none;
+}
