@@ -82,28 +82,19 @@
           <option value="3">GameDev</option>
         </select>
       </section>
-      <section>
-        <label for="universityID">University:</label>
-        <select id="universityID" name="universityID">
-          <option value="1">Stellenbosch University</option>
-          <option value="2">University of Cape Town</option>
-          <option value="3">University of Johannesburg</option>
-          <option value="4">University of KwaZulu Natal</option>
-          <option value="5">North-West University</option>
-          <option value="6">University of Pretoria</option>
-          <option value="7">University of the Witwatersrand</option>
-          <option value="8">University of South Africa (Unisa)</option>
-          <option value="9">Rhodes University</option>
-          <option value="10">Tshwane University of Technology</option>
-        </select>
-      </section>
+      <!--Removed universityID drop down-->
       <section>
         <label for="amount">Amount (Rands):</label>
-        <input type="text" id="amount" name="amount" required>
+        <input type="text" id="amount" name="amount" required pattern="\d+(\.\d+)?" title="Please enter a valid number">
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
         <input type="text" id="studentMarks" name="studentMarks"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+      </section>
+      <section>
+        <label for="courseYear">CourseYear:</label>
+        <input type="text" id="courseYear" name="courseYear"
           oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
       </section>
 
