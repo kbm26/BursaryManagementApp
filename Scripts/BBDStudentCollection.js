@@ -4,6 +4,7 @@ const nameFilter = document.getElementById("nameFilter");
 const approvedFilter = document.getElementById("approvedFilter");
 const pendingFilter = document.getElementById("pendingFilter");
 const rejectedFilter = document.getElementById("rejectedFilter");
+const loadingScreen = document.getElementsByClassName("loadingScreen");
 
 let students;
 let tempStudents;
@@ -235,9 +236,12 @@ const tableUpdater = (data) => {
 
 async function getAllApplications() {
   const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/GetAllStudentAllocationsPro`;
+  loadingScreen[0].style.opacity = 1;
+  loadingScreen[0].style.height = "70vh";
 
   fetch(url)
     .then((response) => {
+      table.innerHTML = "";
       if (response.ok) {
         return response.json();
       } else {
@@ -245,6 +249,8 @@ async function getAllApplications() {
       }
     })
     .then((data) => {
+      loadingScreen[0].style.opacity = 0;
+      loadingScreen[0].style.height = "0vh";
       tempStudents = data.sort((a, b) => {
         return b.allocationYear - a.allocationYear;
       });
