@@ -32,7 +32,7 @@ select {
 }
 
 
-input[type="file"],
+input[type="number"],
 [type="text"],
 [type="checkbox"],
 select {
@@ -88,7 +88,7 @@ select {
 }
 
 
-input[type="file"],
+input[type="number"],
 input[type="checkbox"],
 input[type="text"],
 select {
@@ -118,11 +118,11 @@ select:focus {
     margin-bottom: 3px;
   }
 
-  input[type="file"],
+  input[type="number"],
   [type="text"],
   [type="checkbox"],
   select {
-    padding: 8px;
+    padding: 0;
   }
 
   button {

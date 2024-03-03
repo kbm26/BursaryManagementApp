@@ -163,7 +163,7 @@ function deleteApplication(allocationID) {
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 2;
+  const rowPos = parseInt(tableRow.id) + 1;
 
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
