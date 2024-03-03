@@ -32,12 +32,12 @@
     </section>
   </nav>
   <main>
-    <form id="newStudentApplication" class="addApplication">
+    <form id="newUniversity" class="addApplication">
       <h1>Add new university</h1>
 
       <section>
         <label for="universityID">University:</label>
-        <input type="text" id="universityName" name="universityName">
+        <input type="text" id="universityName" name="universityName" pattern="[A-Za-z]+" required>
       </section>
       <section>
         <button id="submitLogIn" type="submit">Submit</button>
@@ -45,7 +45,7 @@
     </form>
   </main>
 </body>
-<script src="../Scripts/navController.js"></script>
+<script src="../Scripts/addNewUniversity.js"></script>
 
 
 </html>
