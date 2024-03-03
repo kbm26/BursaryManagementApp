@@ -239,13 +239,19 @@ select {
 .deleteData {
   background-color: #ea3a4b;
 }
-
+.downloadID,
+.createLink,
+.downloadAcademic,
+.payUniversity,
 .updateData,
 .deleteData,
 .downloadFile {
   color: white;
 }
 
-.downloadFile {
-  background-color: #797878;
+.downloadFile, .payUniversity,
+.downloadID,
+.createLink,
+.downloadAcademic {
+  background-color: #a0a2be;
 }
