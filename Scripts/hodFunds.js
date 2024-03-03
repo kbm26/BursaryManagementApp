@@ -14,7 +14,7 @@ async function universityBudgetFinder() {
             return; // Exit function early if userID is not found
         }
 
-        const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${tempUserId}`;
+        const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${window.atob(tempUserId)}`;
 
         const userDataResponse = await fetch(url);
         if (!userDataResponse.ok) {
