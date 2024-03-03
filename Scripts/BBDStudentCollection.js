@@ -61,9 +61,6 @@ const userDataInserter = ({ name, element, data }) => {
         } class="userData" placeholder=${
     data.studentMarks
   }  type="number" name="studentMarks">
-        <button type="button" class="lock-button" value=true>${
-          data.isLocked === true ? "LOCKED" : "UNLOCKED"
-        }</button>
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
@@ -77,7 +74,6 @@ const userDataInserter = ({ name, element, data }) => {
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
-  const lockButton = element.querySelector(".lock-button");
   const downloadID = element.querySelector(".downloadID");
   const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
@@ -87,18 +83,10 @@ const userDataInserter = ({ name, element, data }) => {
     deleteStudentAllocation(data.allocationID);
   });
 
-  lockButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    lockButton.innerText =
-      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
-    lockButton.value = lockButton.value === "true" ? "false" : "true";
-  });
-
   const fd = document.getElementById("fd");
   fd.addEventListener("submit", () => {
     event.preventDefault();
     const formData = new FormData(fd);
-    // const isLocked = lockButton.value === "true";
     UpdateStudentAllocation(
       formData.get("amount") ? formData.get("amount") : data.amountRequested,
       data.allocationYear,
@@ -271,8 +259,8 @@ async function getAllApplications() {
 nameFilter.addEventListener("click", (e) => {
   e.preventDefault();
   const sortedStudentsAsc = students.slice().sort((a, b) => {
-    const nameA = a.firstName; // ignore upper and lowercase
-    const nameB = b.firstName; // ignore upper and lowercase
+    const nameA = a.firstName;
+    const nameB = b.firstName;
     if (nameA < nameB) {
       return -1;
     }
@@ -280,12 +268,11 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
-    // names must be equal
     return 0;
   });
   const sortedStudentsDec = students.slice().sort((a, b) => {
-    const nameA = a.firstName; // ignore upper and lowercase
-    const nameB = b.firstName; // ignore upper and lowercase
+    const nameA = a.firstName;
+    const nameB = b.firstName;
     if (nameA > nameB) {
       return -1;
     }
@@ -293,7 +280,6 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
-    // names must be equal
     return 0;
   });
 
