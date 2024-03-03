@@ -97,7 +97,7 @@
     width: 100%;
   }
   
-  #departmentID, #universityID, #genderID, #ethnicityID{
+  #departmentID, #universityID, #genderID, #ethnicityID, #userID{
     height: 4cqh;
     margin: 1vh auto;
     background-color: rgba(255, 255, 255, 0.134);

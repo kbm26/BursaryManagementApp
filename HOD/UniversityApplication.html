@@ -38,6 +38,7 @@
 
     <label for="universityID">University:</label>
     <select id="universityID" name="universityID">
+      <option value="">--Select University--</option>
       <option value="1">Stellenbosch University</option>
       <option value="2">University of Cape Town</option>
       <option value="3">University of Johannesburg</option>
@@ -51,7 +52,7 @@
     </select>
 
     <label for="amountRequested">Amount Requested:</label>
-    <input type="text" id="amountRequested" name="amountRequested"
+    <input type="number" id="amountRequested" name="amountRequested"
       oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br><br>
 
     <button type="submit">Submit</button>
