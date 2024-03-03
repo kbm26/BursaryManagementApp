@@ -44,24 +44,25 @@
       </section>
       <section>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName">
+        <input type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
       </section>
       <section>
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
       </section>
       <section>
         <label for="studentIDNum">ID Number:</label>
-        <input type="text" id="studentIDNum" name="studentIDNum">
+        <input type="number" id="studentIDNum" name="studentIDNum" pattern="\d{13}" required>
       </section>
       <section>
+      <section>
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="text" id="dateOfBirth" name="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" min="1000-01-01"
-          max="9999-12-31" required>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" min="1000-01-01" max="9999-12-31" required>
       </section>
       <section>
         <label for="genderID">Gender:</label>
         <select id="genderID" name="genderID">
+          <option value="">--Select Gender--</option>
           <option value="1">Female</option>
           <option value="2">Male</option>
         </select>
@@ -69,6 +70,7 @@
       <section>
         <label for="ethnicityID">Ethnicity:</label>
         <select id="ethnicityID" name="ethnicityID">
+          <option value="">--Select Ethnicity--</option>
           <option value="1">African</option>
           <option value="2">Indian</option>
           <option value="3">Coloured</option>
@@ -77,6 +79,7 @@
       <section>
         <label for="departmentID">Department:</label>
         <select id="departmentID" name="departmentID">
+          <option value="">--Select Department--</option>
           <option value="1">CompSci</option>
           <option value="2">BEng</option>
           <option value="3">GameDev</option>

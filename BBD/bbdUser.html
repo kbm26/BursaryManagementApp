@@ -35,21 +35,21 @@
     <form  class="addApplication">
       <h1>Add a BBD user </h1>
       <section>
-        <label for="phoneNumber"> Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required>
-      </section>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="number" id="phoneNumber" name="phoneNumber" required maxlength="10" pattern="\d{10}">
+    </section>
       <section>
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required oninput="validateEmail(this);">
+        <input type="email" id="email" name="email" required oninput="validateEmail(this);">
       </section>
       <section>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName">
-      </section>
-      <section>
+        <input type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
+    </section>
+    <section>
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName">
-      </section>
+        <input type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
+    </section>
 
       <button id="submitLogIn" type="submit">Submit</button>
       <span id="successMessage"></span>
