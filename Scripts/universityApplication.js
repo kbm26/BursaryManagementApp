@@ -1,42 +1,60 @@
 // Create a New University Application for funding from BBD 
-document.getElementById('postForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+document.getElementById('postForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); 
 
-    // Get form input values
-    const formData = new FormData(event.target);
-    const postData = {};
-    formData.forEach((value, key) => {
-        postData[key] = value;
-    });
+    const tempUserId = sessionStorage.getItem("userID");
+    if (!tempUserId) {
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = "HOD User ID not found. Please allow cookies";
+        document.body.appendChild(errorMessage);
+        return; 
+    }
 
+    try {
+        const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${window.atob(tempUserId)}`;
+        const userDataResponse = await fetch(url);
+        if (!userDataResponse.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const userData = await userDataResponse.json();
+        console.log(userData);
+        const HODUniversityID = userData.universityID;
 
-    // Define request options
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-    };
-
-    // Check the structure
-    console.log(postData);
-
-    // Make the POST request
-    fetch('https://bursarywebapp.azurewebsites.net/api/UniversityApplication', requestOptions)
-        .then(response => {
-            if (response.ok) {
-                // Display success message
-                document.getElementById("successMessage").textContent = "Application Submitted";
-            } else {
-                // Display error message
-                document.getElementById("successMessage").textContent = "Failed to submit application";
-            }
-        })
-        .catch(error => {
-            // Handle errors
-            console.error('Error:', error);
+        // Get form input values
+        const formData = new FormData(event.target);
+        const postData = {};
+        formData.forEach((value, key) => {
+            postData[key] = value;
         });
+
+        // Set the UniversityID as the retrieved ID
+        postData.universityID = HODUniversityID;
+
+        // Define request options
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        };
+
+        fetch('https://bursarywebapp.azurewebsites.net/api/UniversityApplication', requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById("successMessage").textContent = "Application Submitted";
+                } else {
+                    document.getElementById("successMessage").textContent = "Application for year already exists";
+                }
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+            });
+    } catch (error) {
+        console.error("Error:", error);
+    }
 });
+
 
 
