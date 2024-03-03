@@ -245,8 +245,14 @@ async function getAllApplications() {
       }
     })
     .then((data) => {
-      tempStudents = data;
-      tableUpdater(data);
+      tempStudents = data.sort((a, b) => {
+        return b.allocationYear - a.allocationYear;
+      });
+      tableUpdater(
+        data.sort((a, b) => {
+          return b.allocationYear - a.allocationYear;
+        })
+      );
     })
     .catch((error) => {
       console.error("Error:", error);
