@@ -70,14 +70,16 @@ const userDataInserter = ({ name, element, data }) => {
       <button class="updateData" type="submit">Update</button>
       </section>
       <section class="dataModButtons">
-      <button class="downloadFile" type="submit">Download</button>
+      <button class="downloadID" type="submit">Download ID</button>
+      <button class="downloadAcademic" type="submit">Download Academic</button>
       <button class="createLink" type="submit">Send Link</button>
       </section>
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
   const lockButton = element.querySelector(".lock-button");
-  const downloadButton = element.querySelector(".downloadFile");
+  const downloadID = element.querySelector(".downloadID");
+  const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
 
   deleteButton.addEventListener("click", (event) => {
@@ -112,9 +114,14 @@ const userDataInserter = ({ name, element, data }) => {
     );
   });
 
-  downloadButton.addEventListener("click", (event) => {
+  downloadID.addEventListener("click", (event) => {
     event.preventDefault();
-    getStudentDocuments(data.studentIdNumber);
+    getStudentID(data.studentIdNumber);
+  });
+
+  downloadAcademic.addEventListener("click", (event) => {
+    event.preventDefault();
+    getStudentAcademicTranscript(data.studentIdNumber);
   });
 
   createLinkButton.addEventListener("click", (event) => {
