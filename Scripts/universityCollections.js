@@ -72,7 +72,12 @@ const userDataInserter = ({ name, element, data }) => {
 
   payUniversityButton.addEventListener("click", (event) => {
     event.preventDefault();
-    payMoneytoUniversity(data.universityID, data.applicationID, data.amountRequested, data.applicationStatusID);
+    payMoneytoUniversity(
+      data.universityID,
+      data.applicationID,
+      data.amountRequested,
+      data.applicationStatusID
+    );
   });
 
   const fd = document.getElementById("fd");
@@ -157,7 +162,7 @@ function deleteApplication(allocationID) {
 const redirectToUniInfo = (e) => {
   const tableRow = e.target.parentNode.parentNode;
   const uniName = tableRow.childNodes[0].textContent;
-  const rowPos = parseInt(tableRow.id) + 1;
+  const rowPos = parseInt(tableRow.id) + 2;
 
   if (e.target.textContent == "View") {
     const viewButtons = document.getElementsByClassName("viewUniversity");
@@ -196,7 +201,6 @@ const redirectToUniInfo = (e) => {
   }
 };
 
-
 async function getAllApplications() {
   fetch(
     "https://bursarywebapp.azurewebsites.net/api/UniversityApplication/getAllUniversityApplicationsWithName"
@@ -223,71 +227,61 @@ async function getAllApplications() {
 
 getAllApplications();
 
-
-async function payMoneytoUniversity(universityID, applicationID, amountRequested, applicationStatusID) {
-
+async function payMoneytoUniversity(
+  universityID,
+  applicationID,
+  amountRequested,
+  applicationStatusID
+) {
   try {
     // Fetch current budget data NB: Changed endpoint
-    const response = await fetch("https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024");
+    const response = await fetch(
+      "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024"
+    );
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
     const BudgetAmount = responseData["totalBudget"];
     const availableFunds = responseData["amountRemaining"];
-    
+
     // Check that you have funds available
     if (amountRequested <= availableFunds) {
-
       if (applicationStatusID == 2) {
-
         const requestOptions = {
           method: "POST",
           headers: {
-              "accept": "*/*",
-              "Content-Type": "application/json-patch+json"
+            accept: "*/*",
+            "Content-Type": "application/json-patch+json",
           },
           body: JSON.stringify({
-              universityID,
-              amountAlloc: amountRequested,
-              allocationYear: new Date().getFullYear(),
-              universityApplicationID: applicationID
-          })
-      };
+            universityID,
+            amountAlloc: amountRequested,
+            allocationYear: new Date().getFullYear(),
+            universityApplicationID: applicationID,
+          }),
+        };
 
-      // Send request to update the budget
-      const updateResponse = await fetch("https://bursarywebapp.azurewebsites.net/api/BursaryAllocation", requestOptions);
-      if (updateResponse.ok) {
+        // Send request to update the budget
+        const updateResponse = await fetch(
+          "https://bursarywebapp.azurewebsites.net/api/BursaryAllocation",
+          requestOptions
+        );
+        if (updateResponse.ok) {
           console.log("Budget updated successfully");
           alert("Funds have been processed");
-          
-      } else {
+        } else {
           console.error("Error updating budget:", updateResponse.statusText);
           console.log(updateResponse.statusText);
-          alert("You have already allocated funds to this application"); 
+          alert("You have already allocated funds to this application");
+        }
+      } else {
+        alert("This application has not been approved");
       }
-          
-      }
-      else {
-        alert ("This application has not been approved");
-      }
-
+    } else {
+      alert("Insufficient funds for this allocation");
     }
-      
-
-        
-    else {
-
-        alert("Insufficient funds for this allocation");
-
-    }
-
-    
-} catch (error) {
+  } catch (error) {
     console.error("Error:", error);
-}
-
-
-
-
+  }
 }
