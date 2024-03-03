@@ -112,3 +112,24 @@ a:active {
     border-width: 3px;
     color: rgb(9, 9, 9);
 }
+
+button[type="submit"]{
+    background-color: #949698;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 20vw;
+    box-sizing: border-box;
+    margin-top: 1cqh;
+    border: 2px solid white;
+    color: var(--font-color);
+    font: inherit;
+}
+
+button:hover {
+    border-color: rgba(255, 255, 255, 0.219);
+    background-color: var(--active);
+    box-shadow: none;
+    border-width: 3px;
+    color: black;
+  } 
