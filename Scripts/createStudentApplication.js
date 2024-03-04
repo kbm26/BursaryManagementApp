@@ -13,7 +13,7 @@ document
     }
 
     try {
-      // Fetch user details using HOD UserID
+
       const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${window.atob(
         tempUserId)}`;
       const userDataResponse = await fetch(url);
@@ -162,27 +162,24 @@ function formatDate(date) {
 }
 
 function extractDateOfBirth(idNumber) {
+    idNumber = String(idNumber);
 
-  idNumber = String(idNumber);
+    const yearPrefix = parseInt(idNumber.substring(0, 2));
+    const month = parseInt(idNumber.substring(2, 4));
+    const day = parseInt(idNumber.substring(4, 6));
 
-  const yearPrefix = parseInt(idNumber.substring(0, 2));
-  const month = parseInt(idNumber.substring(2, 4));
-  const day = parseInt(idNumber.substring(4, 6));
+    const currentYear = new Date().getFullYear();
+    const currentCentury = Math.floor(currentYear / 100) * 100;
 
-  const currentYear = new Date().getFullYear();
-  const currentCentury = Math.floor(currentYear / 100) * 100;
-  const century = currentCentury - (yearPrefix < 22 ? 100 : 0);
-  let fullYear = century + yearPrefix;
+    let fullYear;
+    if (yearPrefix >= currentYear % 100) {
+        fullYear = currentCentury - 100 + yearPrefix;
+    } else {
+        fullYear = currentCentury + yearPrefix;
+    }
 
-  if (fullYear > currentYear) {
-      fullYear -= 100;
-  }
-
-  const dateOfBirth = new Date(fullYear, month - 1, day);
-
-  console.log(formatDate(dateOfBirth));
-
-  return formatDate(dateOfBirth);
+    const dateOfBirth = new Date(fullYear, month - 1, day);
+    return formatDate(dateOfBirth);
 }
 
 
