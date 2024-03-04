@@ -240,7 +240,7 @@ const tableUpdater = (data) => {
 };
 
 async function getAllApplications() {
-  const tempUserId = sessionStorage.getItem("userID");
+  const tempUserId = localStorage.getItem("userID");
   if (tempUserId) {
     const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
       tempUserId
