@@ -34,6 +34,7 @@
             <a href="/bbd/bbdUser">Add BBD user</a>
             <a href="/bbd/studentcollection">All Our Students</a>
             <a href="/bbd/universitycollection">View All Universities</a>
+            <button id="logout">LogOut</button>
         </section>
     </nav>
 
@@ -48,7 +49,8 @@
 
         <form id="updateBudgetForm">
             <label for="newBudgetAmount">New Budget Amount:</label>
-            <input class="universalInput" type="text" id="newBudgetAmount" name="newBudgetAmount" required pattern="[0-9]+(\.[0-9]+)?">
+            <input class="universalInput" type="text" id="newBudgetAmount" name="newBudgetAmount" required
+                pattern="[0-9]+(\.[0-9]+)?">
             <button type="submit">Update Budget</button>
         </form>
         <span id="SuccessMessage"></span>
