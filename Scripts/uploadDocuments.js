@@ -1,18 +1,22 @@
 document.getElementById("logInForm").addEventListener("submit", function(event) {
     event.preventDefault(); 
     
-    // Get form input values
+
+    const submitButton = document.getElementById("submitLogIn");
+    submitButton.style.display = "none";
+    document.getElementById("successMessage").textContent = "Processing submission";
+
     const studentIDNum = document.getElementById("studentIDNumber").value;
     const academicTranscriptFile = document.getElementById("academicTranscriptFile").files[0];
     const idFile = document.getElementById("idFile").files[0];
 
-    // Construct FormData object to send multipart/form-data
+
     const formData = new FormData();
     formData.append("studentIDNum", studentIDNum);
     formData.append("academicTranscriptFile", academicTranscriptFile);
     formData.append("idFile", idFile);
 
-    // Options for request 
+
     const requestOptions = {
         method: "POST",
         headers: {
@@ -23,7 +27,7 @@ document.getElementById("logInForm").addEventListener("submit", function(event) 
         
     };
 
-    // POST Request to upload documents for StudentIDNum
+
     fetch(`https://bursarywebapp.azurewebsites.net/api/Documents/UploadStudentDocuments?studentIDNum=${studentIDNum}`, requestOptions)
         .then(response => {
             if (response.ok) {
