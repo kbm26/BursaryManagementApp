@@ -24,21 +24,6 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  const form = document.createElement("form");
-  form.id = "fd";
-  form.action = "";
-
-  const h1 = document.createElement("h1");
-  h1.textContent = `${name}(${data.allocationYear})`;
-  form.appendChild(h1);
-
-  const statusDropDownData = [
-    {
-      identifier: "status",
-      textContent: "Application Status:",
-    },
-  ];
-
   const studentFormInputs = [
     {
       identifier: "amount",
@@ -63,48 +48,14 @@ const userDataInserter = ({ name, element, data }) => {
     { buttonClass: "deleteData", textContent: "Delete" },
     { buttonClass: "updateData", textContent: "Update" },
   ];
-  const userTempLinkData = [
-    {
-      buttonClass: "downloadID",
-      textContent: "Download ID",
-      downloadable: true,
-    },
-    {
-      buttonClass: "downloadAcademic",
-      textContent: "Download Academic",
-      downloadable: true,
-    },
-    { buttonClass: "createLink", textContent: "Send Link" },
-  ];
-
-  form.appendChild(
-    dropDownStatusSectionCreator(
-      "formInput",
-      statusDropDownData,
-      data.applicationStatusID
-    )
-  );
-  form.appendChild(
-    inputSectionCreator(
-      "formInput",
-      studentFormInputs,
-      data.applicationStatusID
-    )
-  );
-  form.appendChild(
-    buttonSectionCreator(
-      "dataModButtons",
-      modificationButtons,
-      data.applicationStatusID
-    )
-  );
-  form.appendChild(
-    buttonSectionCreator(
-      "dataModButtons",
-      userTempLinkData,
-      data.applicationStatusID
-    )
-  );
+  const form = formMaker({
+    name,
+    formInputArr: studentFormInputs,
+    modButtonsArr: modificationButtons,
+    status: data.applicationStatusID,
+    downloadable: true,
+    allocationYear: data.allocationYear,
+  });
 
   element.appendChild(form);
 

@@ -26,7 +26,7 @@ const inputSectionCreator = (className, inputObject, status) => {
     formInput.appendChild(elementLabel);
 
     const inputElement = document.createElement("input");
-    inputElement.className = "universalInput";
+    inputElement.className = "universalInput dropDownForm";
     inputElement.name = identifier;
     inputElement.id = identifier;
     inputElement.placeholder = placeholder;
@@ -66,7 +66,7 @@ const dropDownStatusSectionCreator = (className, inputObject, status) => {
   return statusSection;
 };
 
-const buttonSectionCreator = (className, inputObject, status) => {
+const buttonSectionCreator = (className, inputObject) => {
   const formInput = document.createElement("section");
   formInput.className = className;
 
@@ -80,4 +80,57 @@ const buttonSectionCreator = (className, inputObject, status) => {
     formInput.appendChild(buttonElement);
   }
   return formInput;
+};
+
+const formMaker = ({
+  name,
+  formInputArr,
+  modButtonsArr,
+  status,
+  downloadable,
+  allocationYear,
+}) => {
+  const form = document.createElement("form");
+  form.id = "fd";
+  form.action = "";
+
+  const h1 = document.createElement("h1");
+  h1.textContent = `${name}(${allocationYear})`;
+  form.appendChild(h1);
+
+  const statusDropDownData = [
+    {
+      identifier: "status",
+      textContent: "Application Status:",
+    },
+  ];
+
+  form.appendChild(
+    dropDownStatusSectionCreator("formInput", statusDropDownData, status)
+  );
+  form.appendChild(inputSectionCreator("formInput", formInputArr, status));
+  form.appendChild(
+    buttonSectionCreator("dataModButtons", modButtonsArr, status)
+  );
+
+  if (downloadable) {
+    const userTempLinkData = [
+      {
+        buttonClass: "downloadID",
+        textContent: "Download ID",
+        downloadable: true,
+      },
+      {
+        buttonClass: "downloadAcademic",
+        textContent: "Download Academic",
+        downloadable: true,
+      },
+      { buttonClass: "createLink", textContent: "Send Link" },
+    ];
+
+    form.appendChild(
+      buttonSectionCreator("dataModButtons", userTempLinkData, status)
+    );
+  }
+  return form;
 };
