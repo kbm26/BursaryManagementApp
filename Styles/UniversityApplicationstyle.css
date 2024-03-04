@@ -83,18 +83,3 @@ select:focus {
 
 }
 
-@media (max-width: 768px) {
-
-  form,
-  select {
-    padding: 10px;
-  }
-
-  label {
-    margin-bottom: 3px;
-  }
-
-  button {
-    padding: 8px 15px;
-  }
-}
