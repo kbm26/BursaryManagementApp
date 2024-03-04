@@ -49,12 +49,15 @@
     </header>
 
     <main class="main-container">
+        
 
         <form id="updateBudgetForm">
+            <section class="container">
             <label for="newBudgetAmount">New Budget Amount:</label>
             <input class="universalInput" type="text" id="newBudgetAmount" name="newBudgetAmount" required
                 pattern="[0-9]+(\.[0-9]+)?">
             <button type="submit">Update Budget</button>
+        </section>
         </form>
         <span id="SuccessMessage"></span>
     </main>

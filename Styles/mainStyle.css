@@ -174,9 +174,10 @@ h1 a {
   padding: 3vh 20vw;
   overflow-y: auto;
   height: 88vh;
-  /* display:flex; 
+  /* display: grid;
   align-items: center;
-  justify-content: center;  */
+  justify-content: center;  
+  margin-left: 10%; */
 }
 
 #home {
@@ -221,7 +222,7 @@ h1 a {
   padding-left: 3%;
   color: black;
   font: inherit;
-  width: 30vw;
+  width: 25vw;
   min-width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.649);
 }
@@ -245,6 +246,27 @@ h1 a {
   justify-content: space-around;
   overflow-y: auto;
 }
+
+.container {
+  max-width: 800px; 
+  height:auto;
+  align-items: center;
+  min-width: 250px;
+  margin-bottom: 8%;
+  padding: 20px; /* Add padding to the container */
+  box-sizing: border-box; 
+  width: 40vw;
+  border: 1px solid rgba(0, 0, 0, 0.349);
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+  border-radius: var(--main-border-radius);
+
+}
+
 
 .tile {
   display: flex;
@@ -275,4 +297,11 @@ h1 a {
 
 .dropDownForm {
   max-width: 90%;
+}
+
+#logout{
+  border: none;
+  background-color: #c1bbbb9d;
+  color: white;
+  padding: 0;
 }

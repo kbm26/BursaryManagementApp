@@ -40,12 +40,13 @@
 
   <main>
     <form id="newStudentApplication" class="addApplication">
-      <h1>Student Application</h1>
-      <section>
-        <label for="phoneNumber">Phone Number:</label>
-        <input class="universalInput" type="number" id="phoneNumber" name="phoneNumber" required maxlength="10"
-          pattern="\d{10}">
-      </section>
+      <section class="container">
+        <h1>Student Application</h1>
+        <section>
+          <label for="phoneNumber">Phone Number:</label>
+          <input class="universalInput" type="number" id="phoneNumber" name="phoneNumber" required maxlength="10"
+            pattern="\d{10}">
+        </section>
       <section>
         <label for="email">Email:</label>
         <input class="universalInput" type="email" id="email" name="email" required oninput="validateEmail(this);">
@@ -120,12 +121,13 @@
         <input class="universalInput" type="number" id="studentMarks" name="studentMarks"
           oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
       </section>
-
       <section>
         <button id="submitLogIn" type="submit">Submit</button>
         <span id="successMessage"></span>
-    </form>
-  </main>
+      </section>
+    </section>
+  </form>
+</main>
 </body>
 
 </html>
