@@ -24,7 +24,6 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  console.log(data);
   element.innerHTML = ` <form  id="fd" action="">
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
@@ -47,21 +46,15 @@ const userDataInserter = ({ name, element, data }) => {
         <label for="amount">Amount Requested:</label>
         <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        }  placeholder=${
-    data.amount
-  }  type="number" name="amount">
+        }  placeholder=${data.amount} type="number" name="amount">
         <label for="courseYear">Course Year:</label>
         <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        }  placeholder=${
-    data.courseYear
-  }  type="number" name="courseYear">
+        }  placeholder=${data.courseYear}  type="number" name="courseYear">
         <label for="studentMarks">Student Mark:</label>
         <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        }  placeholder=${
-    data.studentMarks
-  }  type="number" name="studentMarks">
+        }  placeholder=${data.studentMarks}  type="number" name="studentMarks">
       </section>
       <section class="dataModButtons">
       <button class="deleteData" type="submit">Delete</button>
@@ -89,7 +82,7 @@ const userDataInserter = ({ name, element, data }) => {
     event.preventDefault();
     const formData = new FormData(fd);
     UpdateStudentAllocation(
-      formData.get("amount") ? formData.get("amount") : data.amountRequested,
+      formData.get("amount") ? formData.get("amount") : data.amount,
       data.allocationYear,
       data.studentIdNumber,
       formData.get("studentMarks")
@@ -138,7 +131,6 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-  console.log(data);
   const options = {
     method: "PUT",
     headers: {
@@ -148,13 +140,9 @@ async function UpdateStudentAllocation(
   };
   try {
     const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const responseData = await response.json();
-    console.log("Response:", responseData);
+    alert("Application Updated");
   } catch (error) {
-    console.error("Error:", error);
+    alert("Error:", error);
   }
 }
 
@@ -170,16 +158,16 @@ function deleteStudentAllocation(allocationID) {
   )
     .then((response) => {
       if (response.ok) {
-        console.log("Student Allocation successfully deleted.");
+        alert("Student Allocation successfully deleted.");
       } else {
         alert("Cannot delete application under review");
-        console.error(
+        alert(
           "Failed to delete student allocation. It has an assigned reviewer"
         );
       }
     })
     .catch((error) => {
-      console.error("Error:", error);
+      alert("Error:", error);
     });
 }
 
@@ -261,7 +249,7 @@ async function getAllApplications() {
       );
     })
     .catch((error) => {
-      console.error("Error:", error);
+      alert("Error:", error);
       const errorMessage = document.createElement("p");
       errorMessage.textContent = "An error occurred while fetching data.";
       document.body.appendChild(errorMessage);

@@ -5,7 +5,7 @@ const filterToggle = document.querySelector(".filterButton");
 filterToggle.addEventListener("click", (e) => {
   e.preventDefault();
   const display = filterSection.style.display;
-  console.log(display);
+
   if (!display || display === "none") {
     filterSection.style.display = "inherit";
     setTimeout(() => {

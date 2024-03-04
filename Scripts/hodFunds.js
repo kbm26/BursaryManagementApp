@@ -23,7 +23,6 @@ async function universityBudgetFinder() {
       throw new Error("Network response was not ok");
     }
     const userData = await userDataResponse.json();
-    console.log(userData);
     let universityID = userData.universityID;
     const allocationYear = new Date().getFullYear();
 

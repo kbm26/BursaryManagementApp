@@ -28,7 +28,6 @@ function getStudentAcademicTranscript(studentIDNum) {
       // Extract individual links from the response data
       const academicTranscriptLink = data.academicTranscript;
       const idLink = data.id;
-      console.log(data + "here is data");
       // Check if both links are available
       if (academicTranscriptLink) {
         // Create anchor elements for each link
@@ -79,7 +78,6 @@ function getStudentID(studentIDNum) {
 
       // Extract individual links from the response data
       const idLink = data.id;
-      console.log(data + "here is data");
       if (idLink) {
         const idAnchor = document.createElement("a");
         idAnchor.href = idLink;
