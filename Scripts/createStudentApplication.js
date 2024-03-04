@@ -91,7 +91,9 @@ document
             
         }
       } else {
-        alert("Insufficient funds in budget");
+        document.getElementById("successMessage").textContent =
+            "Insufficient funds in budget";
+
       }
     } catch (error) {
 
