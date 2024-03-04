@@ -2,13 +2,15 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
-  <link rel="stylesheet" href="../Styles/mainStyle.css">
-  <link rel="stylesheet" href="../Styles/hodUserStyle.css">
-  <link rel="stylesheet" href="../Styles/collections.css">
-  <title>Add new HOD</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://bbdsoftware.com/wp-content/uploads/cropped-favicon-150x150.png" sizes="32x32">
+    <link rel="stylesheet" href="../Styles/mainStyle.css">
+    <link rel="stylesheet" href="../Styles/hodUserStyle.css">
+    <link rel="stylesheet" href="../Styles/collections.css">
+    <title>Add New HOD</title>
+    <script src="../Scripts/navController.js" defer></script>
+    <script src="../Scripts/addHODUser.js" defer></script>
 </head>
 
 <body>
@@ -33,62 +35,63 @@
             <a href="/bbd/bbdUser">Add BBD user</a>
             <a href="/bbd/studentcollection">All Our Students</a>
             <a href="/bbd/universitycollection">View All Universities</a>
+            <button id="logout">LogOut</button>
         </section>
     </nav>
-  <main>
-    <!-- id="newStudentApplication" -->
-    <form class="addApplication">
-        <h1>Add new HOD</h1>
-        <section>
-            <label for="phoneNumber">Phone Number:</label>
-            <input class="universalInput" type="number" id="phoneNumber" name="phoneNumber" required maxlength="10" pattern="\d{10}">
-        </section>
-        <section>
-            <label for="email">Email:</label>
-            <input class="universalInput" type="email" id="email" name="email" required oninput="validateEmail(this);">
-        </section>
-        <section>
-            <label for="firstName">First Name:</label>
-            <input class="universalInput" type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
-        </section>
-        <section>
-            <label for="lastName">Last Name:</label>
-            <input class="universalInput" type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
-        </section>
-        <section>
-            <label for="departmentID">Department:</label>
-            <select  class="universalSelect"id="departmentID" name="departmentID" required>
-                <option value="">--Select Department--</option>
-                <option value="1">CompSci</option>
-                <option value="2">BEng</option>
-                <option value="3">GameDev</option>
-            </select>
-        </section>
-        <section>
-            <label for="universityID">University:</label>
-            <select  class="universalSelect"id="universityID" name="universityID" required>
-                <option value="">--Select University--</option>
-                <option value="1">Stellenbosch University</option>
-                <option value="2">University of Cape Town</option>
-                <option value="3">University of Johannesburg</option>
-                <option value="4">University of KwaZulu Natal</option>
-                <option value="5">North-West University</option>
-                <option value="6">University of Pretoria</option>
-                <option value="7">University of the Witwatersrand</option>
-                <option value="8">University of South Africa (Unisa)</option>
-                <option value="9">Rhodes University</option>
-                <option value="10">Tshwane University of Technology</option>
-            </select>
-        </section>
-        <section>
-            <button id="submitLogIn" type="submit">Submit</button>
-            <span id="successMessage"></span>
-        </section>
-    </form>
-</main>
+
+    <main>
+        <form class="addApplication">
+            <h1>Add new HOD</h1>
+            <section>
+                <label for="phoneNumber">Phone Number:</label>
+                <input class="universalInput" type="number" id="phoneNumber" name="phoneNumber" required maxlength="10"
+                    pattern="\d{10}">
+            </section>
+            <section>
+                <label for="email">Email:</label>
+                <input class="universalInput" type="email" id="email" name="email" required
+                    oninput="validateEmail(this);">
+            </section>
+            <section>
+                <label for="firstName">First Name:</label>
+                <input class="universalInput" type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
+            </section>
+            <section>
+                <label for="lastName">Last Name:</label>
+                <input class="universalInput" type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
+            </section>
+            <section>
+                <label for="departmentID">Department:</label>
+                <select class="universalSelect" id="departmentID" name="departmentID" required>
+                    <option value="">--Select Department--</option>
+                    <option value="1">CompSci</option>
+                    <option value="2">BEng</option>
+                    <option value="3">GameDev</option>
+                </select>
+            </section>
+            <section>
+                <label for="universityID">University:</label>
+                <select class="universalSelect" id="universityID" name="universityID" required>
+                    <option value="">--Select University--</option>
+                    <option value="1">Stellenbosch University</option>
+                    <option value="2">University of Cape Town</option>
+                    <option value="3">University of Johannesburg</option>
+                    <option value="4">University of KwaZulu Natal</option>
+                    <option value="5">North-West University</option>
+                    <option value="6">University of Pretoria</option>
+                    <option value="7">University of the Witwatersrand</option>
+                    <option value="8">University of South Africa (Unisa)</option>
+                    <option value="9">Rhodes University</option>
+                    <option value="10">Tshwane University of Technology</option>
+                </select>
+            </section>
+            <section>
+                <button id="submitLogIn" type="submit">Submit</button>
+                <span id="successMessage"></span>
+            </section>
+        </form>
+    </main>
 
 </body>
-<script src="../Scripts/navController.js"></script>
-<script src="../Scripts/addHODUser.js"></script>
 
 </html>

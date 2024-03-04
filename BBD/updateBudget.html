@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="../Styles/hodUserStyle.css">
     <link rel="stylesheet" href="../Styles/collections.css">
     <link rel="stylesheet" href="../Styles/mainStyle.css">
-    <title>BBD Home</title>
+    <title>Update Budget</title>
+    <script src="../Scripts/navController.js" defer></script>
+    <script src="../Scripts/Fund.js" defer></script>
+    <script src="../Scripts/changeBudget.js" defer></script>
 </head>
 
 <body>
@@ -34,6 +37,7 @@
             <a href="/bbd/bbdUser">Add BBD user</a>
             <a href="/bbd/studentcollection">All Our Students</a>
             <a href="/bbd/universitycollection">View All Universities</a>
+            <button id="logout">LogOut</button>
         </section>
     </nav>
 
@@ -48,15 +52,13 @@
 
         <form id="updateBudgetForm">
             <label for="newBudgetAmount">New Budget Amount:</label>
-            <input class="universalInput" type="text" id="newBudgetAmount" name="newBudgetAmount" required pattern="[0-9]+(\.[0-9]+)?">
+            <input class="universalInput" type="text" id="newBudgetAmount" name="newBudgetAmount" required
+                pattern="[0-9]+(\.[0-9]+)?">
             <button type="submit">Update Budget</button>
         </form>
         <span id="SuccessMessage"></span>
     </main>
 
 </body>
-<script src="../Scripts/navController.js"></script>
-<script src="../Scripts/Fund.js"></script>
-<script src="../Scripts/changeBudget.js"></script>
 
 </html>
