@@ -24,23 +24,6 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  function generateOptions(statusId) {
-    const options = [
-      { value: "1", text: "Pending" },
-      { value: "2", text: "Approved" },
-      { value: "3", text: "Rejected" },
-    ];
-    return options.map((option) => {
-      const opt = document.createElement("option");
-      opt.value = option.value;
-      opt.text = option.text;
-      if (statusId == option.value) {
-        opt.selected = true;
-      }
-      return opt;
-    });
-  }
-
   const form = document.createElement("form");
   form.id = "fd";
   form.action = "";
