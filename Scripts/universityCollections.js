@@ -18,7 +18,7 @@ function tableMaker(list) {
             ? "approved"
             : "rejected",
       },
-      true
+      uni.universityID
     );
   });
 }
@@ -230,17 +230,16 @@ async function getAllApplications() {
       statusColorCoder();
       for (const b of viewUniversityButtons)
         b.addEventListener("click", redirectToUniInfo);
-      const universityNames = document.getElementsByClassName("studentViewer");
 
+      const universityNames = document.getElementsByClassName("studentViewer");
       for (let i = 0; i < universityNames.length; i++) {
         const uni = universityNames[i];
         uni.addEventListener("click", (e) => {
+          console.log(universityNames[i].innerText);
           e.preventDefault();
           sessionStorage.getItem("uniID") && sessionStorage.removeItem("uniID");
-          sessionStorage.setItem(
-            "uniID",
-            window.btoa(unis[i + 1].universityID)
-          );
+          sessionStorage.setItem("uniID", window.btoa(uni.classList[1]));
+          console.log(uni.classList[1]);
           window.location.href = "/bbd/selectedUnivirsityStudentsCollection";
         });
       }
@@ -259,7 +258,6 @@ async function payMoneytoUniversity(
   applicationStatusID
 ) {
   try {
-    // Fetch current budget data NB: Changed endpoint
     const response = await fetch(
       "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024"
     );
@@ -267,10 +265,8 @@ async function payMoneytoUniversity(
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
-    const BudgetAmount = responseData["totalBudget"];
     const availableFunds = responseData["amountRemaining"];
 
-    // Check that you have funds available
     if (amountRequested <= availableFunds) {
       if (applicationStatusID == 2) {
         const requestOptions = {
@@ -287,7 +283,6 @@ async function payMoneytoUniversity(
           }),
         };
 
-        // Send request to update the budget
         const updateResponse = await fetch(
           "https://bursarywebapp.azurewebsites.net/api/BursaryAllocation",
           requestOptions
