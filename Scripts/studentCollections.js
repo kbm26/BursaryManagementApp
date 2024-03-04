@@ -123,7 +123,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-  alert(data);
+  // alert(data);
   const options = {
     method: "PUT",
     headers: {
@@ -135,6 +135,7 @@ async function UpdateStudentAllocation(
   try {
     const response = await fetch(url, options);
     const responseData = await response.json();
+    getAllApplications();
   } catch (error) {
     alert("Error:", error);
   }

@@ -1,4 +1,4 @@
-const rowAdder = (table, index, { name, status }) => {
+const rowAdder = (table, index, { name, status }, uniID = "false") => {
   let row = table.insertRow(-1);
   row.id = index;
   let c1 = row.insertCell(0);
@@ -15,4 +15,6 @@ const rowAdder = (table, index, { name, status }) => {
   c1.innerText = name;
   c2.appendChild(statusButton);
   c3.appendChild(viewButton);
+  uniID && c1.classList.add("uniLink");
+  uniID && c1.classList.add(uniID);
 };

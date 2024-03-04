@@ -268,3 +268,8 @@ h1 a {
 .dropDownForm {
   max-width: 90%;
 }
+
+.uniLink:hover {
+  background-color: #33333323;
+  cursor: pointer;
+}

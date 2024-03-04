@@ -6,15 +6,20 @@ let unis;
 
 function tableMaker(list) {
   list.forEach((uni, i) => {
-    rowAdder(table, i, {
-      name: uni.universityName,
-      status:
-        uni.applicationStatusID === 1
-          ? "pending"
-          : uni.applicationStatusID === 2
-          ? "approved"
-          : "rejected",
-    });
+    rowAdder(
+      table,
+      i,
+      {
+        name: uni.universityName,
+        status:
+          uni.applicationStatusID === 1
+            ? "pending"
+            : uni.applicationStatusID === 2
+            ? "approved"
+            : "rejected",
+      },
+      uni.applicationID
+    );
   });
 }
 
