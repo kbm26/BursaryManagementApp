@@ -241,11 +241,10 @@ const tableUpdater = (data) => {
 
 async function getAllApplications() {
   const tempUserId = sessionStorage.getItem("userID");
-  const uniID = sessionStorage.getItem("uniID");
-  if (uniID || tempUserId) {
-    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${
-      window.atob(uniID) || window.atob(tempUserId)
-    }`;
+  if (tempUserId) {
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
+      tempUserId
+    )}`;
     loadingScreen[0].style.opacity = 1;
     loadingScreen[0].style.height = "70vh";
 
