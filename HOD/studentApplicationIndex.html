@@ -48,32 +48,32 @@
       </section>
       <section>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input class="universalInput"  type="text" id="firstName" name="firstName" required>
       </section>
       <section>
           <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" required>
+          <input class="universalInput" type="text" id="lastName" name="lastName" required>
       </section>
       
       <section>
         <label for="studentIDNum">ID Number:</label>
-        <input type="text" id="studentIDNum" name="studentIDNum" required>
+        <input class="universalInput"  type="text" id="studentIDNum" name="studentIDNum" required>
       </section>
       
       <section>
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" min="1990-01-01" required oninput="validateDateOfBirth(this)">
+        <input  class="universalInput" type="date" id="dateOfBirth" name="dateOfBirth" min="1990-01-01" required oninput="validateDateOfBirth(this)">
       </section>
       <section>
         <label for="genderID">Gender:</label>
-        <select id="genderID" name="genderID">
+        <select class="universalSelect" id="genderID" name="genderID">
           <option value="1">Female</option>
           <option value="2">Male</option>
         </select>
       </section>
       <section>
         <label for="ethnicityID">Ethnicity:</label>
-        <select id="ethnicityID" name="ethnicityID">
+        <select class="universalSelect" id="ethnicityID" name="ethnicityID">
           <option value="1">African</option>
           <option value="2">Indian</option>
           <option value="3">Coloured</option>
@@ -81,7 +81,7 @@
       </section>
       <section>
         <label for="departmentID">Department:</label>
-        <select id="departmentID" name="departmentID">
+        <select class="universalSelect" id="departmentID" name="departmentID">
           <option value="1">CompSci</option>
           <option value="2">BEng</option>
           <option value="3">GameDev</option>
@@ -93,7 +93,7 @@
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
-        <input type="number" id="studentMarks" name="studentMarks" required>
+        <input  class="universalInput" type="number" id="studentMarks" name="studentMarks" required>
       </section>
       <section>
         <label for="courseYear">CourseYear:</label>
