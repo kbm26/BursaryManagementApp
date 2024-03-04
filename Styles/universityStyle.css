@@ -44,20 +44,6 @@ main {
     font-style: normal;
 }
 
-.main-container a {
-    text-decoration: none;
-}
-
-.main-container {
-    width: 100vw;
-    height: 55vh;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-}
-
 .nav-bar {
     background-color: #C80B0E;
     color: white;
@@ -75,17 +61,10 @@ main {
     justify-content: center;
 }
 
-.section-title {
-    color: #333;
-    text-align: center;
-
-}
-
 section:hover {
-    transition: 400ms;
     border-color: rgba(0, 0, 0, 0.822);
     box-shadow: none;
-    border-width: 3px;
+    border-width: 2px;
     color: rgb(0, 0, 0);
 }
 
@@ -113,7 +92,7 @@ a:active {
     color: rgb(9, 9, 9);
 }
 
-button[type="submit"]{
+button[type="submit"] {
     background-color: #949698;
     padding: 5px;
     border-radius: 8px;
@@ -132,4 +111,4 @@ button:hover {
     box-shadow: none;
     border-width: 3px;
     color: black;
-  } 
+}

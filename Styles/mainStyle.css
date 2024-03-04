@@ -222,3 +222,44 @@ h1 a {
   opacity: 0;
   display: none;
 }
+
+.main-container a {
+  text-decoration: none;
+}
+
+.main-container {
+  width: 100vw;
+  height: 55vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  overflow-y: auto;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  aspect-ratio: 1;
+  height: 28cqh;
+  border: 1px solid rgba(0, 0, 0, 0.625);
+  border-radius: 5px;
+  text-align: center;
+  padding: 2cqw;
+  margin: 2vw;
+  background-color: #d0dddc55;
+}
+
+.tile p {
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 1vh;
+}
+
+.tile-title {
+  color: #333;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 0;
+}
