@@ -1,5 +1,23 @@
 const nav = document.getElementsByClassName("navigation")[0];
 const burgerMenu = document.getElementById("burger");
+const logout = document.getElementById("logout");
+
+logout.addEventListener("click", () => {
+  let token = JSON.parse(localStorage.getItem("authInfo"));
+  fetch(
+    "https://accounts.google.com/o/oauth2/revoke?token=" +
+      token["access_token"],
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  ).then((data) => {
+    localStorage.clear();
+    location.href = "/";
+  });
+});
 
 burgerMenu.addEventListener("click", () => {
   if (nav.style.display !== "flex") {
