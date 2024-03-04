@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then((data) => {
       // Handle the response data
-      console.log(data);
       if (!data.isValid) {
         // If validation fails, redirect the user to an error page
         window.location.href = "/error";

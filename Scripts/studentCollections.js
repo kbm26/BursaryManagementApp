@@ -143,7 +143,6 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-  console.log(data);
   const options = {
     method: "PUT",
     headers: {
@@ -311,7 +310,7 @@ nameFilter.addEventListener("click", (e) => {
     // names must be equal
     return 0;
   });
-  console.log(students);
+
   tableUpdater(
     students[0]["studentFirstName"] == sortedStudentsAsc[0]["studentFirstName"]
       ? sortedStudentsDec
