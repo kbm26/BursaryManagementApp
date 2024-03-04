@@ -10,7 +10,6 @@ const rowAdder = (table, index, { name, status }, uniFunctionality = false) => {
   statusButton.textContent = status;
   viewButton.textContent = "View";
   uniFunctionality && c1.classList.add("studentViewer");
-  uniFunctionality && c1.classList.add(uniFunctionality);
   statusButton.classList.add("status");
   viewButton.classList.add("viewUniversity");
 
