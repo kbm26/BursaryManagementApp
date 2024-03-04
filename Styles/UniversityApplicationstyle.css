@@ -31,21 +31,6 @@ select {
   margin-bottom: 5px;
 }
 
-
-input[type="number"],
-[type="text"],
-[type="checkbox"],
-select {
-  height: 9cqh;
-  margin: 1vh auto;
-  background-color: rgba(255, 255, 255, 0.134);
-  border: 2px solid rgba(135, 135, 135, 0.656);
-  border-radius: 15px;
-  padding-left: 3%;
-  color: black;
-  font: inherit;
-}
-
 button {
   background-color: #949698;
   color: white;
@@ -87,15 +72,6 @@ select {
 
 }
 
-
-input[type="number"],
-input[type="checkbox"],
-input[type="text"],
-select {
-  width: 100%;
-
-}
-
 select {
   margin-bottom: 40px;
 }
@@ -116,13 +92,6 @@ select:focus {
 
   label {
     margin-bottom: 3px;
-  }
-
-  input[type="number"],
-  [type="text"],
-  [type="checkbox"],
-  select {
-    padding: 0;
   }
 
   button {

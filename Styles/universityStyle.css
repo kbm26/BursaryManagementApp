@@ -107,7 +107,6 @@ section:hover {
 a:active {
     transition: 20ms;
     border-color: rgba(47, 44, 44, 0.993);
-    background-color: var(--active);
     box-shadow: none;
     border-width: 3px;
     color: rgb(9, 9, 9);

@@ -28,7 +28,7 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select ${
+        <select  class="universalSelect"${
           data.applicationID !== 1 && "disabled"
         } name="Status" id="status">
         <option ${
@@ -44,15 +44,15 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input class="userData" ${
+        <input class="universalInput"  ${
           data.applicationID !== 1 && "disabled"
         } placeholder=${data.amount}  type="number" name="amount">
         <label for="courseYear">Course Year:</label>
-        <input class="userData" ${
+        <input class="universalInput"  ${
           data.applicationID !== 1 && "disabled"
         } placeholder=${data.courseYear}  type="number" name="courseYear">
         <label for="studentMarks">Student Mark:</label>
-        <input class="userData" ${
+        <input class="universalInput"  ${
           data.applicationID !== 1 && "disabled"
         } placeholder=${data.studentMarks}  type="number" name="studentMarks">
         <button type="button" class="lock-button" value=true>${
