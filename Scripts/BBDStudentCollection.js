@@ -29,7 +29,7 @@ const userDataInserter = ({ name, element, data }) => {
       <h1>${name}(${data.allocationYear})</h1>
       <section class="formInput">
         <label for="status">Application Status:</label>
-        <select ${
+        <select  class="universalSelect"${
           data.applicationStatusID !== 1 && "disabled"
         } name="Status" id="status">
         <option ${
