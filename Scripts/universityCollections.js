@@ -19,56 +19,35 @@ function tableMaker(list) {
 }
 
 const userDataInserter = ({ name, element, data }) => {
-  element.innerHTML = ` <form id="fd" action="">
-      <h1>${name}(${data.applicationYear})</h1>
-      <section class="formInput">
-        <label for="status">Application Status:</label>
-       <select  class="universalSelect"${
-         data.applicationStatusID !== 1 && "disabled"
-       } name="Status" id="status">
-        <option ${
-          data.applicationStatusID == "1" && "selected"
-        } value="1">Pending</option>
-        <option ${
-          data.applicationStatusID == "2" && "selected"
-        } value="2">Approved</option>
-        <option ${
-          data.applicationStatusID == "3" && "selected"
-        } value="3">Rejected</option>
-      </select>
-      </section>
-      <section class="formInput">
-        <label for="amount">Amount Requested:</label>
-        <input class="universalInput" ${
-          data.applicationStatusID !== 1 && "disabled"
-        }  id="amount" placeholder=${
-    data.amountRequested
-  }  type="number" name="amount">
-        <button type="button" class="lock-button" value=true>${
-          data.isLocked === true ? "LOCKED" : "UNLOCKED"
-        }</button>
-      </section>
-      <section class="dataModButtons">
-      <button class="deleteData" type="submit">Delete</button>
-      <button class="updateData" type="submit">Update</button>
-      <button class="payUniversity" type="submit">Allocate Funds</button>
-      </section>
-    </form>`;
+  const universityFormInputs = [
+    {
+      identifier: "amount",
+      textContent: "Amount Requested:",
+      placeholder: data.amountRequested,
+      type: "number",
+    },
+  ];
+  const modificationButtons = [
+    { buttonClass: "deleteData", textContent: "Delete" },
+    { buttonClass: "updateData", textContent: "Update" },
+    { buttonClass: "payUniversity", textContent: "Allocate Funds" },
+  ];
+  const form = formMaker({
+    name,
+    formInputArr: universityFormInputs,
+    modButtonsArr: modificationButtons,
+    status: data.applicationStatusID,
+    allocationYear: data.applicationYear,
+  });
+
+  element.appendChild(form);
 
   const deleteButton = element.querySelector(".deleteData");
-  const lockButton = element.querySelector(".lock-button");
   const payUniversityButton = element.querySelector(".payUniversity");
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
     deleteApplication(data.applicationID);
-  });
-
-  lockButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    lockButton.innerText =
-      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
-    lockButton.value = lockButton.value === "true" ? "false" : "true";
   });
 
   payUniversityButton.addEventListener("click", (event) => {

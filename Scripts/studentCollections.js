@@ -24,54 +24,42 @@ const tableMaker = (data) => {
 };
 
 const userDataInserter = ({ name, element, data }) => {
-  element.innerHTML = ` <form  id="fd" action="">
-      <h1>${name}(${data.allocationYear})</h1>
-      <section class="formInput">
-        <label for="status">Application Status:</label>
-        <select  class="universalSelect"${
-          data.applicationID !== 1 && "disabled"
-        } name="Status" id="status">
-        <option ${
-          data.applicationStatusID == "1" && "selected"
-        } value="1">Pending</option>
-        <option ${
-          data.applicationStatusID == "2" && "selected"
-        } value="2">Approved</option>
-        <option ${
-          data.applicationStatusID == "3" && "selected"
-        } value="3">Rejected</option>
-      </select>
-      </section>
-      <section class="formInput">
-        <label for="amount">Amount Requested:</label>
-        <input class="universalInput"  ${
-          data.applicationID !== 1 && "disabled"
-        } placeholder=${data.amount}  type="number" name="amount">
-        <label for="courseYear">Course Year:</label>
-        <input class="universalInput"  ${
-          data.applicationID !== 1 && "disabled"
-        } placeholder=${data.courseYear}  type="number" name="courseYear">
-        <label for="studentMarks">Student Mark:</label>
-        <input class="universalInput"  ${
-          data.applicationID !== 1 && "disabled"
-        } placeholder=${data.studentMarks}  type="number" name="studentMarks">
-        <button type="button" class="lock-button" value=true>${
-          data.isLocked === true ? "LOCKED" : "UNLOCKED"
-        }</button>
-      </section>
-      <section class="dataModButtons">
-      <button class="deleteData" type="submit">Delete</button>
-      <button class="updateData" type="submit">Update</button>
-      </section>
-      <section class="dataModButtons">
-      <button class="downloadID" type="submit">Download ID</button>
-      <button class="downloadAcademic" type="submit">Download Academic</button>
-      <button class="createLink" type="submit">Send Link</button>
-      </section>
-    </form>`;
+  const studentFormInputs = [
+    {
+      identifier: "amount",
+      textContent: "Amount Requested:",
+      placeholder: data.amount,
+      type: "number",
+    },
+    {
+      identifier: "courseYear",
+      textContent: "Course Year:",
+      placeholder: data.courseYear,
+      type: "number",
+    },
+    {
+      identifier: "studentMarks",
+      textContent: "Student Mark:",
+      placeholder: data.studentMarks,
+      type: "number",
+    },
+  ];
+  const modificationButtons = [
+    { buttonClass: "deleteData", textContent: "Delete" },
+    { buttonClass: "updateData", textContent: "Update" },
+  ];
+  const form = formMaker({
+    name,
+    formInputArr: studentFormInputs,
+    modButtonsArr: modificationButtons,
+    status: data.applicationStatusID,
+    downloadable: true,
+    allocationYear: data.allocationYear,
+  });
+
+  element.appendChild(form);
 
   const deleteButton = element.querySelector(".deleteData");
-  const lockButton = element.querySelector(".lock-button");
   const downloadID = element.querySelector(".downloadID");
   const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
@@ -81,18 +69,10 @@ const userDataInserter = ({ name, element, data }) => {
     deleteStudentAllocation(data.applicationID);
   });
 
-  lockButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    lockButton.innerText =
-      lockButton.innerText === "UNLOCKED" ? "LOCKED" : "UNLOCKED";
-    lockButton.value = lockButton.value === "true" ? "false" : "true";
-  });
-
   const fd = document.getElementById("fd");
   fd.addEventListener("submit", () => {
     event.preventDefault();
     const formData = new FormData(fd);
-    // const isLocked = lockButton.value === "true";
     UpdateStudentAllocation(
       formData.get("amount") ? formData.get("amount") : data.amount,
       data.allocationYear,

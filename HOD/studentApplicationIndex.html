@@ -61,19 +61,6 @@
         <label for="studentIDNum">ID Number:</label>
         <input class="universalInput" type="text" id="studentIDNum" name="studentIDNum" required>
       </section>
-
-      <section>
-        <label for="dateOfBirth">Date of Birth:</label>
-        <input class="universalInput" type="date" id="dateOfBirth" name="dateOfBirth" min="1990-01-01" required
-          oninput="validateDateOfBirth(this)">
-      </section>
-      <section>
-        <label for="genderID">Gender:</label>
-        <select class="universalSelect" id="genderID" name="genderID">
-          <option value="1">Female</option>
-          <option value="2">Male</option>
-        </select>
-      </section>
       <section>
         <label for="ethnicityID">Ethnicity:</label>
         <select class="universalSelect" id="ethnicityID" name="ethnicityID">
@@ -92,8 +79,7 @@
       </section>
       <section>
         <label for="amount">Amount (Rands):</label>
-        <input class="universalInput" type="number" id="amount" name="amount" required pattern="\d+(\.\d+)?"
-          title="Please enter a valid number">
+        <input class="universalInput" type="number" id="amount" name="amount" required>
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
@@ -101,9 +87,14 @@
       </section>
       <section>
         <label for="courseYear">CourseYear:</label>
-        <input class="universalInput" type="number" id="courseYear" name="courseYear"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+        <select class="universalSelect" id="courseYear" name="courseYear">
+          <option value="1">First Year</option>
+          <option value="2">Second Year</option>
+          <option value="3">Third Year</option>
+          <option value="4">Fourth Year</option>
+        </select>
       </section>
+      
 
       <section>
         <button id="submitLogIn" type="submit">Submit</button>
