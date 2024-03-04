@@ -38,7 +38,7 @@ nav {
   position: sticky;
   justify-content: center;
   align-items: start;
-  background-color: var(--bbd-primary-color);
+  background-color: rgb(178, 45, 45);
   width: 100vw;
   color: var(--font-color);
   font-family: NordiquePro, sans-serif;
@@ -51,7 +51,7 @@ nav h1 {
 }
 
 nav h1 a {
-  text-align: center;
+  text-align: left;
   margin: 1.5vh;
   width: 100vw;
 }
@@ -255,3 +255,4 @@ select {
 .downloadAcademic {
   background-color: #a0a2be;
 }
+
