@@ -43,5 +43,6 @@ document.getElementById("logInForm").addEventListener("submit", function(event) 
         })
         .catch(error => {
             console.error("Error:", error);
+            submitButton.style.display = "block";
         });
   });
