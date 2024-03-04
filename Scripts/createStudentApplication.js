@@ -1,25 +1,21 @@
-// Allow HOD to create a new Student Application
+
 document
   .getElementById("newStudentApplication")
   .addEventListener("submit", async function (event) {
-    // Prevent form submission
     event.preventDefault();
 
-    // Get HODUniversityID using UserID
     const tempUserId = localStorage.getItem("userID");
     if (!tempUserId) {
-      // Display error message if userID is not found
       const errorMessage = document.createElement("p");
       errorMessage.textContent = "HOD User ID not found. Please allow cookies";
       document.body.appendChild(errorMessage);
-      return; // Exit function early if userID is not found
+      return; 
     }
 
     try {
       // Fetch user details using HOD UserID
       const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${window.atob(
-        tempUserId
-      )}`;
+        tempUserId)}`;
       const userDataResponse = await fetch(url);
       if (!userDataResponse.ok) {
         throw new Error("Network response was not ok");
@@ -28,20 +24,24 @@ document
       console.log(userData);
       const HODUniversityID = userData.universityID;
 
-      // Get form input values from html
       const formData = new FormData(event.target);
       const postData = {};
 
-      // Manually trim whitespace from values and add to postData
       formData.forEach((value, key) => {
         const trimmedValue = value.trim();
         postData[key] = trimmedValue;
       });
 
-      // Set the UniversityID as the retrieved ID
+
       postData.universityID = HODUniversityID;
 
-      // Define request options
+      const idNumber = document.getElementById("studentIDNum").value; 
+
+      postData.dateOfBirth = extractDateOfBirth(idNumber);
+
+      postData.genderID = extractGender(idNumber);
+
+
       const requestOptions = {
         method: "POST",
         headers: {
@@ -50,7 +50,7 @@ document
         body: JSON.stringify(postData),
       };
 
-      // Check available funds:
+
       const allocationYear = new Date().getFullYear();
 
       const spendingsResponse = await fetch(
@@ -70,32 +70,36 @@ document
       const responseData = await spendingsResponse.json();
       const availableFunds = responseData["amountRemaining"];
 
-      // Make Request if funds are available:
+      console.log(postData);
+
+
       if (postData.amount < availableFunds) {
-        // Make the POST request
+
         const response = await fetch(
           "https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/createStudentApplication",
           requestOptions
         );
         if (response.ok) {
-          // Display success message if request is successful
+
           document.getElementById("successMessage").textContent =
             "Creating Application Successful";
+            console.log(response.json);
         } else {
-          // Display error message if request fails
+
           document.getElementById("successMessage").textContent =
             "Creating Application Failed";
+            
         }
       } else {
         alert("Insufficient funds in budget");
       }
     } catch (error) {
-      // Display error message if an error occurs
+
       console.error("Error:", error);
     }
   });
 
-// Validate email address
+
 function validateEmail(input) {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const isValid = emailPattern.test(input.value);
@@ -106,18 +110,16 @@ function validateEmail(input) {
 
 
 function validatePhoneNumber(input) {
-    // Use regular expression to validate South African phone number format
+
     const regex = /^((\+27)|0)[6-8][0-9]{8}$/;
     return regex.test(input);
 }
 
 
-
-// Validate student marks (must be above 70)
 function validateStudentMarks(input) {
     const marks = parseInt(input.value);
-    if (marks <= 70) {
-        input.setCustomValidity("Student marks must be above 70");
+    if (marks <= 70 || marks > 100) {
+        input.setCustomValidity("Student marks must be above 70 and less than 100");
     } else {
         input.setCustomValidity("");
     }
@@ -125,24 +127,12 @@ function validateStudentMarks(input) {
 
 
 function isValidSAIDNumber(input) {
-    // Check if the ID number is 13 characters long
-    if (input.length !== 13) {
-        return false;
-    }
+  const regex = /^(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))$/;
 
-    // Apply Luhn algorithm to validate the ID number
-    let sum = 0;
-    for (let i = 0; i < 12; i++) {
-        const digit = parseInt(input.charAt(i));
-        sum += (i % 2 === 0) ? digit : (digit < 5) ? 2 * digit : 2 * digit - 9;
-    }
-    const checksum = (10 - (sum % 10)) % 10;
-    return parseInt(input.charAt(12)) === checksum;
+  return regex.test(input);
 }
 
 
-
-// Attach validation functions to corresponding input fields
 document.getElementById("phoneNumber").addEventListener("input", function () {
     const isValid = validatePhoneNumber(this.value);
     if (!isValid) {
@@ -153,51 +143,58 @@ document.getElementById("phoneNumber").addEventListener("input", function () {
 });
 
 
-function validateDateOfBirth(input) {
-    const dob = new Date(input.value);
-    const minDate = new Date("1990-01-01");
-    const maxDate = new Date(); // Current date
-    if (dob < minDate || dob > maxDate) {
-        input.setCustomValidity('Date of birth must be between 1990 and the current year');
-    } else {
-        input.setCustomValidity('');
-    }
-
-    // Extract birthdate from student ID number (if available)
-    const studentIDNum = document.getElementById('studentIDNum').value;
-    if (studentIDNum.length === 13) { // Check if student ID number is valid
-        const birthdateFromID = new Date(studentIDNum.substring(0, 6).replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
-        if (dob.getTime() !== birthdateFromID.getTime()) {
-            input.setCustomValidity('Date of birth must match the student ID number');
-        } else {
-            input.setCustomValidity('');
-        }
-    }
-}
-
-
 
 function validateNames(input) {
     const isValid = /^[A-Za-z]+$/.test(input.value);
     if (!isValid) {
         input.setCustomValidity("Must contain only alphabetic characters.");
     } else {
-        input.setCustomValidity(""); // Reset validation message
+        input.setCustomValidity(""); 
     }
 }
 
-function matchGenderWithID(studentIDNum, genderID) {
-    // Extract the gender digit from the student ID number
-    const genderDigit = parseInt(studentIDNum.charAt(6));
 
-    // Determine the expected gender based on the gender digit
-    const expectedGender = (genderDigit % 2 === 0) ? "1" : "2"; // 1 for Female, 2 for Male
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}/${month}/${day}`;
+}
 
-    // Compare the expected gender with the selected gender ID
-    return expectedGender === genderID;
+function extractDateOfBirth(idNumber) {
+
+  idNumber = String(idNumber);
+
+  const yearPrefix = parseInt(idNumber.substring(0, 2));
+  const month = parseInt(idNumber.substring(2, 4));
+  const day = parseInt(idNumber.substring(4, 6));
+
+  const currentYear = new Date().getFullYear();
+  const currentCentury = Math.floor(currentYear / 100) * 100;
+  const century = currentCentury - (yearPrefix < 22 ? 100 : 0);
+  let fullYear = century + yearPrefix;
+
+  if (fullYear > currentYear) {
+      fullYear -= 100;
+  }
+
+  const dateOfBirth = new Date(fullYear, month - 1, day);
+
+  console.log(formatDate(dateOfBirth));
+
+  return formatDate(dateOfBirth);
 }
 
 
+function extractGender(idNumber) {
+  const genderDigits = parseInt(idNumber.substring(6, 10));
+
+  if (genderDigits < 5000) {
+      return 1;
+  } else {
+      return 2; 
+  }
+}
 
 document.getElementById("studentIDNum").addEventListener("input", function () {
     const isValid = isValidSAIDNumber(this.value);
@@ -222,30 +219,24 @@ document.getElementById("lastName").addEventListener("input", function () {
 });
 
 
-document.getElementById("genderID").addEventListener("change", function () {
-    const studentIDNum = document.getElementById("studentIDNum").value;
-    const selectedGenderID = this.value;
+document.getElementById("amount").addEventListener("input", function () {
+  const value = this.value;
 
-    const isValid = matchGenderWithID(studentIDNum, selectedGenderID);
-    if (!isValid) {
-        this.setCustomValidity("Gender must match ID Number");
-    } else {
-        this.setCustomValidity("");
-    }
+  const sanitizedValue = value.replace(/^0+/, '');
+
+  const sanitizedValue2 = sanitizedValue.replace(/[^\d.]/g, '');
+
+  const sanitizedValue3 = sanitizedValue2.replace(/(\..*)\./g, '$1');
+
+  const finalValue = sanitizedValue3.startsWith('-') ? sanitizedValue3.slice(1) : sanitizedValue3;
+
+  this.value = finalValue;
+
+  if (value !== finalValue) {
+      this.setCustomValidity("Please enter a valid amount (positive number)");
+  } else {
+      this.setCustomValidity("");
+  }
 });
 
-
-
-
-
-// const studentIDNum = "9706175213084"; // Example student ID number
-// const selectedGenderID = document.getElementById("genderID").value; // Get the selected gender ID from the <select> element
-
-// if (matchGenderWithID(studentIDNum, selectedGenderID)) {
-//     // Gender matches the one derived from the ID number
-//     console.log("Gender matches");
-// } else {
-//     // Gender does not match
-//     console.log("Gender does not match");
-// }
 
