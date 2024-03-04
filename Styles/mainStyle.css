@@ -71,6 +71,7 @@ body {
 .formInput,
 #submitLogIn {
   width: 80%;
+  min-width: 200px;
   display: inherit;
   flex-flow: column;
   margin: 1vh auto;
@@ -262,4 +263,8 @@ h1 a {
   text-align: center;
   margin-top: 4vh;
   margin-bottom: 0;
+}
+
+.dropDownForm {
+  max-width: 90%;
 }
