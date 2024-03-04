@@ -292,7 +292,7 @@ h1 a {
 .tile-title {
   color: #333;
   text-align: center;
-  margin-top: 4vh;
+  margin-top: 3.5vh;
   margin-bottom: 0;
 }
 
@@ -304,7 +304,7 @@ h1 a {
   border: none;
   background-color: #c1bbbb9d;
   color: white;
-  padding: 0;
+  padding: 4px 6px;
 }
 
 .documentInput {
