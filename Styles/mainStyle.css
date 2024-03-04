@@ -204,20 +204,62 @@ h1 a {
   display: none;
 }
 
-.universalInput, .universalSelect{
+.universalInput,
+.universalSelect {
   height: 6cqh;
   background-color: rgba(255, 240, 240, 0.132);
   border-radius: 15px;
   padding-left: 3%;
-  color:black;
+  color: black;
   font: inherit;
   width: 30vw;
   min-width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.649);
 }
 
-.universalInput:focus, .universalSelect{
+.universalInput:focus,
+.universalSelect {
   border: 1px solid black;
   outline: none;
 }
 
+.main-container a {
+  text-decoration: none;
+}
+
+.main-container {
+  width: 100vw;
+  height: 55vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  overflow-y: auto;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  aspect-ratio: 1;
+  height: 28cqh;
+  border: 1px solid rgba(0, 0, 0, 0.625);
+  border-radius: 5px;
+  text-align: center;
+  padding: 2cqw;
+  margin: 2vw;
+  background-color: #d0dddc55;
+}
+
+.tile p {
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 1vh;
+}
+
+.tile-title {
+  color: #333;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 0;
+}
