@@ -81,8 +81,8 @@ const userDataInserter = ({ name, element, data }) => {
         ? formData.get("studentMarks")
         : data.studentMarks,
       data.courseYear,
-      formData.get("Status")
-        ? formData.get("Status")
+      formData.get("status")
+        ? formData.get("status")
         : data.applicationStatusID,
       data.allocationID
     );
