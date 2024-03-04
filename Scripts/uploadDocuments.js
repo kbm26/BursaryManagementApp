@@ -34,9 +34,11 @@ document.getElementById("logInForm").addEventListener("submit", function(event) 
                 console.log("Student Documents uploaded successfully.");
                 document.getElementById("successMessage").textContent = "Documents uploaded successfully.";
                 document.getElementById("successMessage").style.display = "inline";
+                submitButton.style.display = "block";
             } else {
                 console.error("Failed to upload documents.");
                 document.getElementById("successMessage").textContent = "Documents Failed to upload.";
+                submitButton.style.display = "block";
             }
         })
         .catch(error => {
