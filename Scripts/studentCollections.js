@@ -94,7 +94,7 @@ const userDataInserter = ({ name, element, data }) => {
     const formData = new FormData(fd);
     // const isLocked = lockButton.value === "true";
     UpdateStudentAllocation(
-      formData.get("amount") ? formData.get("amount") : data.amountRequested,
+      formData.get("amount") ? formData.get("amount") : data.amount,
       data.allocationYear,
       data.studentIDNum,
       formData.get("studentMarks")
@@ -143,6 +143,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
+  alert(data);
   const options = {
     method: "PUT",
     headers: {
@@ -152,13 +153,9 @@ async function UpdateStudentAllocation(
   };
   try {
     const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
     const responseData = await response.json();
-    console.log("Response:", responseData);
   } catch (error) {
-    console.error("Error:", error);
+    alert("Error:", error);
   }
 }
 
@@ -174,16 +171,16 @@ function deleteStudentAllocation(allocationID) {
   )
     .then((response) => {
       if (response.ok) {
-        console.log("Student Allocation successfully deleted.");
+        alert("Student Allocation successfully deleted.");
       } else {
         alert("Cannot delete application under review");
-        console.error(
+        alert(
           "Failed to delete student allocation. It has an assigned reviewer"
         );
       }
     })
     .catch((error) => {
-      console.error("Error:", error);
+      alert("Error:", error);
     });
 }
 
@@ -268,7 +265,7 @@ async function getAllApplications() {
         tableUpdater(data);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        alert("Error:", error);
         const errorMessage = document.createElement("p");
         errorMessage.textContent = "An error occurred while fetching data.";
         document.body.appendChild(errorMessage);
