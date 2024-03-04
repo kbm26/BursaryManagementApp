@@ -21,7 +21,6 @@ document
         throw new Error("Network response was not ok");
       }
       const userData = await userDataResponse.json();
-      console.log(userData);
       const HODUniversityID = userData.universityID;
 
       // Get form input values

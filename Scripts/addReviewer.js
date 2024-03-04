@@ -85,7 +85,6 @@ async function handleSubmit(event) {
       studentAllocationID: null,
       universityApplicationID: appID,
     };
-    console.log(formData);
 
     const requestOptions = {
       method: "POST",
