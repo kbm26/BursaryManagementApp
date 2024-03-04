@@ -1,4 +1,4 @@
-const rowAdder = (table, index, { name, status }, uniFunctionality = false) => {
+const rowAdder = (table, index, { name, status }) => {
   let row = table.insertRow(-1);
   row.id = index;
   let c1 = row.insertCell(0);
@@ -9,7 +9,6 @@ const rowAdder = (table, index, { name, status }, uniFunctionality = false) => {
   const viewButton = document.createElement("button");
   statusButton.textContent = status;
   viewButton.textContent = "View";
-  uniFunctionality && c1.classList.add("studentViewer");
   statusButton.classList.add("status");
   viewButton.classList.add("viewUniversity");
 

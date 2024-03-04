@@ -222,8 +222,3 @@ h1 a {
   opacity: 0;
   display: none;
 }
-
-.studentViewer:hover {
-  cursor: pointer;
-  background-color: #d0d5dd5d;
-}

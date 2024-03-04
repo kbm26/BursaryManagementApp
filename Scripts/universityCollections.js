@@ -6,20 +6,15 @@ let unis;
 
 function tableMaker(list) {
   list.forEach((uni, i) => {
-    rowAdder(
-      table,
-      i,
-      {
-        name: uni.universityName,
-        status:
-          uni.applicationStatusID === 1
-            ? "pending"
-            : uni.applicationStatusID === 2
-            ? "approved"
-            : "rejected",
-      },
-      true
-    );
+    rowAdder(table, i, {
+      name: uni.universityName,
+      status:
+        uni.applicationStatusID === 1
+          ? "pending"
+          : uni.applicationStatusID === 2
+          ? "approved"
+          : "rejected",
+    });
   });
 }
 
@@ -230,20 +225,6 @@ async function getAllApplications() {
       statusColorCoder();
       for (const b of viewUniversityButtons)
         b.addEventListener("click", redirectToUniInfo);
-      const universityNames = document.getElementsByClassName("studentViewer");
-
-      for (let i = 0; i < universityNames.length; i++) {
-        const uni = universityNames[i];
-        uni.addEventListener("click", (e) => {
-          e.preventDefault();
-          sessionStorage.getItem("uniID") && sessionStorage.removeItem("uniID");
-          sessionStorage.setItem(
-            "uniID",
-            window.btoa(unis[i + 1].universityID)
-          );
-          window.location.href = "/bbd/selectedUnivirsityStudentsCollection";
-        });
-      }
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
