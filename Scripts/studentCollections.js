@@ -4,7 +4,6 @@ const nameFilter = document.getElementById("nameFilter");
 const approvedFilter = document.getElementById("approvedFilter");
 const pendingFilter = document.getElementById("pendingFilter");
 const rejectedFilter = document.getElementById("rejectedFilter");
-const loadingScreen = document.getElementsByClassName("loadingScreen");
 
 let students;
 let tempStudents;
@@ -64,16 +63,14 @@ const userDataInserter = ({ name, element, data }) => {
       <button class="updateData" type="submit">Update</button>
       </section>
       <section class="dataModButtons">
-      <button class="downloadID" type="submit">Download ID</button>
-      <button class="downloadAcademic" type="submit">Download Academic</button>
+      <button class="downloadFile" type="submit">Download</button>
       <button class="createLink" type="submit">Send Link</button>
       </section>
     </form>`;
 
   const deleteButton = element.querySelector(".deleteData");
   const lockButton = element.querySelector(".lock-button");
-  const downloadID = element.querySelector(".downloadID");
-  const downloadAcademic = element.querySelector(".downloadAcademic");
+  const downloadButton = element.querySelector(".downloadFile");
   const createLinkButton = element.querySelector(".createLink");
 
   deleteButton.addEventListener("click", (event) => {
@@ -92,7 +89,7 @@ const userDataInserter = ({ name, element, data }) => {
   fd.addEventListener("submit", () => {
     event.preventDefault();
     const formData = new FormData(fd);
-
+    // const isLocked = lockButton.value === "true";
     UpdateStudentAllocation(
       formData.get("amount") ? formData.get("amount") : data.amountRequested,
       data.allocationYear,
@@ -108,14 +105,9 @@ const userDataInserter = ({ name, element, data }) => {
     );
   });
 
-  downloadID.addEventListener("click", (event) => {
+  downloadButton.addEventListener("click", (event) => {
     event.preventDefault();
-    getStudentID(data.studentIDNum);
-  });
-
-  downloadAcademic.addEventListener("click", (event) => {
-    event.preventDefault();
-    getStudentAcademicTranscript(data.studentIDNum);
+    getStudentDocuments(data.studentIDNum);
   });
 
   createLinkButton.addEventListener("click", (event) => {
@@ -143,7 +135,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-
+  console.log(data);
   const options = {
     method: "PUT",
     headers: {
@@ -241,24 +233,13 @@ const tableUpdater = (data) => {
 
 async function getAllApplications() {
   const tempUserId = sessionStorage.getItem("userID");
-  const uniID = sessionStorage.getItem("uniID");
-  if (uniID || tempUserId) {
-    let url;
-    if (window.atob(uniID)) {
-      url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
-        uniID
-      )}`;
-    } else {
-      url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
-        tempUserId
-      )}`;
-    }
-    loadingScreen[0].style.opacity = 1;
-    loadingScreen[0].style.height = "70vh";
+  if (tempUserId) {
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
+      tempUserId
+    )}`;
 
     fetch(url)
       .then((response) => {
-        table.innerHTML = "";
         if (response.ok) {
           return response.json();
         } else {
@@ -266,8 +247,6 @@ async function getAllApplications() {
         }
       })
       .then((data) => {
-        loadingScreen[0].style.opacity = 0;
-        loadingScreen[0].style.height = "0vh";
         tempStudents = data.sort((a, b) => {
           return b.allocationYear - a.allocationYear;
         });
@@ -294,8 +273,8 @@ async function getAllApplications() {
 nameFilter.addEventListener("click", (e) => {
   e.preventDefault();
   const sortedStudentsAsc = students.slice().sort((a, b) => {
-    const nameA = a.studentFirstName;
-    const nameB = b.studentFirstName;
+    const nameA = a.studentFirstName; // ignore upper and lowercase
+    const nameB = b.studentFirstName; // ignore upper and lowercase
     if (nameA < nameB) {
       return -1;
     }
@@ -303,11 +282,12 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
+    // names must be equal
     return 0;
   });
   const sortedStudentsDec = students.slice().sort((a, b) => {
-    const nameA = a.studentFirstName;
-    const nameB = b.studentFirstName;
+    const nameA = a.studentFirstName; // ignore upper and lowercase
+    const nameB = b.studentFirstName; // ignore upper and lowercase
     if (nameA > nameB) {
       return -1;
     }
@@ -315,9 +295,10 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
+    // names must be equal
     return 0;
   });
-
+  console.log(students);
   tableUpdater(
     students[0]["studentFirstName"] == sortedStudentsAsc[0]["studentFirstName"]
       ? sortedStudentsDec
