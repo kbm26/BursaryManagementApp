@@ -66,7 +66,7 @@ const userDataInserter = ({ name, element, data }) => {
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
-    deleteStudentAllocation(data.applicationID);
+    deleteStudentAllocation(data.allocationID);
   });
 
   const fd = document.getElementById("fd");
@@ -80,9 +80,9 @@ const userDataInserter = ({ name, element, data }) => {
       formData.get("studentMarks")
         ? formData.get("studentMarks")
         : data.studentMarks,
-      data.courseYear,
-      formData.get("Status")
-        ? formData.get("Status")
+      formData.get("courseYear") ? formData.get("courseYear") : data.courseYear,
+      formData.get("status")
+        ? formData.get("status")
         : data.applicationStatusID,
       data.allocationID
     );
@@ -127,7 +127,7 @@ async function UpdateStudentAllocation(
   const options = {
     method: "PUT",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json-patch+json",
     },
     body: JSON.stringify(data),
@@ -217,11 +217,13 @@ const tableUpdater = (data) => {
 };
 
 async function getAllApplications() {
-  const tempUserId = localStorage.getItem("userID");
+  // const tempUserId = localStorage.getItem("userID");
+  const tempUserId = 1;
   if (tempUserId) {
-    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
-      tempUserId
-    )}`;
+    // const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
+    //   tempUserId
+    // )}`;
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/1`;
     loadingScreen[0].style.opacity = 1;
     loadingScreen[0].style.height = "70vh";
 
