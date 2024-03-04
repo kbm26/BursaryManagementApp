@@ -46,26 +46,25 @@
       </section>
       <section>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
+        <input type="text" id="firstName" name="firstName" required>
       </section>
       <section>
           <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
+          <input type="text" id="lastName" name="lastName" required>
       </section>
       
       <section>
         <label for="studentIDNum">ID Number:</label>
-        <input type="number" id="studentIDNum" name="studentIDNum" pattern="\d{13}" required>
+        <input type="text" id="studentIDNum" name="studentIDNum" required>
       </section>
       
       <section>
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" min="1000-01-01" max="9999-12-31" required>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" min="1990-01-01" required oninput="validateDateOfBirth(this)">
       </section>
       <section>
         <label for="genderID">Gender:</label>
         <select id="genderID" name="genderID">
-          <option value="">--Select Gender--</option>
           <option value="1">Female</option>
           <option value="2">Male</option>
         </select>
@@ -73,7 +72,6 @@
       <section>
         <label for="ethnicityID">Ethnicity:</label>
         <select id="ethnicityID" name="ethnicityID">
-          <option value="">--Select Ethnicity--</option>
           <option value="1">African</option>
           <option value="2">Indian</option>
           <option value="3">Coloured</option>
@@ -82,21 +80,18 @@
       <section>
         <label for="departmentID">Department:</label>
         <select id="departmentID" name="departmentID">
-          <option value="">--Select Department--</option>
           <option value="1">CompSci</option>
           <option value="2">BEng</option>
           <option value="3">GameDev</option>
         </select>
       </section>
-      <!--Removed universityID drop down-->
       <section>
         <label for="amount">Amount (Rands):</label>
         <input type="number" id="amount" name="amount" required pattern="\d+(\.\d+)?" title="Please enter a valid number">
       </section>
       <section>
         <label for="studentMarks">Student Marks:</label>
-        <input type="number" id="studentMarks" name="studentMarks"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+        <input type="number" id="studentMarks" name="studentMarks" required>
       </section>
       <section>
         <label for="courseYear">CourseYear:</label>
