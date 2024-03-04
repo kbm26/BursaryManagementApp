@@ -4,7 +4,7 @@ document.getElementById("newStudentApplication").addEventListener("submit", asyn
     event.preventDefault();
 
     // Get HODUniversityID using UserID
-    const tempUserId = sessionStorage.getItem("userID");
+    const tempUserId = localStorage.getItem("userID");
     if (!tempUserId) {
         // Display error message if userID is not found
         const errorMessage = document.createElement("p");
@@ -158,15 +158,15 @@ function validateDateOfBirth(input) {
     }
 
     // Extract birthdate from student ID number (if available)
-    // const studentIDNum = document.getElementById('studentIDNum').value;
-    // if (studentIDNum.length === 13) { // Check if student ID number is valid
-    //     const birthdateFromID = new Date(studentIDNum.substring(0, 6).replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
-    //     if (dob.getTime() !== birthdateFromID.getTime()) {
-    //         input.setCustomValidity('Date of birth must match the student ID number');
-    //     } else {
-    //         input.setCustomValidity('');
-    //     }
-    // }
+    const studentIDNum = document.getElementById('studentIDNum').value;
+    if (studentIDNum.length === 13) { // Check if student ID number is valid
+        const birthdateFromID = new Date(studentIDNum.substring(0, 6).replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
+        if (dob.getTime() !== birthdateFromID.getTime()) {
+            input.setCustomValidity('Date of birth must match the student ID number');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
 }
 
 
@@ -217,8 +217,8 @@ document.getElementById("lastName").addEventListener("input", function () {
 
 
 document.getElementById("genderID").addEventListener("change", function () {
-
-    const studentIDNum = document.getElementById("studentIDNum").value
+    const studentIDNum = document.getElementById("studentIDNum").value;
+    const selectedGenderID = this.value;
 
     const isValid = matchGenderWithID(studentIDNum, selectedGenderID);
     if (!isValid) {
@@ -226,7 +226,6 @@ document.getElementById("genderID").addEventListener("change", function () {
     } else {
         this.setCustomValidity("");
     }
-
 });
 
 
