@@ -32,29 +32,14 @@ const userDataInserter = ({ name, element, data }) => {
   h1.textContent = `${name}(${data.allocationYear})`;
   form.appendChild(h1);
 
-  //status
-  const statusSection = document.createElement("section");
-  statusSection.className = "formInput";
-  const statusLabel = document.createElement("label");
-  statusLabel.htmlFor = "status";
-  statusLabel.textContent = "Application Status:";
-  statusSection.appendChild(statusLabel);
+  const statusDropDownData = [
+    {
+      identifier: "status",
+      textContent: "Application Status:",
+    },
+  ];
 
-  const statusSelect = document.createElement("select");
-  statusSelect.className = "universalSelect";
-  statusSelect.name = "Status";
-  statusSelect.id = "status";
-  if (data.applicationStatusID !== 1) {
-    statusSelect.disabled = true;
-  }
-  generateOptions(data.applicationStatusID).forEach((option) =>
-    statusSelect.appendChild(option)
-  );
-  statusSection.appendChild(statusSelect);
-  form.appendChild(statusSection);
-
-  //status
-  const obj = [
+  const studentFormInputs = [
     {
       identifier: "amount",
       textContent: "Amount Requested:",
@@ -74,56 +59,98 @@ const userDataInserter = ({ name, element, data }) => {
       type: "number",
     },
   ];
+  const modificationButtons = [
+    { buttonClass: "deleteData", textContent: "Delete" },
+    { buttonClass: "updateData", textContent: "Update" },
+  ];
+  const userTempLinkData = [
+    {
+      buttonClass: "downloadID",
+      textContent: "Download ID",
+      downloadable: true,
+    },
+    {
+      buttonClass: "downloadAcademic",
+      textContent: "Download Academic",
+      downloadable: true,
+    },
+    { buttonClass: "createLink", textContent: "Send Link" },
+  ];
 
   form.appendChild(
-    inputSectionCreator("formInput", obj, data.applicationStatusID)
+    dropDownStatusSectionCreator(
+      "formInput",
+      statusDropDownData,
+      data.applicationStatusID
+    )
+  );
+  form.appendChild(
+    inputSectionCreator(
+      "formInput",
+      studentFormInputs,
+      data.applicationStatusID
+    )
+  );
+  form.appendChild(
+    buttonSectionCreator(
+      "dataModButtons",
+      modificationButtons,
+      data.applicationStatusID
+    )
+  );
+  form.appendChild(
+    buttonSectionCreator(
+      "dataModButtons",
+      userTempLinkData,
+      data.applicationStatusID
+    )
   );
 
   element.appendChild(form);
 
-  // const deleteButton = element.querySelector(".deleteData");
-  // const downloadID = element.querySelector(".downloadID");
-  // const downloadAcademic = element.querySelector(".downloadAcademic");
-  // const createLinkButton = element.querySelector(".createLink");
+  const deleteButton = element.querySelector(".deleteData");
+  const downloadID = element.querySelector(".downloadID");
+  const downloadAcademic = element.querySelector(".downloadAcademic");
+  const createLinkButton = element.querySelector(".createLink");
 
-  // deleteButton.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   deleteStudentAllocation(data.allocationID);
-  // });
+  deleteButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteStudentAllocation(data.allocationID);
+  });
 
-  // const fd = document.getElementById("fd");
-  // fd.addEventListener("submit", () => {
-  //   event.preventDefault();
-  //   const formData = new FormData(fd);
-  //   UpdateStudentAllocation(
-  //     formData.get("amount") ? formData.get("amount") : data.amountRequested,
-  //     data.allocationYear,
-  //     data.studentIdNumber,
-  //     formData.get("studentMarks")
-  //       ? formData.get("studentMarks")
-  //       : data.studentMarks,
-  //     data.courseYear,
-  //     formData.get("Status")
-  //       ? formData.get("Status")
-  //       : data.applicationStatusID,
-  //     data.allocationID
-  //   );
-  // });
+  const fd = document.getElementById("fd");
+  fd.addEventListener("submit", () => {
+    event.preventDefault();
+    const formData = new FormData(fd);
+    UpdateStudentAllocation(
+      formData.get("amount") ? formData.get("amount") : data.amountRequested,
+      data.allocationYear,
+      data.studentIdNumber,
+      formData.get("studentMarks")
+        ? formData.get("studentMarks")
+        : data.studentMarks,
+      data.courseYear,
+      formData.get("Status")
+        ? formData.get("Status")
+        : data.applicationStatusID,
+      data.allocationID
+    );
+  });
 
-  // downloadID.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   getStudentID(data.studentIdNumber);
-  // });
+  downloadID.addEventListener("click", (event) => {
+    event.preventDefault();
+    getStudentID(data.studentIdNumber);
+  });
 
-  // downloadAcademic.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   getStudentAcademicTranscript(data.studentIdNumber);
-  // });
+  downloadAcademic.addEventListener("click", (event) => {
+    event.preventDefault();
+    getStudentAcademicTranscript(data.studentIdNumber);
+  });
 
-  // createLinkButton.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   generateLinkandEmail(data.studentIdNumber, data.email);
-  // });
+  createLinkButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    generateLinkandEmail(data.studentIdNumber, data.email);
+  });
 };
 
 async function UpdateStudentAllocation(

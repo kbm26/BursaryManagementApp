@@ -18,7 +18,6 @@ function generateOptions(statusId) {
 const inputSectionCreator = (className, inputObject, status) => {
   const formInput = document.createElement("section");
   formInput.className = className;
-
   for (const input of inputObject) {
     const { identifier, textContent, placeholder, type } = input;
     const elementLabel = document.createElement("label");
@@ -36,6 +35,49 @@ const inputSectionCreator = (className, inputObject, status) => {
       inputElement.disabled = true;
     }
     formInput.appendChild(inputElement);
+  }
+  return formInput;
+};
+
+const dropDownStatusSectionCreator = (className, inputObject, status) => {
+  const statusSection = document.createElement("section");
+  statusSection.className = className;
+  for (const input of inputObject) {
+    const { identifier, textContent } = input;
+    const statusLabel = document.createElement("label");
+    statusLabel.htmlFor = identifier;
+    statusLabel.textContent = textContent;
+    statusSection.appendChild(statusLabel);
+
+    const statusSelect = document.createElement("select");
+    statusSelect.className = "universalSelect";
+    statusSelect.name = identifier;
+    statusSelect.id = identifier;
+    if (status !== 1) {
+      statusSelect.disabled = true;
+    }
+    generateOptions(status).forEach((option) =>
+      statusSelect.appendChild(option)
+    );
+
+    statusSection.appendChild(statusSelect);
+  }
+
+  return statusSection;
+};
+
+const buttonSectionCreator = (className, inputObject, status) => {
+  const formInput = document.createElement("section");
+  formInput.className = className;
+
+  for (const input of inputObject) {
+    const { buttonClass, textContent } = input;
+    const buttonElement = document.createElement("button");
+    buttonElement.className = buttonClass;
+    buttonElement.textContent = textContent;
+    buttonElement.type = "submit";
+    formInput.appendChild(buttonElement);
+    formInput.appendChild(buttonElement);
   }
   return formInput;
 };
