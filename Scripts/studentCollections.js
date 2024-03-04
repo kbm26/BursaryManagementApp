@@ -127,6 +127,7 @@ async function UpdateStudentAllocation(
   const options = {
     method: "PUT",
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json-patch+json",
     },
     body: JSON.stringify(data),
