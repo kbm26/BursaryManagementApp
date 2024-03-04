@@ -41,23 +41,23 @@
         <h1>Add new HOD</h1>
         <section>
             <label for="phoneNumber">Phone Number:</label>
-            <input type="number" id="phoneNumber" name="phoneNumber" required maxlength="10" pattern="\d{10}">
+            <input class="universalInput" type="number" id="phoneNumber" name="phoneNumber" required maxlength="10" pattern="\d{10}">
         </section>
         <section>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required oninput="validateEmail(this);">
+            <input class="universalInput" type="email" id="email" name="email" required oninput="validateEmail(this);">
         </section>
         <section>
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
+            <input class="universalInput" type="text" id="firstName" name="firstName" pattern="[A-Za-z]+">
         </section>
         <section>
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
+            <input class="universalInput" type="text" id="lastName" name="lastName" pattern="[A-Za-z]+">
         </section>
         <section>
             <label for="departmentID">Department:</label>
-            <select id="departmentID" name="departmentID" required>
+            <select  class="universalSelect"id="departmentID" name="departmentID" required>
                 <option value="">--Select Department--</option>
                 <option value="1">CompSci</option>
                 <option value="2">BEng</option>
@@ -66,7 +66,7 @@
         </section>
         <section>
             <label for="universityID">University:</label>
-            <select id="universityID" name="universityID" required>
+            <select  class="universalSelect"id="universityID" name="universityID" required>
                 <option value="">--Select University--</option>
                 <option value="1">Stellenbosch University</option>
                 <option value="2">University of Cape Town</option>

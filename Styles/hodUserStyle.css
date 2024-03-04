@@ -28,28 +28,8 @@
   }
   
   
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
   .main-container a {
     text-decoration: none;
-  }
-  
-  input[type="number"],
-  input[type="date"],
-  input[type="email"],
-  input[type="text"]{
-    height: 4cqh;
-    margin: 1vh auto;
-    background-color: rgba(255, 255, 255, 0.134);
-    border: 2px solid rgba(135, 135, 135, 0.656);
-    border-radius: 15px;
-    padding-left: 3%;
-    color: black;
-    width: 100%;
-    font: inherit;
   }
   
    #submitLogIn {
@@ -79,25 +59,9 @@
     align-items: flex-start;
   }
   
-  
-  
-  #departmentID, 
-  #universityID, 
-  #genderID, 
-  #ethnicityID, 
-  #userID{
-    height: 4cqh;
-    margin: 1vh auto;
-    background-color: rgba(255, 255, 255, 0.134);
-    border: 2px solid rgba(135, 135, 135, 0.656);
-    border-radius: 15px;
-    padding-left: 4%;
-    color: black;
-    font: inherit;
-  }
 
   
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     form {
       padding: 10px;
     }
@@ -110,13 +74,7 @@
       margin-bottom: 3px;
     }
   
-    input[type="number"],
-    input[type="date"],
-    input[type="text"]{
-      padding: 8px;
-    }
-  
     #submitLogIn {
       padding: 8px 15px;
     }
-  }
+  } */
