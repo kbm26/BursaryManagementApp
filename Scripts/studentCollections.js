@@ -45,8 +45,7 @@ const userDataInserter = ({ name, element, data }) => {
     },
   ];
   const modificationButtons = [
-    { buttonClass: "deleteData", textContent: "Delete" },
-    { buttonClass: "updateData", textContent: "Update" },
+    { buttonClass: "updateData", textContent: "Update" }
   ];
   const form = formMaker({
     name,
@@ -59,15 +58,10 @@ const userDataInserter = ({ name, element, data }) => {
 
   element.appendChild(form);
 
-  const deleteButton = element.querySelector(".deleteData");
   const downloadID = element.querySelector(".downloadID");
   const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
 
-  deleteButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    deleteStudentAllocation(data.allocationID);
-  });
 
   const fd = document.getElementById("fd");
   fd.addEventListener("submit", () => {
@@ -123,7 +117,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-  alert(data);
+  
   const options = {
     method: "PUT",
     headers: {
@@ -136,7 +130,7 @@ async function UpdateStudentAllocation(
     const response = await fetch(url, options);
     const responseData = await response.json();
   } catch (error) {
-    alert("Error:", error);
+    console.log("Error:", error);
   }
 }
 
