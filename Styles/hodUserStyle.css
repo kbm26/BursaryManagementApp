@@ -37,21 +37,6 @@
     text-decoration: none;
   }
   
-  input[type="number"],
-  input[type="date"],
-  input[type="email"],
-  input[type="text"]{
-    height: 4cqh;
-    margin: 1vh auto;
-    background-color: rgba(255, 255, 255, 0.134);
-    border: 2px solid rgba(135, 135, 135, 0.656);
-    border-radius: 15px;
-    padding-left: 3%;
-    color: black;
-    width: 100%;
-    font: inherit;
-  }
-  
    #submitLogIn {
     background-color: #949698;
     padding: 10px 20px;
@@ -108,12 +93,6 @@
   
     label {
       margin-bottom: 3px;
-    }
-  
-    input[type="number"],
-    input[type="date"],
-    input[type="text"]{
-      padding: 8px;
     }
   
     #submitLogIn {

@@ -45,21 +45,21 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input ${
+        <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        } class="userData" placeholder=${
+        }  placeholder=${
     data.amount
   }  type="number" name="amount">
         <label for="courseYear">Course Year:</label>
-        <input ${
+        <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        } class="userData" placeholder=${
+        }  placeholder=${
     data.courseYear
   }  type="number" name="courseYear">
         <label for="studentMarks">Student Mark:</label>
-        <input ${
+        <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        } class="userData" placeholder=${
+        }  placeholder=${
     data.studentMarks
   }  type="number" name="studentMarks">
       </section>

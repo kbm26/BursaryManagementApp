@@ -39,9 +39,9 @@ const userDataInserter = ({ name, element, data }) => {
       </section>
       <section class="formInput">
         <label for="amount">Amount Requested:</label>
-        <input ${
+        <input class="universalInput" ${
           data.applicationStatusID !== 1 && "disabled"
-        } class="userData" id="amount" placeholder=${
+        }  id="amount" placeholder=${
     data.amountRequested
   }  type="number" name="amount">
         <button type="button" class="lock-button" value=true>${
