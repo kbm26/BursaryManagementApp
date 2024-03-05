@@ -104,6 +104,7 @@ body {
   justify-content: center;
   border-color: rgba(255, 255, 255, 0.219);
   background-color: var(--active);
+  font-family: sans-serif;
 }
 
 #googleLogo {
@@ -122,7 +123,6 @@ body {
 }
 
 
-
 h1 {
   margin-top: 0;
 }
@@ -131,6 +131,8 @@ h1 a {
   text-decoration: none;
   color: white;
 }
+
+
 
 .errorPage {
   font-size: 2rem;
@@ -147,21 +149,25 @@ h1 a {
 
 .navigation {
   opacity: 0;
-  transition: 900ms;
+  transition: 400ms;
   display: none;
   flex-flow: column;
   align-items: center;
   width: 100vw;
   height: 0vh;
-  background-color: var(--bbd-primary-color);
+  background-color: rgb(62, 61, 61);
   background-image: url("../Assets/bbdBackground.png");
-
+  gap: 1rem;
   background-blend-mode: color-burn;
 }
 
 .navigation a {
   text-decoration: none;
-  color: white;
+  color: rgb(249, 249, 249);
+}
+
+.navigation a:hover{
+    color: #b66666;
 }
 
 .addApplication {
@@ -169,6 +175,10 @@ h1 a {
   padding: 3vh 20vw;
   overflow-y: auto;
   height: 88vh;
+  /* display: grid;
+  align-items: center;
+  justify-content: center;  
+  margin-left: 10%; */
 }
 
 #home {
@@ -213,7 +223,7 @@ h1 a {
   padding-left: 3%;
   color: black;
   font: inherit;
-  width: 30vw;
+  width: 25vw;
   min-width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.649);
 }
@@ -238,6 +248,27 @@ h1 a {
   overflow-y: auto;
 }
 
+.container {
+  max-width: 800px; 
+  height:auto;
+  align-items: center;
+  min-width: 250px;
+  margin-bottom: 8%;
+  padding: 20px; /* Add padding to the container */
+  box-sizing: border-box; 
+  width: 40vw;
+  border: 1px solid rgba(0, 0, 0, 0.349);
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+  box-shadow: var(--general-box-shadow);
+  backdrop-filter: var(--back-drop);
+  -webkit-backdrop-filter: var(--back-drop);
+  border-radius: var(--main-border-radius);
+
+}
+
+
 .tile {
   display: flex;
   align-items: center;
@@ -250,7 +281,7 @@ h1 a {
   text-align: center;
   padding: 2cqw;
   margin: 2vw;
-  background-color: #d0dddc55;
+  background-color: #d0cccc55;
 }
 
 .tile p {
@@ -261,7 +292,7 @@ h1 a {
 .tile-title {
   color: #333;
   text-align: center;
-  margin-top: 4vh;
+  margin-top: 3.5vh;
   margin-bottom: 0;
 }
 
@@ -269,7 +300,20 @@ h1 a {
   max-width: 90%;
 }
 
+<<<<<<< HEAD
 .uniLink:hover {
   background-color: #33333323;
   cursor: pointer;
+=======
+#logout{
+  border: none;
+  background-color: #c1bbbb9d;
+  color: white;
+  padding: 4px 6px;
+}
+
+.documentInput {
+  color: white;
+  font-family: sans-serif;
+>>>>>>> 5a5f899c45cf9228f915ac12126352431dd36f21
 }

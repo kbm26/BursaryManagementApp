@@ -33,7 +33,6 @@ const userDataInserter = ({ name, element, data }) => {
     },
   ];
   const modificationButtons = [
-    { buttonClass: "deleteData", textContent: "Delete" },
     { buttonClass: "updateData", textContent: "Update" },
     { buttonClass: "payUniversity", textContent: "Allocate Funds" },
   ];
@@ -47,13 +46,7 @@ const userDataInserter = ({ name, element, data }) => {
 
   element.appendChild(form);
 
-  const deleteButton = element.querySelector(".deleteData");
   const payUniversityButton = element.querySelector(".payUniversity");
-
-  deleteButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    deleteApplication(data.applicationID);
-  });
 
   payUniversityButton.addEventListener("click", (event) => {
     event.preventDefault();

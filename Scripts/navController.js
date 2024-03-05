@@ -24,7 +24,7 @@ burgerMenu.addEventListener("click", () => {
     nav.style.display = "flex";
     setTimeout(() => {
       nav.style.opacity = 1;
-      nav.style.height = "100vh";
+      nav.style.height = "50vh";
     }, 200);
   } else {
     nav.style.height = "0vh";
