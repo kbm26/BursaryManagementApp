@@ -1,7 +1,6 @@
 const current = document.getElementById("current");
 const total = document.getElementById("total");
 
-// Get the Balance of spendings for a particular university
 async function universityBudgetFinder() {
   try {
     const tempUserId = localStorage.getItem("userID");
@@ -11,7 +10,7 @@ async function universityBudgetFinder() {
         tempUserId ? "Please retry later" : "Please allow cookies"
       }`;
       document.body.appendChild(errorMessage);
-      return; // Exit function early if userID is not found
+      return;
     }
 
     const url = `https://bursarywebapp.azurewebsites.net/api/Users/universityUserDetails/${window.atob(
@@ -43,7 +42,6 @@ async function universityBudgetFinder() {
     const responseData = await spendingsResponse.json();
     current.innerText = `Current Amount: R${responseData["amountRemaining"]}`;
     total.innerText = `Total Allocation: R${responseData["totalAmount"]}`;
-    console.log("Response:", responseData);
   } catch (error) {
     console.error("Error:", error);
   }

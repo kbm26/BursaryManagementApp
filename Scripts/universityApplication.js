@@ -1,4 +1,3 @@
-// Create a New University Application for funding from BBD
 document
   .getElementById("postForm")
   .addEventListener("submit", async function (event) {
@@ -23,17 +22,14 @@ document
       const userData = await userDataResponse.json();
       const HODUniversityID = userData.universityID;
 
-      // Get form input values
       const formData = new FormData(event.target);
       const postData = {};
       formData.forEach((value, key) => {
         postData[key] = value;
       });
 
-      // Set the UniversityID as the retrieved ID
       postData.universityID = HODUniversityID;
 
-      // Define request options
       const requestOptions = {
         method: "POST",
         headers: {
@@ -56,7 +52,6 @@ document
           }
         })
         .catch((error) => {
-          // Handle errors
           console.error("Error:", error);
         });
     } catch (error) {

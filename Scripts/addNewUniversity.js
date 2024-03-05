@@ -1,47 +1,40 @@
-// Add new University
-document.getElementById("newUniversity").addEventListener("submit", async function(event) {
-    // Prevent form submission
+document
+  .getElementById("newUniversity")
+  .addEventListener("submit", async function (event) {
     event.preventDefault();
 
     try {
-        // Get the university name input value from the form
-        const uniName = document.getElementById("universityName").value;
+      const uniName = document.getElementById("universityName").value;
 
-        const requestData = {
-            uniName: uniName
-        };
+      const requestData = {
+        uniName: uniName,
+      };
 
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "*/*"
-            },
-            body: JSON.stringify(requestData) 
-        };
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        body: JSON.stringify(requestData),
+      };
 
-        const response = await fetch("https://bursarywebapp.azurewebsites.net/api/Universities", requestOptions);
+      const response = await fetch(
+        "https://bursarywebapp.azurewebsites.net/api/Universities",
+        requestOptions
+      );
 
-        if (!response.ok) {
-            document.getElementById("successMessage").textContent = "University Already Exists";
-            throw new Error(`HTTP error! status: ${response.status}`);
-            
-        }
-        else {
-            document.getElementById("successMessage").textContent = "University Added Successfully";
-        }
+      if (!response.ok) {
+        document.getElementById("successMessage").textContent =
+          "University Already Exists";
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        document.getElementById("successMessage").textContent =
+          "University Added Successfully";
+      }
 
-        // Parse the JSON response data
-        const responseData = await response.json();
-
-        // Log the response data
-        console.log("Response:", responseData);
-
-
+      alert("University has been created.");
     } catch (error) {
-        // Log any errors that occur
-        console.error("Error:", error);
-        // Add code to handle errors (e.g., display error message)
+      alert("University has not been created.", error);
     }
-
-});
+  });

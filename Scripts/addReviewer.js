@@ -31,7 +31,7 @@ function getUniversities() {
       if (response.ok) {
         return response.json();
       } else {
-        console.log("broke");
+        alert("No funds allocated");
       }
     })
     .then((data) => {
@@ -76,7 +76,6 @@ async function handleSubmit(event) {
   const selectedOption = UserSelect.options[UserSelect.selectedIndex];
 
   try {
-    // Wait for the application ID to be fetched
     const appID = await getUniversityApplicationID(universityID);
 
     const userID = parseInt(selectedOption.getAttribute("info"));
