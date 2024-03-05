@@ -45,7 +45,7 @@ const userDataInserter = ({ name, element, data }) => {
     },
   ];
   const modificationButtons = [
-    { buttonClass: "updateData", textContent: "Update" }
+    { buttonClass: "updateData", textContent: "Update" },
   ];
   const form = formMaker({
     name,
@@ -61,7 +61,6 @@ const userDataInserter = ({ name, element, data }) => {
   const downloadID = element.querySelector(".downloadID");
   const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
-
 
   const fd = document.getElementById("fd");
   fd.addEventListener("submit", () => {
@@ -125,36 +124,11 @@ async function UpdateStudentAllocation(
     body: JSON.stringify(data),
   };
   try {
-    const response = await fetch(url, options);
     alert("Application Updated");
+    getAllApplications();
   } catch (error) {
     alert("Error:", error);
   }
-}
-
-function deleteStudentAllocation(allocationID) {
-  fetch(
-    `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  )
-    .then((response) => {
-      if (response.ok) {
-        alert("Student Allocation successfully deleted.");
-      } else {
-        alert("Cannot delete application under review");
-        alert(
-          "Failed to delete student allocation. It has an assigned reviewer"
-        );
-      }
-    })
-    .catch((error) => {
-      alert("Error:", error);
-    });
 }
 
 const redirectToStudentInfo = (e) => {

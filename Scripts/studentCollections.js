@@ -45,7 +45,7 @@ const userDataInserter = ({ name, element, data }) => {
     },
   ];
   const modificationButtons = [
-    { buttonClass: "updateData", textContent: "Update" }
+    { buttonClass: "updateData", textContent: "Update" },
   ];
   const form = formMaker({
     name,
@@ -61,7 +61,6 @@ const userDataInserter = ({ name, element, data }) => {
   const downloadID = element.querySelector(".downloadID");
   const downloadAcademic = element.querySelector(".downloadAcademic");
   const createLinkButton = element.querySelector(".createLink");
-
 
   const fd = document.getElementById("fd");
   fd.addEventListener("submit", () => {
@@ -117,7 +116,7 @@ async function UpdateStudentAllocation(
     applicationStatusID: applicationStatusID,
     allocationID: allocationID,
   };
-  
+
   const options = {
     method: "PUT",
     headers: {
@@ -128,35 +127,10 @@ async function UpdateStudentAllocation(
   };
   try {
     const response = await fetch(url, options);
-    const responseData = await response.json();
+    alert("Student was updated successfully");
   } catch (error) {
-    console.log("Error:", error);
+    alert("Error:", error);
   }
-}
-
-function deleteStudentAllocation(allocationID) {
-  fetch(
-    `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/${allocationID}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  )
-    .then((response) => {
-      if (response.ok) {
-        alert("Student Allocation successfully deleted.");
-      } else {
-        alert("Cannot delete application under review");
-        alert(
-          "Failed to delete student allocation. It has an assigned reviewer"
-        );
-      }
-    })
-    .catch((error) => {
-      alert("Error:", error);
-    });
 }
 
 const redirectToStudentInfo = (e) => {
@@ -211,13 +185,11 @@ const tableUpdater = (data) => {
 };
 
 async function getAllApplications() {
-  // const tempUserId = localStorage.getItem("userID");
-  const tempUserId = 1;
+  const tempUserId = localStorage.getItem("userID");
   if (tempUserId) {
-    // const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
-    //   tempUserId
-    // )}`;
-    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/1`;
+    const url = `https://bursarywebapp.azurewebsites.net/api/StudentsAllocation/user/${window.atob(
+      tempUserId
+    )}`;
     loadingScreen[0].style.opacity = 1;
     loadingScreen[0].style.height = "70vh";
 
@@ -268,7 +240,6 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
-    // names must be equal
     return 0;
   });
   const sortedStudentsDec = students.slice().sort((a, b) => {
@@ -281,7 +252,6 @@ nameFilter.addEventListener("click", (e) => {
       return 1;
     }
 
-    // names must be equal
     return 0;
   });
 

@@ -3,7 +3,6 @@ const total = document.getElementById("Total");
 
 async function fundFinder() {
   try {
-    // Changed to fetch from BBDSpendings endpoint
     const response = await fetch(
       "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024"
     );

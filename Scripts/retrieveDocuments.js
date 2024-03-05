@@ -1,11 +1,10 @@
-// Get the Documents for Specified Student ID Number
 function getStudentAcademicTranscript(studentIDNum) {
   fetch(
     `https://bursarywebapp.azurewebsites.net/api/Documents/${studentIDNum}`,
     {
       method: "GET",
       headers: {
-        accept: "application/json", // Expecting a json response
+        accept: "application/json",
       },
     }
   )
@@ -13,7 +12,7 @@ function getStudentAcademicTranscript(studentIDNum) {
       if (response.ok) {
         return response.json();
       } else {
-        console.log(
+        alert(
           Error +
             "Student has no documents. Please send them a temporary link to upload"
         );
@@ -25,12 +24,9 @@ function getStudentAcademicTranscript(studentIDNum) {
     .then((data) => {
       alert("Documents for Student retrieved:", data);
 
-      // Extract individual links from the response data
       const academicTranscriptLink = data.academicTranscript;
       const idLink = data.id;
-      // Check if both links are available
       if (academicTranscriptLink) {
-        // Create anchor elements for each link
         const academicTranscriptAnchor = document.createElement("a");
         academicTranscriptAnchor.href = academicTranscriptLink;
         academicTranscriptAnchor.target = "_blank";
@@ -56,7 +52,7 @@ function getStudentID(studentIDNum) {
     {
       method: "GET",
       headers: {
-        accept: "application/json", // Expecting a json response
+        accept: "application/json",
       },
     }
   )
@@ -64,7 +60,7 @@ function getStudentID(studentIDNum) {
       if (response.ok) {
         return response.json();
       } else {
-        console.log(
+        alert(
           Error +
             "Student has no documents. Please send them a temporary link to upload"
         );
@@ -76,7 +72,6 @@ function getStudentID(studentIDNum) {
     .then((data) => {
       alert("Documents for Student retrieved:", data);
 
-      // Extract individual links from the response data
       const idLink = data.id;
       if (idLink) {
         const idAnchor = document.createElement("a");
@@ -98,5 +93,3 @@ function getStudentID(studentIDNum) {
       console.error("Error:", error);
     });
 }
-
-// Popup message = Student Has no document. Please send them a temporary link to upload

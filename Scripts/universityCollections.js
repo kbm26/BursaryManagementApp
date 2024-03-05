@@ -104,7 +104,6 @@ async function updateApplication(
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const responseData = await response.json();
-    console.log("Response:", responseData);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -122,13 +121,13 @@ function deleteApplication(allocationID) {
   )
     .then((response) => {
       if (response.ok) {
-        console.log("Student Allocation successfully deleted.");
+        alert("Student Allocation successfully deleted.");
       } else {
-        console.error("Failed to delete student allocation");
+        alert("Failed to delete student allocation");
       }
     })
     .catch((error) => {
-      console.error("Error:", error);
+      alert("Error:", error);
     });
 }
 
@@ -212,7 +211,6 @@ async function payMoneytoUniversity(
   applicationStatusID
 ) {
   try {
-    // Fetch current budget data NB: Changed endpoint
     const response = await fetch(
       "https://bursarywebapp.azurewebsites.net/api/BbdSpendings/2024"
     );
@@ -223,7 +221,6 @@ async function payMoneytoUniversity(
     const BudgetAmount = responseData["totalBudget"];
     const availableFunds = responseData["amountRemaining"];
 
-    // Check that you have funds available
     if (amountRequested <= availableFunds) {
       if (applicationStatusID == 2) {
         const requestOptions = {
@@ -240,17 +237,13 @@ async function payMoneytoUniversity(
           }),
         };
 
-        // Send request to update the budget
         const updateResponse = await fetch(
           "https://bursarywebapp.azurewebsites.net/api/BursaryAllocation",
           requestOptions
         );
         if (updateResponse.ok) {
-          console.log("Budget updated successfully");
           alert("Funds have been processed");
         } else {
-          console.error("Error updating budget:", updateResponse.statusText);
-          console.log(updateResponse.statusText);
           alert("You have already allocated funds to this application");
         }
       } else {

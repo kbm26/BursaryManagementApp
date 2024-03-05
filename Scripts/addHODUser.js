@@ -1,5 +1,4 @@
 function validateEmail(emailInput) {
-  // Regular expression for validating email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(emailInput.value)) {
     emailInput.setCustomValidity("Invalid email format");
