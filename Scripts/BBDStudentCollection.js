@@ -124,6 +124,7 @@ async function UpdateStudentAllocation(
     body: JSON.stringify(data),
   };
   try {
+    const response = await fetch(url, options);
     alert("Application Updated");
     getAllApplications();
   } catch (error) {
